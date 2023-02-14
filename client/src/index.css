@@ -1,0 +1,19 @@
+@import url("https://api.fontshare.com/v2/css?f[]=chillax@600,500,300,700,400&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #15202b;
+  font-weight: 500;
+  color: whitesmoke;
+  /* font-family: "Chillax", sans-serif; */
+}
