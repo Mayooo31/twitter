@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
-import photo from "../assets/photo1.jpg";
-import {
-  EllipsisHorizontalIcon,
-  ChatBubbleOvalLeftIcon,
-  ArrowPathRoundedSquareIcon,
-  HeartIcon,
-  ShareIcon,
-} from "@heroicons/react/24/outline";
+
+// components
 import TweetButtons from "./TweetButtons";
+
+// css and styles
+import photo from "../assets/photo1.jpg";
+import photo2 from "../assets/messi.jpg";
+import styles from "../styles";
+import { EllipsisHorizontalIcon } from "@heroicons/react/24/outline";
 
 const Tweet = () => {
   const [nickWidth, setNickWidth] = useState<number>();
@@ -16,14 +16,16 @@ const Tweet = () => {
   const containerRef = useRef<HTMLDivElement>();
   const nickRef = useRef<HTMLSpanElement>();
   const usernameRef = useRef<HTMLSpanElement>();
+  const dateRef = useRef<HTMLSpanElement>();
 
   // shrink spans (nick and username) if its no space...
   useEffect(() => {
     const contWidth = +containerRef.current?.offsetWidth!;
     const nickWidth = +nickRef.current?.offsetWidth!;
     const usernameWidth = +usernameRef.current?.offsetWidth!;
+    const dateRefWidth = +dateRef.current?.offsetWidth!;
 
-    const maxPossibleWidth = nickWidth + usernameWidth + 70;
+    const maxPossibleWidth = nickWidth + usernameWidth + dateRefWidth + 38;
     const gapWidth = maxPossibleWidth - contWidth;
 
     if (gapWidth > 0) {
@@ -33,7 +35,9 @@ const Tweet = () => {
   }, [containerRef.current?.offsetWidth]);
 
   return (
-    <div className="px-4 pt-3 pb-1 flex gap-3 border-b-[#d2d2d248] border-b-[1px] border-solid">
+    <div
+      className={`px-4 pt-3 pb-1 flex gap-3 ${styles.borderBottom} xs:ml-[70px] ss:ml-0 max-w-[600px]`}
+    >
       <div className="shrink-0">
         <img className="w-12 h-12 rounded-full" src={photo} />
       </div>
@@ -56,16 +60,18 @@ const Tweet = () => {
           >
             @supermario
           </span>
-          <span className="font-normal text-grayish whitespace-nowrap w-[33px]">
-            · 12h
+          <span
+            ref={dateRef as React.RefObject<HTMLSpanElement>}
+            className="font-normal text-grayish whitespace-nowrap"
+          >
+            · 23.4.2022
           </span>
           <EllipsisHorizontalIcon className="h-6 w-6 ml-auto cursor-pointer text-grayish hover:text-[#3597ff]" />
         </div>
-        <div>
-          <span className="font-normal">
-            No to je síla. Můj první tweet nehehehe. 👌😎🤷‍♂️
-          </span>
-        </div>
+        <span className="font-normal">
+          No to je síla. Můj první tweet nehehehe. 👌😎🤷‍♂️
+        </span>
+        <img src={photo2} className="my-2 rounded-2xl" />
         <TweetButtons />
       </div>
     </div>

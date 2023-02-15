@@ -3,7 +3,7 @@ import Main from "../components/Main";
 
 const Home = () => {
   return (
-    <div>
+    <div className="h-screen w-full m-auto">
       <Main />
     </div>
   );
