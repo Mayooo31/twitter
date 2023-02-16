@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#38618c",
+        primary: "#15202b",
         secondary: "#f3f3f3",
         grayish: "#ffffffb3",
       },
@@ -14,8 +14,8 @@ module.exports = {
       xs: "500px",
       ss: "600px",
       sm: "768px",
-      md: "1060px",
-      lg: "1200px",
+      md: "1040px",
+      lg: "1280px",
       xl: "1700px",
     },
   },
