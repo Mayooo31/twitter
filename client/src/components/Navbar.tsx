@@ -10,7 +10,7 @@ const Navbar = () => {
       className={`sticky top-0 left-0 xs:left-[70px] w-full xs:w-[calc(100%-70px)] ss:w-full  bg-[#15202bed] pb-[1px] ${styles.borderBottom} max-w-[600px]`}
     >
       <div className="flex items-center pb-2 px-3 pt-3">
-        <h1 className="hidden xs:block text-xl font-bold">Hlavní stránka</h1>
+        <h1 className="hidden xs:block text-xl font-bold ml-2">Hlavní stránka</h1>
         <div className="w-[calc(50%-14px)] xs:hidden">
           <img className="w-9 h-9 rounded-full" src={photo1} />
         </div>

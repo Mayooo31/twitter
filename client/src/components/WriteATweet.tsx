@@ -33,7 +33,7 @@ const WriteATweet = () => {
     <div
       className={`hidden xs:flex gap-3 xs:ml-[70px] ss:ml-0 ${styles.borderBottom} px-4 py-2 max-w-[600px]`}
     >
-      <img src={photo} className="w-12 h-12 rounded-full" />
+      <img src={photo} className="w-12 h-12 rounded-full cursor-pointer" />
       <div className="w-full flex flex-col pt-2">
         <TextareaAutosize
           placeholder="Co se právě děje?"

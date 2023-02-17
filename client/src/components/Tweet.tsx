@@ -44,7 +44,7 @@ const Tweet = () => {
       <div className="w-full">
         <div
           ref={containerRef as React.RefObject<HTMLDivElement>}
-          className="flex gap-1 items-center w-full"
+          className="flex gap-1 items-center w-full relative"
         >
           <span
             style={{ width: nickWidth }}
@@ -66,7 +66,7 @@ const Tweet = () => {
           >
             · 23.4.2022
           </span>
-          <EllipsisHorizontalIcon className="h-6 w-6 ml-auto cursor-pointer text-grayish hover:text-[#3597ff]" />
+          <EllipsisHorizontalIcon className="h-8 w-8 p-[2px] absolute top-[50%] right-[-5px] translate-y-[-50%] ml-auto cursor-pointer text-grayish hover:text-[#3597ff] hover:bg-[#3597ff23] rounded-full" />
         </div>
         <span className="font-normal">
           No to je síla. Můj první tweet nehehehe. 👌😎🤷‍♂️
