@@ -7,9 +7,9 @@ const Navbar = () => {
 
   return (
     <div
-      className={`sticky top-0 left-0 xs:left-[70px] w-full xs:w-[calc(100%-70px)] ss:w-full px-4 pt-3 bg-[#15202bed] pb-[1px] ${styles.borderBottom} max-w-[600px]`}
+      className={`sticky top-0 left-0 xs:left-[70px] w-full xs:w-[calc(100%-70px)] ss:w-full  bg-[#15202bed] pb-[1px] ${styles.borderBottom} max-w-[600px]`}
     >
-      <div className="flex items-center pb-2">
+      <div className="flex items-center pb-2 px-3 pt-3">
         <h1 className="hidden xs:block text-xl font-bold">Hlavní stránka</h1>
         <div className="w-[calc(50%-14px)] xs:hidden">
           <img className="w-9 h-9 rounded-full" src={photo1} />
@@ -25,7 +25,7 @@ const Navbar = () => {
         </svg>
       </div>
       <div className="flex w-full">
-        <a className="w-[50%] h-[53px]">
+        <button className="w-[50%] h-[53px] hover:bg-[#2c3640] cursor-pointer">
           <div className="relative h-full w-fit m-auto grid place-items-center">
             <span className="font-semibold">Pro vás</span>
             <span
@@ -33,8 +33,8 @@ const Navbar = () => {
               className="absolute bottom-0 w-full h-1 rounded-full"
             ></span>
           </div>
-        </a>
-        <a className="w-[50%] h-[53px]">
+        </button>
+        <button className="w-[50%] h-[53px] hover:bg-[#2c3640] cursor-pointer">
           <div className="relative h-full w-fit m-auto grid place-items-center">
             <span className="font-semibold">Sledování</span>
             {/* <span
@@ -42,7 +42,7 @@ const Navbar = () => {
               className="absolute bottom-0 w-full h-1 rounded-full"
             ></span> */}
           </div>
-        </a>
+        </button>
       </div>
     </div>
   );

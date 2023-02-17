@@ -12,7 +12,6 @@ import { EllipsisHorizontalIcon } from "@heroicons/react/24/outline";
 const Tweet = () => {
   const [nickWidth, setNickWidth] = useState<number>();
   const [usernameWidth, setUsernameWidth] = useState<number>();
-
   const containerRef = useRef<HTMLDivElement>();
   const nickRef = useRef<HTMLSpanElement>();
   const usernameRef = useRef<HTMLSpanElement>();
@@ -33,10 +32,11 @@ const Tweet = () => {
       setUsernameWidth(usernameWidth - gapWidth / 2);
     }
   }, [containerRef.current?.offsetWidth]);
+  //
 
   return (
     <div
-      className={`px-4 pt-3 pb-1 flex gap-3 ${styles.borderBottom} xs:ml-[70px] ss:ml-0 max-w-[600px]`}
+      className={`px-4 pt-3 pb-1 flex gap-3 ${styles.borderBottom} xs:ml-[70px] ss:ml-0 max-w-[600px] hover:bg-[#20304077] cursor-pointer`}
     >
       <div className="shrink-0">
         <img className="w-12 h-12 rounded-full" src={photo} />

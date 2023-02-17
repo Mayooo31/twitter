@@ -1,23 +1,29 @@
-import React from 'react'
-import styles from '../styles'
-import Navbar from './Navbar'
-import Tweet from './Tweet'
+import React from "react";
+
+// Components
+import Navbar from "./Navbar";
+import Tweet from "./Tweet";
+import WriteATweet from "./WriteATweet";
+
+// Css
+import styles from "../styles";
 
 const Main = () => {
   return (
     <div className={`sb ss:overflow-auto ss:h-screen ${styles.borderRight}`}>
-        <Navbar />
-        <Tweet />
-        <Tweet />
-        <Tweet />
-        <Tweet />
-        <Tweet />
-        <Tweet />
-        <Tweet />
-        <Tweet />
-        <Tweet />
-      </div>
-  )
-}
+      <Navbar />
+      <WriteATweet />
+      <Tweet />
+      <Tweet />
+      <Tweet />
+      <Tweet />
+      <Tweet />
+      <Tweet />
+      <Tweet />
+      <Tweet />
+      <Tweet />
+    </div>
+  );
+};
 
-export default Main
+export default Main;
