@@ -36,7 +36,7 @@ const Tweet = () => {
 
   return (
     <div
-      className={`px-4 pt-3 pb-1 flex gap-3 ${styles.borderBottom} xs:ml-[70px] ss:ml-0 max-w-[600px] hover:bg-[#20304077] cursor-pointer`}
+      className={`px-4 pt-3 pb-1 flex gap-3 ${styles.borderBottom} xs:ml-[70px] ss:ml-0 hover:bg-[#20304077] cursor-pointer`}
     >
       <div className="shrink-0">
         <img className="w-12 h-12 rounded-full" src={photo} />
@@ -68,7 +68,7 @@ const Tweet = () => {
           </span>
           <EllipsisHorizontalIcon className="h-8 w-8 p-[2px] absolute top-[50%] right-[-5px] translate-y-[-50%] ml-auto cursor-pointer text-grayish hover:text-[#3597ff] hover:bg-[#3597ff23] rounded-full" />
         </div>
-        <span className="font-normal">
+        <span className="font-medium text-[#dadada]">
           No to je síla. Můj první tweet nehehehe. 👌😎🤷‍♂️
         </span>
         <img src={photo2} className="my-2 rounded-2xl" />

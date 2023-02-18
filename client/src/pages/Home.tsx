@@ -1,20 +1,17 @@
 // Components
-import Main from "../components/Main";
-import Navbar from "../components/Navbar";
+import MainHome from "../components/sections/MainHome";
 import NavigationPanel from "../components/NavigationPanel";
-import RightPanel from "../components/RightPanel";
-import Tweet from "../components/Tweet";
+import RightPanelHome from "../components/sections/RightPanelHome";
 
 // Css and styles
 import "../index.css";
-import styles from "../styles";
 
 const Home = () => {
   return (
     <div className="mb-[52px] xs:mb-0 ss:flex ss:justify-center">
       <NavigationPanel />
-      <Main />
-      <RightPanel />
+      <MainHome />
+      <RightPanelHome />
     </div>
   );
 };

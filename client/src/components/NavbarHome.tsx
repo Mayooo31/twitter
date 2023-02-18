@@ -2,12 +2,11 @@
 import photo1 from "../assets/photo1.jpg";
 import styles from "../styles";
 
+const theme: string = "rgb(255, 122, 0)";
 const Navbar = () => {
-  const theme: string = "rgb(255, 122, 0)";
-
   return (
     <div
-      className={`sticky top-0 left-0 xs:left-[70px] w-full xs:w-[calc(100%-70px)] ss:w-full  bg-[#15202bed] pb-[1px] ${styles.borderBottom} max-w-[600px]`}
+      className={`sticky top-0 left-0 xs:left-[70px] w-full xs:w-[calc(100%-70px)] ss:w-full  bg-[#15202bed] pb-[1px] ${styles.borderBottom} z-50`}
     >
       <div className="flex items-center pb-2 px-3 pt-3">
         <h1 className="hidden xs:block text-xl font-bold ml-2">Hlavní stránka</h1>
