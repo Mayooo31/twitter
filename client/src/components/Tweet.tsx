@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // components
 import TweetButtons from "./TweetButtons";
@@ -16,6 +17,7 @@ const Tweet = () => {
   const nickRef = useRef<HTMLSpanElement>();
   const usernameRef = useRef<HTMLSpanElement>();
   const dateRef = useRef<HTMLSpanElement>();
+  const navigate = useNavigate();
 
   // shrink spans (nick and username) if its no space...
   useEffect(() => {
@@ -38,7 +40,7 @@ const Tweet = () => {
     <div
       className={`px-4 pt-3 pb-1 flex gap-3 ${styles.borderBottom} xs:ml-[70px] ss:ml-0 hover:bg-[#20304077] cursor-pointer`}
     >
-      <div className="shrink-0">
+      <div onClick={() => navigate("/mario")} className="shrink-0">
         <img className="w-12 h-12 rounded-full" src={photo} />
       </div>
       <div className="w-full">
@@ -47,13 +49,15 @@ const Tweet = () => {
           className="flex gap-1 items-center w-full relative"
         >
           <span
+            onClick={() => navigate("/mario")}
             style={{ width: nickWidth }}
             ref={nickRef as React.RefObject<HTMLSpanElement>}
-            className="text-ellipsis whitespace-nowrap overflow-hidden font-bold"
+            className="text-ellipsis whitespace-nowrap overflow-hidden font-bold hover:underline"
           >
             Mario🐱‍👤👌
           </span>
           <span
+            onClick={() => navigate("/mario")}
             style={{ width: usernameWidth }}
             ref={usernameRef as React.RefObject<HTMLSpanElement>}
             className="font-normal text-grayish text-ellipsis whitespace-nowrap overflow-hidden"

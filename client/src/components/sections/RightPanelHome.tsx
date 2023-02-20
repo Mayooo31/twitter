@@ -7,7 +7,7 @@ import Trends from "../Trends";
 
 const RightPanelHome = () => {
   return (
-    <div className="hidden md:flex flex-col gap-3 w-[290px] ml-5 mt-3">
+    <div className="hidden md:flex flex-col gap-3 max-w-[350px] ml-5 mt-3 mr-8">
       <Search />
       <Trends />
       <Footer />

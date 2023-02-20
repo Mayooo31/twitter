@@ -1,5 +1,3 @@
-@import url("https://api.fontshare.com/v2/css?f[]=chillax@600,500,300,700,400&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -27,4 +25,52 @@ body {
   border-radius: 6px;
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
   background-color: rgb(255, 122, 0);
+}
+
+.custom-blur {
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.g-1 {
+  grid-template-columns: repeat(1, 100%);
+  grid-template-rows: repeat(1, 200px);
+}
+
+.g-2 {
+  grid-template-columns: repeat(2, 50%);
+  grid-template-rows: repeat(1, 100%);
+  gap: 2px;
+}
+
+.g-3 {
+  grid-template-columns: repeat(2, 50%);
+  grid-template-rows: repeat(2, 50%);
+  gap: 2px;
+}
+
+.g-3 img:nth-child(3) {
+  grid-column: span 2;
+}
+
+.g-4 {
+  grid-template-columns: repeat(2, 50%);
+  grid-template-rows: repeat(2, 50%);
+  gap: 2px;
+}
+
+.g-5 {
+  grid-template-columns: repeat(3, 33.3%);
+  grid-template-rows: repeat(2, 50%);
+  gap: 2px;
+}
+
+.g-5 img:nth-child(5) {
+  grid-column: span 2;
+}
+
+.g-6 {
+  grid-template-columns: repeat(3, 33.3%);
+  grid-template-rows: repeat(2, 50%);
+  gap: 2px;
 }

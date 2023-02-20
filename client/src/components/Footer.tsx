@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="flex justify-start gap-2 flex-wrap overflow-auto">
+    <div className="flex justify-start gap-2 pb-3 flex-wrap overflow-auto">
       <a href="#" className="text-[13px] text-[#fcfcfc88] font-normal hover:underline">
         Smluvní podmínky
       </a>

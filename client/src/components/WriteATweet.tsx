@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import TextareaAutosize from "react-textarea-autosize";
 
 // Icons
@@ -20,6 +21,7 @@ const theme: string = "rgb(255, 122, 0)";
 
 const WriteATweet = () => {
   const [isTweetEmpty, setIsTweetEmpty] = useState<boolean>(true);
+  const navigate = useNavigate();
 
   const textAreaHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (e.target.value) {
@@ -33,7 +35,11 @@ const WriteATweet = () => {
     <div
       className={`hidden xs:flex gap-3 xs:ml-[70px] ss:ml-0 ${styles.borderBottom} px-4 py-2`}
     >
-      <img src={photo} className="w-12 h-12 rounded-full cursor-pointer" />
+      <img
+        onClick={() => navigate("/mario")}
+        src={photo}
+        className="w-12 h-12 rounded-full cursor-pointer"
+      />
       <div className="w-full flex flex-col pt-2">
         <TextareaAutosize
           placeholder="Co se právě děje?"
