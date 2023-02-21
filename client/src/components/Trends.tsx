@@ -14,6 +14,9 @@ const Trends = () => {
       <Trend popularIn="Back End" popular="Mongo DB" numOfTweets="97 tis." />
       <Trend popularIn="Soccer" popular="Lionel Messi" numOfTweets="914 tis." />
       <Trend popularIn="IT" popular="ChatGPT" numOfTweets="3.2 mil." />
+      <Trend popularIn="IT" popular="HireMe" numOfTweets="1.1 tis." />
+      <Trend popularIn="IT" popular="Google" numOfTweets="5.4 mil." />
+      <Trend popularIn="Česko" popular="Spotify" numOfTweets="900 tis." />
       <button
         style={{ color: theme }}
         className="px-4 text-left py-4 hover:bg-[#41576f23] cursor-pointer w-full"

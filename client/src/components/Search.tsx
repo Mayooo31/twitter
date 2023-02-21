@@ -12,7 +12,7 @@ const Search = () => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
   return (
-    <div className="relative">
+    <div className="sticky top-0 left-0 bg-[#15202b] z-30 py-2 max-w-[600px]">
       <input
         value={input}
         onChange={e => setInput(e.currentTarget.value)}

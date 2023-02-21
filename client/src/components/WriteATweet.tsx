@@ -32,9 +32,7 @@ const WriteATweet = () => {
   };
 
   return (
-    <div
-      className={`hidden xs:flex gap-3 xs:ml-[70px] ss:ml-0 ${styles.borderBottom} px-4 py-2`}
-    >
+    <div className={`hidden xs:flex gap-3 ${styles.borderBottom} px-4 py-2`}>
       <img
         onClick={() => navigate("/mario")}
         src={photo}

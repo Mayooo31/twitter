@@ -1,20 +1,19 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-
 // Components
-import MainAccount from "../components/sections/MainAccount";
+import { useEffect } from "react";
 import NavigationPanel from "../components/NavigationPanel";
-import RightPanelAccount from "../components/sections/RightPanelAccount";
+import Main from "../components/sections/Main";
+import RightPanel from "../components/sections/RightPanel";
 
 const Account = () => {
-  const params = useParams();
-  const { accId } = params;
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
-    <div className="mb-[52px] xs:mb-0 ss:flex ss:justify-center">
+    <div className="mb-[52px] xs:mb-0 xs:flex xs:justify-center">
       <NavigationPanel />
-      <MainAccount />
-      <RightPanelAccount />
+      <Main />
+      <RightPanel />
     </div>
   );
 };

@@ -8,7 +8,7 @@ const ProfileButtons = () => {
   const [selected, setSelected] = useState("tweets");
 
   return (
-    <div className={`flex ${styles.borderBottom} xs:ml-[70px] ss:ml-0`}>
+    <div className={`flex ${styles.borderBottom}`}>
       <button
         onClick={() => setSelected("tweets")}
         className="w-[50%] h-[53px] cursor-pointer hover:bg-[#2c3640]"

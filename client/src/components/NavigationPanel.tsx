@@ -34,7 +34,7 @@ const NavigationPanel = () => {
 
   return (
     <div
-      className={`bg-[#15202b] z-50 fixed bottom-0 left-0 xs:h-full w-full min-w-[70px] xs:w-[70px] flex xs:flex-col justify-around xs:justify-start items-center border-t-[#d2d2d248] border-t-[1px] border-solid xs:border-t-[0px] xs:border-r-[1px] xs:border-r-[#d2d2d248] ss:static ss:h-screen lg:w-[250px] lg:items-start`}
+      className={`xs:sticky fixed xs:top-0 bg-[#15202b] z-50 bottom-0 left-0 xs:h-screen w-full min-w-[70px] xs:w-[70px] flex xs:flex-col justify-around xs:justify-start items-center border-t-[#d2d2d248] border-t-[1px] border-solid xs:border-t-[0px] xs:border-r-[1px] xs:border-r-[#d2d2d248] lg:w-[250px] lg:items-start`}
     >
       <button className="hidden xs:flex xs:justify-center xs:items-center w-full lg:justify-start lg:ml-3">
         <svg
@@ -48,7 +48,10 @@ const NavigationPanel = () => {
         </svg>
       </button>
       <button
-        onClick={() => navigate("/")}
+        onClick={() => {
+          navigate("/");
+          window.scrollTo(0, 0);
+        }}
         className="h-full xs:h-[55px] w-[25%] xs:w-full py-3 xs:py-0 center justify-center flex xs:justify-center xs:items-center lg:justify-start lg:gap-5 lg:w-fit hover:bg-[#ffffff1e] lg:pl-3 lg:pr-6 lg:rounded-full"
       >
         {selected === "home" ? (

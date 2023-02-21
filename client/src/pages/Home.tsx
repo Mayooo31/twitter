@@ -1,17 +1,19 @@
 // Components
-import MainHome from "../components/sections/MainHome";
+import { useEffect } from "react";
 import NavigationPanel from "../components/NavigationPanel";
-import RightPanelHome from "../components/sections/RightPanelHome";
-
-// Css and styles
-import "../index.css";
+import Main from "../components/sections/Main";
+import RightPanel from "../components/sections/RightPanel";
 
 const Home = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-    <div className="mb-[52px] xs:mb-0 ss:flex ss:justify-center">
+    <div className="mb-[52px] xs:mb-0 xs:flex xs:justify-center">
       <NavigationPanel />
-      <MainHome />
-      <RightPanelHome />
+      <Main />
+      <RightPanel />
     </div>
   );
 };

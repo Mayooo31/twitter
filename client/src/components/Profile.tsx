@@ -15,7 +15,7 @@ const Profile = () => {
   const [hovering, setHovering] = useState("Sleduji");
 
   return (
-    <div className={`xs:ml-[70px] ss:ml-0 mb-3`}>
+    <div className={`mb-3`}>
       <div className="relative">
         <img src={photo} className="object-cover cursor-pointer" />
         <img

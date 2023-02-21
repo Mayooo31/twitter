@@ -38,7 +38,7 @@ const Tweet = () => {
 
   return (
     <div
-      className={`px-4 pt-3 pb-1 flex gap-3 ${styles.borderBottom} xs:ml-[70px] ss:ml-0 hover:bg-[#20304077] cursor-pointer`}
+      className={`px-4 pt-3 pb-1 flex gap-3 ${styles.borderBottom} hover:bg-[#20304077] cursor-pointer`}
     >
       <div onClick={() => navigate("/mario")} className="shrink-0">
         <img className="w-12 h-12 rounded-full" src={photo} />
