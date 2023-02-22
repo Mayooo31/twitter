@@ -2,10 +2,13 @@
 import photo1 from "../assets/photo1.jpg";
 import styles from "../styles";
 import "../index.css";
+import { useCtx } from "../context";
 
 const theme: string = "rgb(255, 122, 0)";
 
 const Navbar = () => {
+  const { setOpenMobileNavbar } = useCtx();
+
   return (
     <div
       className={`sticky top-0 left-0 xs:left-[70px] w-full ss:w-full bg-[#15202bed] pb-[1px] ${styles.borderBottom} z-50 custom-blur`}
@@ -13,7 +16,11 @@ const Navbar = () => {
       <div className="flex items-center pb-2 px-3 pt-3">
         <h1 className="hidden xs:block text-xl font-bold ml-2">Hlavní stránka</h1>
         <div className="w-[calc(50%-14px)] xs:hidden">
-          <img className="w-9 h-9 rounded-full" src={photo1} />
+          <img
+            onClick={() => setOpenMobileNavbar(true)}
+            className="w-9 h-9 rounded-full"
+            src={photo1}
+          />
         </div>
         <svg
           xmlns="http://www.w3.org/2000/svg"

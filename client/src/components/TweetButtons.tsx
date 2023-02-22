@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 
 // css and styles
-import { HeartIcon as HeartIconLiked } from "@heroicons/react/24/solid";
+import {
+  HeartIcon as HeartIconLiked,
+  ArrowDownTrayIcon,
+} from "@heroicons/react/24/solid";
 import {
   ArrowPathRoundedSquareIcon,
   ChatBubbleOvalLeftIcon,
@@ -46,7 +49,8 @@ const TweetButtons = () => {
         </span>
       </button>
       <button className="group hidden xxs:block cursor-pointer text-grayish hover:text-[#3597ff]">
-        <ShareIcon className="h-8 xxs:h-9 w-8 xxs:w-9 ml-auto group-hover:bg-[#2c8df41c] rounded-full p-2" />
+        <ShareIcon className="h-8 xxs:h-9 w-8 xxs:w-9 ml-auto group-hover:bg-[#2c8df41c] rounded-full p-2 lg:hidden" />
+        <ArrowDownTrayIcon className="hidden h-8 xxs:h-9 w-8 xxs:w-9 ml-auto group-hover:bg-[#2c8df41c] rounded-full p-2 lg:block" />
       </button>
     </div>
   );

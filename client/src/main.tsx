@@ -1,28 +1,14 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
-// Components
-import Home from "./pages/Home";
-import Account from "./pages/Account";
+import { ContextProvider } from "./context";
 
 // Css
 import "./index.css";
-
-// Routers
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-  },
-  {
-    path: "/:accId",
-    element: <Account />,
-  },
-]);
+import App from "./App";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   // <React.StrictMode>
-  <RouterProvider router={router} />
+  <ContextProvider>
+    <App />
+  </ContextProvider>
   // </React.StrictMode>,
 );
