@@ -11,7 +11,7 @@ import styles from "../../styles";
 
 const MainAccount = () => {
   return (
-    <div className={`sb ss:h-full max-w-[600px] ${styles.borderRight}`}>
+    <div className={`ss:h-full max-w-[600px] ${styles.borderRight}`}>
       <NavbarAccount />
       <Profile />
       <ProfileButtons />

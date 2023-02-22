@@ -14,7 +14,7 @@ const Context = createContext<ContextType>(null!);
 export const useCtx = () => useContext(Context);
 
 export const ContextProvider = ({ children }: PropsType) => {
-  const [openMobileNavbar, setOpenMobileNavbar] = useState<boolean>(true);
+  const [openMobileNavbar, setOpenMobileNavbar] = useState<boolean>(false);
 
   return (
     <Context.Provider value={{ openMobileNavbar, setOpenMobileNavbar }}>

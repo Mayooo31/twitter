@@ -72,9 +72,7 @@ const Tweet = () => {
           </span>
           <EllipsisHorizontalIcon className="h-8 w-8 p-[2px] absolute top-[50%] right-[-5px] translate-y-[-50%] ml-auto cursor-pointer text-grayish hover:text-[#3597ff] hover:bg-[#3597ff23] rounded-full" />
         </div>
-        <span className="font-medium text-[#dadada]">
-          No to je síla. Můj první tweet nehehehe. 👌😎🤷‍♂️
-        </span>
+        <span className="font-medium text-[#dadada]">Messi is the best. 👌😎🤷‍♂️</span>
         <img src={photo2} className="my-2 rounded-2xl" />
         <TweetButtons />
       </div>

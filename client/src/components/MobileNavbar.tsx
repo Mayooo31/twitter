@@ -10,7 +10,6 @@ import {
   BanknotesIcon,
   BookmarkIcon,
   ChartBarIcon,
-  ChatBubbleBottomCenterIcon,
   ChatBubbleBottomCenterTextIcon,
   ChevronDownIcon,
   ClipboardDocumentListIcon,

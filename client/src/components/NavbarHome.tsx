@@ -3,15 +3,40 @@ import photo1 from "../assets/photo1.jpg";
 import styles from "../styles";
 import "../index.css";
 import { useCtx } from "../context";
+import { useEffect, useRef, useState } from "react";
 
 const theme: string = "rgb(255, 122, 0)";
 
 const Navbar = () => {
   const { setOpenMobileNavbar } = useCtx();
+  const [shrinkNavbar, setShrinkNavbar] = useState<boolean>(false);
+
+  let lastScrollPosition = 0;
+
+  const handleScroll = () => {
+    const position = window.pageYOffset;
+    if (position > lastScrollPosition && position >= 50) {
+      setShrinkNavbar(true);
+    } else if (position < lastScrollPosition) {
+      setShrinkNavbar(false);
+    }
+    lastScrollPosition = position;
+  };
+
+  useEffect(() => {
+    if (window.innerWidth >= 500) return;
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <div
-      className={`sticky top-0 left-0 xs:left-[70px] w-full ss:w-full bg-[#15202bed] pb-[1px] ${styles.borderBottom} z-50 custom-blur`}
+      className={`sticky top-0 left-0 duration-200 ${
+        shrinkNavbar ? "translate-y-[-55px]" : "translate-y-[0px]"
+      } xs:left-[70px] w-full ss:w-full bg-[#15202bed] pb-[1px] ${
+        styles.borderBottom
+      } z-50 custom-blur`}
     >
       <div className="flex items-center pb-2 px-3 pt-3">
         <h1 className="hidden xs:block text-xl font-bold ml-2">Hlavní stránka</h1>
@@ -23,6 +48,9 @@ const Navbar = () => {
           />
         </div>
         <svg
+          onClick={() => {
+            window.scrollTo(0, 0);
+          }}
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 30 30"
           fill={theme}

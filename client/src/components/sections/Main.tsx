@@ -17,7 +17,7 @@ const Main = () => {
   const { accId } = useParams();
 
   return (
-    <div className={`sb ss:h-full max-w-[600px] ${styles.borderRight}`}>
+    <div className={`ss:h-full max-w-[600px] ${styles.borderRight}`}>
       {accId && <NavbarAccount />}
       {accId && <Profile />}
       {accId && <ProfileButtons />}
