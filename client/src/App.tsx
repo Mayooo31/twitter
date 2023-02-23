@@ -7,12 +7,17 @@ import { useCtx } from "./context";
 import MobileNavbar from "./components/MobileNavbar";
 import Account from "./pages/Account";
 import Home from "./pages/Home";
+import Bookmarks from "./pages/Bookmarks";
 
 // Routers
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
+  },
+  {
+    path: "/bookmarks",
+    element: <Bookmarks />,
   },
   {
     path: "/:accId",

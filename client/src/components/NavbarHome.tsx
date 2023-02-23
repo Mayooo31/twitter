@@ -3,13 +3,14 @@ import photo1 from "../assets/photo1.jpg";
 import styles from "../styles";
 import "../index.css";
 import { useCtx } from "../context";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 const theme: string = "rgb(255, 122, 0)";
 
 const Navbar = () => {
   const { setOpenMobileNavbar } = useCtx();
   const [shrinkNavbar, setShrinkNavbar] = useState<boolean>(false);
+  const [selected, setSelected] = useState("for you");
 
   let lastScrollPosition = 0;
 
@@ -48,9 +49,7 @@ const Navbar = () => {
           />
         </div>
         <svg
-          onClick={() => {
-            window.scrollTo(0, 0);
-          }}
+          onClick={() => window.scrollTo(0, 0)}
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 30 30"
           fill={theme}
@@ -61,22 +60,32 @@ const Navbar = () => {
         </svg>
       </div>
       <div className="flex w-full">
-        <button className="w-[50%] h-[53px] hover:bg-[#2c3640] cursor-pointer">
+        <button
+          onClick={() => setSelected("for you")}
+          className="w-[50%] h-[53px] hover:bg-[#2c3640] cursor-pointer"
+        >
           <div className="relative h-full w-fit m-auto grid place-items-center">
             <span className="font-semibold">Pro vás</span>
-            <span
-              style={{ backgroundColor: theme }}
-              className="absolute bottom-0 w-full h-1 rounded-full"
-            ></span>
+            {selected === "for you" && (
+              <span
+                style={{ backgroundColor: theme }}
+                className="absolute bottom-0 w-full h-1 rounded-full"
+              ></span>
+            )}
           </div>
         </button>
-        <button className="w-[50%] h-[53px] hover:bg-[#2c3640] cursor-pointer">
+        <button
+          onClick={() => setSelected("following")}
+          className="w-[50%] h-[53px] hover:bg-[#2c3640] cursor-pointer"
+        >
           <div className="relative h-full w-fit m-auto grid place-items-center">
             <span className="font-semibold">Sledování</span>
-            {/* <span
-              style={{ backgroundColor: theme }}
-              className="absolute bottom-0 w-full h-1 rounded-full"
-            ></span> */}
+            {selected === "following" && (
+              <span
+                style={{ backgroundColor: theme }}
+                className="absolute bottom-0 w-full h-1 rounded-full"
+              ></span>
+            )}
           </div>
         </button>
       </div>

@@ -94,7 +94,13 @@ const NavigationPanel = () => {
         )}
         <p className="hidden lg:block text-xl">Zprávy</p>
       </button>
-      <button className="hidden  xs:h-[55px] xs:w-full xs:py-0 center xs:flex xs:justify-center xs:items-center lg:justify-start lg:gap-5 lg:w-fit hover:bg-[#ffffff1e] lg:pl-3 lg:pr-6 lg:rounded-full">
+      <button
+        onClick={() => {
+          navigate("/bookmarks");
+          window.scrollTo(0, 0);
+        }}
+        className="hidden  xs:h-[55px] xs:w-full xs:py-0 center xs:flex xs:justify-center xs:items-center lg:justify-start lg:gap-5 lg:w-fit hover:bg-[#ffffff1e] lg:pl-3 lg:pr-6 lg:rounded-full"
+      >
         {selected === "bookmark" ? (
           <BookmarkIconSelected className="w-7 h-7" />
         ) : (
