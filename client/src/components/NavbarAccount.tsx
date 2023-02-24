@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 // css and styles
 import "../index.css";
 
-const theme: string = "rgb(255, 122, 0)";
+const theme: string = "#ff7a00";
 
 const NavbarAccount = () => {
   const navigate = useNavigate();

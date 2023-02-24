@@ -1,44 +1,28 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // Hooks
 import { useCtx } from "./context";
 
 // Components
-import MobileNavbar from "./components/MobileNavbar";
 import Account from "./pages/Account";
 import Home from "./pages/Home";
 import Bookmarks from "./pages/Bookmarks";
-
-// Routers
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-  },
-  {
-    path: "/bookmarks",
-    element: <Bookmarks />,
-  },
-  {
-    path: "/:accId",
-    element: <Account />,
-  },
-]);
+import Overlay from "./components/Overlay";
 
 const App = () => {
-  const { openMobileNavbar, setOpenMobileNavbar } = useCtx();
+  const { openMobileNavbar, setOpenMobileNavbar, setShowMore, showMore } = useCtx();
 
   return (
-    <div>
-      {openMobileNavbar && (
-        <span
-          onClick={() => setOpenMobileNavbar(false)}
-          className="fixed top-0 left-0 w-full h-screen bg-[#c1c1c139] xs:hidden z-[99]"
-        />
-      )}
-      <MobileNavbar />
-      <RouterProvider router={router} />
-    </div>
+    <BrowserRouter>
+      <Overlay isOpen={showMore} closeOverlay={setShowMore} />
+      <Overlay isOpen={openMobileNavbar} closeOverlay={setOpenMobileNavbar} />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/bookmarks" element={<Bookmarks />} />
+        <Route path="/:accId" element={<Account />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 
