@@ -1,9 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
+
+// Hooks
+import { useLocation, useNavigate } from "react-router-dom";
 import { useCtx } from "../context";
-import { useNavigate } from "react-router-dom";
-import photo from "../assets/photo1.jpg";
+
+// Components
+import MobileNavbar from "./MobileNavbar";
 
 // Icons
+import photo from "../assets/photo1.jpg";
 import {
   HomeIcon as HomeIconSelected,
   MagnifyingGlassIcon as MagnifyingGlassIconSelected,
@@ -12,7 +17,6 @@ import {
   BookmarkIcon as BookmarkIconSelected,
   ClipboardDocumentListIcon as ClipboardDocumentListIconSelected,
   UserIcon as UserIconSelected,
-  EllipsisHorizontalCircleIcon as EllipsisHorizontalCircleIconSelected,
   HashtagIcon as HashtagIconSelected,
   EllipsisHorizontalIcon,
 } from "@heroicons/react/24/solid";
@@ -28,14 +32,13 @@ import {
   ChatBubbleBottomCenterTextIcon,
   HashtagIcon,
 } from "@heroicons/react/24/outline";
-import MobileNavbar from "./MobileNavbar";
 
 const NavigationPanel = () => {
-  const { setShowMore, openMobileNavbar, showMore } = useCtx();
-  const [selected, setSelected] = useState<string>("home");
+  const { setOpenMore, openMore, setOpenWriteATweet } = useCtx();
   const [coords, setCoords] = useState<{ x: string; y: string }>({ x: "0px", y: "0px" });
   const moreButtonRef = useRef<HTMLButtonElement>(null!);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const position = moreButtonRef.current.getBoundingClientRect();
@@ -65,15 +68,18 @@ const NavigationPanel = () => {
           }}
           className="h-full xs:h-[55px] w-[25%] xs:w-full py-3 xs:py-0 center justify-center flex xs:justify-center xs:items-center lg:justify-start lg:gap-5 lg:w-fit hover:bg-[#ffffff1e] lg:pl-3 lg:pr-6 lg:rounded-full"
         >
-          {selected === "home" ? (
+          {location.pathname === "/" ? (
             <HomeIconSelected className="w-7 h-7" />
           ) : (
             <HomeIcon className="w-7 h-7" />
           )}
           <p className="hidden lg:block text-xl">Hlavní stránka</p>
         </button>
-        <button className="hidden h-full xs:h-[55px] center lg:flex xs:items-center lg:justify-start lg:gap-5 lg:w-fit hover:bg-[#ffffff1e] lg:pl-3 lg:pr-6 lg:rounded-full">
-          {selected === "hashtag" ? (
+        <button
+          onClick={() => navigate("/search")}
+          className="hidden h-full xs:h-[55px] center lg:flex xs:items-center lg:justify-start lg:gap-5 lg:w-fit hover:bg-[#ffffff1e] lg:pl-3 lg:pr-6 lg:rounded-full"
+        >
+          {location.pathname === "/search" ? (
             <HashtagIconSelected className="w-7 h-7" />
           ) : (
             <HashtagIcon className="w-7 h-7" />
@@ -81,8 +87,11 @@ const NavigationPanel = () => {
           <p className="hidden lg:block text-xl">Prozkoumat</p>
         </button>
         {/* NO LG */}
-        <button className="h-full xs:h-[55px] w-[25%] xs:w-full py-3 xs:py-0 center flex xs:justify-center xs:items-center md:hidden justify-center">
-          {selected === "search" ? (
+        <button
+          onClick={() => navigate("/search")}
+          className="h-full xs:h-[55px] w-[25%] xs:w-full py-3 xs:py-0 center flex xs:justify-center xs:items-center md:hidden justify-center"
+        >
+          {location.pathname === "/search" ? (
             <MagnifyingGlassIconSelected className="w-7 h-7" />
           ) : (
             <MagnifyingGlassIcon className="w-7 h-7" />
@@ -90,7 +99,7 @@ const NavigationPanel = () => {
         </button>
         {/* NO LG END */}
         <button className="h-full xs:h-[55px] w-[25%] xs:w-full py-3 xs:py-0 center flex xs:justify-center xs:items-center lg:justify-start lg:gap-5 lg:w-fit hover:bg-[#ffffff1e] lg:pl-3 lg:pr-6 lg:rounded-full justify-center">
-          {selected === "bell" ? (
+          {location.pathname === "/bell" ? (
             <BellIconSelected className="w-7 h-7" />
           ) : (
             <BellIcon className="w-7 h-7" />
@@ -98,7 +107,7 @@ const NavigationPanel = () => {
           <p className="hidden lg:block text-xl">Oznámení</p>
         </button>
         <button className="h-full xs:h-[55px] w-[25%] xs:w-full py-3 xs:py-0 center flex xs:justify-center xs:items-center lg:justify-start lg:gap-5 lg:w-fit hover:bg-[#ffffff1e] lg:pl-3 lg:pr-6 lg:rounded-full justify-center">
-          {selected === "message" ? (
+          {location.pathname === "/message" ? (
             <EnvelopeIconSelected className="w-7 h-7" />
           ) : (
             <EnvelopeIcon className="w-7 h-7" />
@@ -107,13 +116,11 @@ const NavigationPanel = () => {
         </button>
         <button
           onClick={() => {
-            setSelected("bookmark");
             navigate("/bookmarks");
-            window.scrollTo(0, 0);
           }}
           className="hidden  xs:h-[55px] xs:w-full xs:py-0 center xs:flex xs:justify-center xs:items-center lg:justify-start lg:gap-5 lg:w-fit hover:bg-[#ffffff1e] lg:pl-3 lg:pr-6 lg:rounded-full"
         >
-          {selected === "bookmark" ? (
+          {location.pathname === "/bookmarks" ? (
             <BookmarkIconSelected className="w-7 h-7" />
           ) : (
             <BookmarkIcon className="w-7 h-7" />
@@ -121,15 +128,20 @@ const NavigationPanel = () => {
           <p className="hidden lg:block text-xl">Záložky</p>
         </button>
         <button className="hidden  xs:h-[55px] xs:w-full xs:py-0 center xs:flex xs:justify-center xs:items-center lg:justify-start lg:gap-5 lg:w-fit hover:bg-[#ffffff1e] lg:pl-3 lg:pr-6 lg:rounded-full">
-          {selected === "clipboard" ? (
+          {location.pathname === "/clipboard" ? (
             <ClipboardDocumentListIconSelected className="w-7 h-7" />
           ) : (
             <ClipboardDocumentListIcon className="w-7 h-7" />
           )}
           <p className="hidden lg:block text-xl">Seznamy</p>
         </button>
-        <button className="hidden  xs:h-[55px] xs:w-full xs:py-0 center xs:flex xs:justify-center xs:items-center lg:justify-start lg:gap-5 lg:w-fit hover:bg-[#ffffff1e] lg:pl-3 lg:pr-6 lg:rounded-full">
-          {selected === "user" ? (
+        <button
+          onClick={() => {
+            navigate("/mario");
+          }}
+          className="hidden  xs:h-[55px] xs:w-full xs:py-0 center xs:flex xs:justify-center xs:items-center lg:justify-start lg:gap-5 lg:w-fit hover:bg-[#ffffff1e] lg:pl-3 lg:pr-6 lg:rounded-full"
+        >
+          {location.pathname === "/mario" ? (
             <UserIconSelected className="w-7 h-7" />
           ) : (
             <UserIcon className="w-7 h-7" />
@@ -139,18 +151,18 @@ const NavigationPanel = () => {
 
         <button
           ref={moreButtonRef}
-          onClick={() => setShowMore(true)}
+          onClick={() => setOpenMore(true)}
           className="hidden xs:h-[55px] xs:w-full xs:py-0 center xs:flex xs:justify-center xs:items-center lg:justify-start lg:gap-5 lg:w-fit hover:bg-[#ffffff1e] lg:pl-3 lg:pr-6 lg:rounded-full"
         >
-          {selected === "more" ? (
-            <EllipsisHorizontalCircleIconSelected className="w-7 h-7" />
-          ) : (
-            <EllipsisHorizontalCircleIcon className="w-7 h-7" />
-          )}
+          <EllipsisHorizontalCircleIcon className="w-7 h-7" />
+
           <p className="hidden lg:block text-xl">Více</p>
         </button>
 
-        <button className="absolute xs:static bottom-16 right-3 xs:mt-3 bg-[#ff7300] p-3 rounded-full lg:w-[220px] lg:grid lg:place-items-center">
+        <button
+          onClick={() => setOpenWriteATweet(true)}
+          className="absolute xs:static bottom-16 right-3 xs:mt-3 bg-[#ff7300] p-3 rounded-full lg:w-[220px] lg:grid lg:place-items-center"
+        >
           <ChatBubbleBottomCenterTextIcon className="w-8 h-8 lg:hidden" />
           <p className="hidden lg:flex text-xl ">Tweetovat</p>
         </button>
@@ -167,7 +179,7 @@ const NavigationPanel = () => {
           <EllipsisHorizontalIcon className="hidden shrink-0 lg:flex h-6 w-6 ml-auto text-grayish mr-4" />
         </div>
       </div>
-      {(showMore || openMobileNavbar) && <MobileNavbar coords={coords} />}
+      {(openMore || window.innerWidth < 500) && <MobileNavbar coords={coords} />}
     </>
   );
 };

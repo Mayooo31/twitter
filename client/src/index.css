@@ -74,3 +74,7 @@ body {
   grid-template-rows: repeat(2, 50%);
   gap: 2px;
 }
+
+.custom-shadow {
+  box-shadow: rgba(209, 209, 209, 0.24) 0px 3px 8px;
+}

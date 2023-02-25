@@ -1,12 +1,19 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 import Trend from "./Trend";
 
 // Temporarily theme
 const theme: string = "rgb(255, 122, 0)";
 
 const Trends = () => {
+  const location = useLocation();
+
   return (
-    <div className="bg-[#1e2732] rounded-2xl overflow-hidden">
+    <div
+      className={`rounded-2xl overflow-hidden ${
+        location.pathname === "/search" ? "bg-transparent" : "bg-[#1e2732]"
+      }`}
+    >
       <h1 className="text-xl font-extrabold pt-2 pb-3 px-4">Trendy pro vás</h1>
       <Trend popularIn="Front End" popular="React JS" numOfTweets="1.2 mil." />
       <Trend popularIn="Front End" popular="Tailwind" numOfTweets="633 tis." />

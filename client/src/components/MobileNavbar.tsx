@@ -40,7 +40,7 @@ const MobileNavbar = ({ coords }: Props) => {
   return (
     <div
       style={{ top: coords.y, left: coords.x }}
-      className={`overflow-auto xs:fixed xs:rounded-2xl xs:w-[300px] xs:h-auto xs:max-h-[600px] flex flex-col p-4 fixed xs:translate-x-[0%] xs:translate-y-[-80%] ease-out z-[100] max-w-[300px] w-full bg-[#15202b] h-screen ${
+      className={`overflow-auto xs:rounded-2xl xs:w-[300px] xs:h-auto xs:max-h-[600px] flex flex-col p-4 fixed xs:translate-x-[0%] xs:translate-y-[-80%] ease-out z-[100] max-w-[300px] w-full bg-[#15202b] h-screen ${
         openMobileNavbar
           ? "duration-200 translate-x-[0px]"
           : "duration-0 translate-x-[-100%]"
@@ -67,7 +67,14 @@ const MobileNavbar = ({ coords }: Props) => {
         </p>
       </div>
       <div className="flex flex-col">
-        <button className="flex gap-5 py-3 items-center xs:hidden">
+        <button
+          onClick={() => {
+            setOpenMobileNavbar(false);
+            navigate("/mario");
+            window.scrollTo(0, 0);
+          }}
+          className="flex gap-5 py-3 items-center xs:hidden"
+        >
           <UserIcon className="w-6 h-6" />
           <p className="text-xl font-bold">Profil</p>
         </button>

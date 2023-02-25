@@ -6,7 +6,6 @@ import TweetButtons from "./TweetButtons";
 
 // css and styles
 import photo from "../assets/photo1.jpg";
-import photo2 from "../assets/messi.jpg";
 import styles from "../styles";
 import { EllipsisHorizontalIcon } from "@heroicons/react/24/outline";
 
@@ -73,7 +72,7 @@ const Tweet = () => {
           <EllipsisHorizontalIcon className="h-8 w-8 p-[2px] absolute top-[50%] right-[-5px] translate-y-[-50%] ml-auto cursor-pointer text-grayish hover:text-[#3597ff] hover:bg-[#3597ff23] rounded-full" />
         </div>
         <span className="font-medium text-[#dadada]">Messi is the best. 👌😎🤷‍♂️</span>
-        <img src={photo2} className="my-2 rounded-2xl" />
+        <img src={photo} className="my-2 rounded-2xl" />
         <TweetButtons />
       </div>
     </div>

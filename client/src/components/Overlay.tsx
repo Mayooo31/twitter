@@ -13,7 +13,7 @@ const Overlay = ({ isOpen, closeOverlay }: Props) => {
   return (
     <span
       onClick={() => closeOverlay(false)}
-      className="fixed top-0 left-0 w-full h-screen bg-[#c1c1c139] z-[99]"
+      className="fixed top-0 left-0 w-full h-screen bg-[#c1c1c110] z-[99]"
     />
   );
 };
