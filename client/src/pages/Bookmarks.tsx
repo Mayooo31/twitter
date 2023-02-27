@@ -1,13 +1,11 @@
 import { useEffect } from "react";
 
 // Components
-import NavigationPanel from "../components/NavigationPanel";
 import NavbarBookmarks from "../components/NavbarBookmarks";
 import Tweet from "../components/Tweet";
-import RightPanel from "../components/RightPanel";
 
 // Css and styles
-import styles from "../styles";
+import MainLayout from "../components/Layouts/MainLayout";
 
 const Bookmarks = () => {
   useEffect(() => {
@@ -15,12 +13,14 @@ const Bookmarks = () => {
   }, []);
 
   return (
-    <div className={`ss:h-full max-w-[600px]`}>
-      <NavbarBookmarks />
-      <Tweet />
-      <Tweet />
-      <Tweet />
-    </div>
+    <MainLayout>
+      <div className={`ss:h-full max-w-[600px]`}>
+        <NavbarBookmarks />
+        <Tweet />
+        <Tweet />
+        <Tweet />
+      </div>
+    </MainLayout>
   );
 };
 

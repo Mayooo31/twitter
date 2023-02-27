@@ -11,7 +11,7 @@ const ProfileButtons = () => {
     <div className={`flex ${styles.borderBottom}`}>
       <button
         onClick={() => setSelected("tweets")}
-        className="w-[50%] h-[53px] cursor-pointer hover:bg-[#2c3640]"
+        className="w-[20%] h-[53px] cursor-pointer hover:bg-[#2c3640]"
       >
         <div className="relative h-full w-fit m-auto grid place-items-center">
           <span
@@ -33,7 +33,7 @@ const ProfileButtons = () => {
       </button>
       <button
         onClick={() => setSelected("tweets and answers")}
-        className="w-[50%] h-[53px] cursor-pointer hover:bg-[#2c3640]"
+        className="w-[40%] h-[53px] cursor-pointer hover:bg-[#2c3640]"
       >
         <div className="relative h-full w-fit m-auto grid place-items-center">
           <span
@@ -55,7 +55,7 @@ const ProfileButtons = () => {
       </button>
       <button
         onClick={() => setSelected("media")}
-        className="w-[50%] h-[53px] cursor-pointer hover:bg-[#2c3640]"
+        className="w-[20%] h-[53px] cursor-pointer hover:bg-[#2c3640]"
       >
         <div className="relative h-full w-fit m-auto grid place-items-center">
           <span
@@ -77,7 +77,7 @@ const ProfileButtons = () => {
       </button>
       <button
         onClick={() => setSelected("likes")}
-        className="w-[50%] h-[53px] cursor-pointer hover:bg-[#2c3640]"
+        className="w-[20%] h-[53px] cursor-pointer hover:bg-[#2c3640]"
       >
         <div className="relative h-full w-fit m-auto grid place-items-center">
           <span
