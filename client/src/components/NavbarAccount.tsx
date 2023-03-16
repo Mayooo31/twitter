@@ -1,18 +1,19 @@
 import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 import { useNavigate } from "react-router-dom";
+import { useCtx } from "../context";
 
 // css and styles
 import "../index.css";
 
-const theme: string = "#ff7a00";
-
 const NavbarAccount = () => {
+  const { theme } = useCtx();
   const navigate = useNavigate();
 
   return (
     <div
+      style={{ background: theme.name === "blue" ? "#15202bda" : "#000000c9" }}
       onClick={() => window.scrollTo(0, 0)}
-      className={`sticky flex items-center top-0 left-0 xs:left-[70px] w-full h-[53px] bg-[#15202bed] pb-[3px] z-50 custom-blur cursor-pointer`}
+      className={`sticky flex items-center top-0 left-0 xs:left-[70px] w-full h-[53px]  pb-[3px] z-50 custom-blur cursor-pointer`}
     >
       <button
         onClick={() => navigate(-1)}

@@ -34,7 +34,7 @@ import {
 } from "@heroicons/react/24/outline";
 
 const NavigationPanel = () => {
-  const { setOpenMore, openMore, setOpenWriteATweet } = useCtx();
+  const { setOpenMore, openMore, setOpenWriteATweet, theme } = useCtx();
   const [coords, setCoords] = useState<{ x: string; y: string }>({ x: "0px", y: "0px" });
   const moreButtonRef = useRef<HTMLButtonElement>(null!);
   const navigate = useNavigate();
@@ -48,7 +48,8 @@ const NavigationPanel = () => {
   return (
     <>
       <div
-        className={`xs:sticky fixed xs:top-0 bg-[#15202b] z-50 bottom-0 left-0 xs:h-screen w-full min-w-[70px] xs:w-[70px] flex xs:flex-col justify-around xs:justify-start items-center border-t-[#d2d2d248] border-t-[1px] border-solid xs:border-t-[0px] xs:border-r-[1px] xs:border-r-[#d2d2d248] lg:w-[250px] lg:items-start`}
+        style={{ background: theme.background }}
+        className={`xs:sticky fixed xs:top-0 bg-inherit z-50 bottom-0 left-0 xs:h-screen w-full min-w-[70px] xs:w-[70px] flex xs:flex-col justify-around xs:justify-start items-center border-t-[#d2d2d248] border-t-[1px] border-solid xs:border-t-[0px] xs:border-r-[1px] xs:border-r-[#d2d2d248] lg:w-[250px] lg:items-start`}
       >
         <button className="hidden xs:flex xs:justify-center xs:items-center w-full lg:justify-start lg:ml-3">
           <svg
@@ -161,7 +162,8 @@ const NavigationPanel = () => {
 
         <button
           onClick={() => setOpenWriteATweet(true)}
-          className="absolute xs:static bottom-16 right-3 xs:mt-3 bg-[#ff7300] p-3 rounded-full lg:w-[220px] lg:grid lg:place-items-center"
+          style={{ background: theme.color }}
+          className="absolute xs:static bottom-16 right-3 xs:mt-3 p-3 rounded-full lg:w-[220px] lg:grid lg:place-items-center"
         >
           <ChatBubbleBottomCenterTextIcon className="w-8 h-8 lg:hidden" />
           <p className="hidden lg:flex text-xl ">Tweetovat</p>
@@ -172,7 +174,7 @@ const NavigationPanel = () => {
             <span className=" text-ellipsis whitespace-nowrap overflow-hidden w-[130px]">
               Mario🐱‍👤👌
             </span>
-            <span className="text-grayish text-ellipsis whitespace-nowrap overflow-hidden w-[130px]">
+            <span className="text-grayish font-normal text-ellipsis whitespace-nowrap overflow-hidden w-[130px]">
               @supermario
             </span>
           </div>

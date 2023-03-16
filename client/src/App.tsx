@@ -8,20 +8,25 @@ import Account from "./pages/Account";
 import Bookmarks from "./pages/Bookmarks";
 import Searching from "./pages/Searching";
 import ModalsAndOverlays from "./components/Modals & Overlays/ModalsAndOverlays";
+import { useCtx } from "./context";
 
 const App = () => {
+  const { theme } = useCtx();
+
   return (
     <BrowserRouter>
       <ModalsAndOverlays />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/bookmarks" element={<Bookmarks />} />
-        <Route path="/search" element={<Searching />} />
-        <Route path="/:accId" element={<Account />} />
-      </Routes>
+      <div style={{ background: theme.background }}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/bookmarks" element={<Bookmarks />} />
+          <Route path="/search" element={<Searching />} />
+          <Route path="/:accId" element={<Account />} />
+        </Routes>
+      </div>
     </BrowserRouter>
   );
 };

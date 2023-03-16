@@ -25,13 +25,14 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import photo from "../assets/photo1.jpg";
+import "../index.css";
 
 type Props = {
   coords: { x: string; y: string };
 };
 
 const MobileNavbar = ({ coords }: Props) => {
-  const { openMobileNavbar, setOpenMobileNavbar } = useCtx();
+  const { openMobileNavbar, setOpenMobileNavbar, theme } = useCtx();
   const [showStudio, setShowStudio] = useState<boolean>(false);
   const [showTools, setShowTools] = useState<boolean>(false);
   const [showSettings, setShowSettings] = useState<boolean>(false);
@@ -39,8 +40,8 @@ const MobileNavbar = ({ coords }: Props) => {
 
   return (
     <div
-      style={{ top: coords.y, left: coords.x }}
-      className={`overflow-auto xs:rounded-2xl xs:w-[300px] xs:h-auto xs:max-h-[600px] flex flex-col p-4 fixed xs:translate-x-[0%] xs:translate-y-[-80%] ease-out z-[100] max-w-[300px] w-full bg-[#15202b] h-screen ${
+      style={{ top: coords.y, left: coords.x, background: theme.background }}
+      className={`overflow-auto xs:rounded-2xl xs:w-[300px] xs:h-auto xs:max-h-[600px] flex flex-col p-4 fixed xs:translate-x-[0%] xs:translate-y-[-80%] ease-out z-[100] max-w-[300px] w-full h-screen ${
         openMobileNavbar
           ? "duration-200 translate-x-[0px]"
           : "duration-0 translate-x-[-100%]"
@@ -55,8 +56,8 @@ const MobileNavbar = ({ coords }: Props) => {
           <img src={photo} className="w-10 h-10 rounded-full" />
           <PlusIcon className="w-8 h-8 p-1 rounded-full border-[#d2d2d244] border-[2px] border-solid" />
         </div>
-        <p className="text-lg font-bold">Hovno vole naser si😒</p>
-        <p className="text-grayish">@_____majo_____</p>
+        <p className="text-lg font-bold">Mario🤢🐱‍👤😒</p>
+        <p className="text-grayish">@supermario</p>
       </div>
       <div className="flex gap-4 mb-4 xs:hidden">
         <p className="font-normal text-grayish">
@@ -78,7 +79,7 @@ const MobileNavbar = ({ coords }: Props) => {
           <UserIcon className="w-6 h-6" />
           <p className="text-xl font-bold">Profil</p>
         </button>
-        <button className="flex gap-5 py-3 items-center xs:hover:text-[#ff7a00]">
+        <button className={`flex gap-5 py-3 items-center ${theme.name}`}>
           <ChatBubbleBottomCenterTextIcon className="w-6 h-6" />
           <p className="text-xl font-bold">Témata</p>
         </button>
@@ -97,7 +98,7 @@ const MobileNavbar = ({ coords }: Props) => {
           <ClipboardDocumentListIcon className="w-6 h-6" />
           <p className="text-xl font-bold">Seznamy</p>
         </button>
-        <button className="flex gap-5 py-3 items-center bg xs:hover:text-[#ff7a00]">
+        <button className={`flex gap-5 py-3 items-center bg ${theme.name}`}>
           <HeartIcon className="w-6 h-6" />
           <p className="text-xl font-bold">Kruh Twitter</p>
         </button>
@@ -106,18 +107,19 @@ const MobileNavbar = ({ coords }: Props) => {
       <div className="mt-2">
         <button
           onClick={() => setShowStudio(!showStudio)}
-          className="flex justify-between w-full items-center py-3 hover:text-[#ff7a00]"
+          className={`flex justify-between w-full items-center py-3 ${theme.name}`}
         >
           <p className="text-base">Tvůrčí studio</p>
           <ChevronDownIcon
+            style={{ color: showStudio ? theme.color : "" }}
             className={`w-5 h-5 duration-200 ${
-              showStudio ? "rotate-[-180deg] text-[#ff7a00]" : "rotate-[0deg]"
+              showStudio ? "rotate-[-180deg]" : "rotate-[0deg]"
             }`}
           />
         </button>
         {showStudio && (
           <div>
-            <button className="flex gap-3 items-center py-2 w-full hover:text-[#ff7a00]">
+            <button className={`flex gap-3 items-center py-2 w-full ${theme.name}`}>
               <ChartBarIcon className="w-5 h-5" />
               <p className="font-normal">Analýzy</p>
             </button>
@@ -127,26 +129,27 @@ const MobileNavbar = ({ coords }: Props) => {
       <div>
         <button
           onClick={() => setShowTools(!showTools)}
-          className="flex justify-between w-full items-center py-3 hover:text-[#ff7a00]"
+          className={`flex justify-between w-full items-center py-3 ${theme.name}`}
         >
           <p className="text-base">Profesionální nástroje</p>
           <ChevronDownIcon
+            style={{ color: showTools ? theme.color : "" }}
             className={`w-5 h-5 duration-200 ${
-              showTools ? "rotate-[-180deg] text-[#ff7a00]" : "rotate-[0deg]"
+              showTools ? "rotate-[-180deg]" : "rotate-[0deg]"
             }`}
           />
         </button>
         {showTools && (
           <div>
-            <button className="flex gap-3 items-center py-2 w-full hover:text-[#ff7a00]">
+            <button className={`flex gap-3 items-center py-2 w-full ${theme.name}`}>
               <RocketLaunchIcon className="w-5 h-5" />
               <p className="font-normal">Twitter pro profesionály</p>
             </button>
-            <button className="flex gap-3 items-center py-2 w-full hover:text-[#ff7a00]">
+            <button className={`flex gap-3 items-center py-2 w-full ${theme.name}`}>
               <ArrowTrendingUpIcon className="w-5 h-5" />
               <p className="font-normal">Reklamy na Twitteru</p>
             </button>
-            <button className="flex gap-3 items-center py-2 w-full hover:text-[#ff7a00]">
+            <button className={`flex gap-3 items-center py-2 w-full ${theme.name}`}>
               <BanknotesIcon className="w-5 h-5" />
               <p className="font-normal">Monetizace</p>
             </button>
@@ -156,34 +159,35 @@ const MobileNavbar = ({ coords }: Props) => {
       <div>
         <button
           onClick={() => setShowSettings(!showSettings)}
-          className="flex justify-between w-full items-center py-3 hover:text-[#ff7a00]"
+          className={`flex justify-between w-full items-center py-3 ${theme.name}`}
         >
           <p className="text-base">Nastavení a podpora</p>
           <ChevronDownIcon
+            style={{ color: showSettings ? theme.color : "" }}
             className={`w-5 h-5 duration-200 ${
-              showSettings ? "rotate-[-180deg] text-[#ff7a00]" : "rotate-[0deg]"
+              showSettings ? "rotate-[-180deg]" : "rotate-[0deg]"
             }`}
           />
         </button>
         {showSettings && (
           <div className="mb-5">
-            <button className="flex gap-3 items-center py-2 w-full hover:text-[#ff7a00]">
+            <button className={`flex gap-3 items-center py-2 w-full ${theme.name}`}>
               <Cog8ToothIcon className="w-5 h-5" />
               <p className="font-normal">Nastavení a soukromí</p>
             </button>
-            <button className="flex gap-3 items-center py-2 w-full hover:text-[#ff7a00]">
+            <button className={`flex gap-3 items-center py-2 w-full ${theme.name}`}>
               <QuestionMarkCircleIcon className="w-5 h-5" />
               <p className="font-normal">Centrum nápovědy</p>
             </button>
-            <button className="flex gap-3 items-center py-2 w-full hover:text-[#ff7a00]">
+            <button className={`flex gap-3 items-center py-2 w-full ${theme.name}`}>
               <ClockIcon className="w-5 h-5" />
               <p className="font-normal">Spořič dat</p>
             </button>
-            <button className="flex gap-3 items-center py-2 w-full hover:text-[#ff7a00]">
+            <button className={`flex gap-3 items-center py-2 w-full ${theme.name}`}>
               <PencilSquareIcon className="w-5 h-5" />
               <p className="font-normal">Zobrazení</p>
             </button>
-            <button className="flex gap-3 items-center py-2 w-full hover:text-[#ff7a00]">
+            <button className={`flex gap-3 items-center py-2 w-full ${theme.name}`}>
               <ArrowRightOnRectangleIcon className="w-5 h-5" />
               <p className="font-normal">Odhlásit se</p>
             </button>

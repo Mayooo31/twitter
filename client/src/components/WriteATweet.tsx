@@ -18,16 +18,13 @@ import {
 import photo from "../assets/photo1.jpg";
 import styles from "../styles";
 
-// Temporarily theme
-const theme: string = "rgb(255, 122, 0)";
-
 type Props = {
   isModal: boolean;
 };
 
 const WriteATweet = ({ isModal }: Props) => {
   const [isTweetEmpty, setIsTweetEmpty] = useState<boolean>(true);
-  const { setOpenWriteATweet } = useCtx();
+  const { setOpenWriteATweet, theme } = useCtx();
   const navigate = useNavigate();
 
   const textAreaHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -40,9 +37,10 @@ const WriteATweet = ({ isModal }: Props) => {
 
   return (
     <div
+      style={{ background: theme.background }}
       className={`xs:block ${styles.borderBottom} px-4 py-2 ${
         isModal
-          ? "fixed top-0 left-0 sm:top-[10%] w-full rounded-[0] sm:left-[50%] z-[100] h-screen sm:h-fit sm:w-[600px] max-w-full bg-[#15202b] sm:translate-x-[-50%] sm:rounded-2xl"
+          ? "fixed top-0 left-0 sm:top-[10%] w-full rounded-[0] sm:left-[50%] z-[100] h-screen sm:h-fit sm:w-[600px] max-w-full bg-inherit sm:translate-x-[-50%] sm:rounded-2xl"
           : "hidden relative"
       }`}
     >
@@ -72,33 +70,34 @@ const WriteATweet = ({ isModal }: Props) => {
             }`}
           >
             <PhotoIcon
-              style={{ color: theme }}
-              className="h-9 w-9 p-2 hover:bg-[#ff7b001b] rounded-full cursor-pointer"
+              style={{ color: theme.color }}
+              className={`h-9 w-9 p-2 rounded-full cursor-pointer ${theme.bgName}`}
             />
             <GifIcon
-              style={{ color: theme }}
-              className="h-9 w-9 p-2 hover:bg-[#ff7b001b] rounded-full cursor-pointer"
+              style={{ color: theme.color }}
+              className={`h-9 w-9 p-2 rounded-full cursor-pointer ${theme.bgName}`}
             />
             <FaceSmileIcon
-              style={{ color: theme }}
-              className="h-9 w-9 p-2 hover:bg-[#ff7b001b] rounded-full cursor-pointer"
+              style={{ color: theme.color }}
+              className={`h-9 w-9 p-2 rounded-full cursor-pointer ${theme.bgName}`}
             />
             <MapPinIcon
-              style={{ color: theme }}
-              className="h-9 w-9 p-2 hover:bg-[#ff7b001b] rounded-full cursor-pointer"
+              style={{ color: theme.color }}
+              className={`h-9 w-9 p-2 rounded-full cursor-pointer ${theme.bgName}`}
             />
             <CalendarDaysIcon
-              style={{ color: theme }}
-              className="h-9 w-9 hidden sm:block p-2 hover:bg-[#ff7b001b] rounded-full cursor-pointer"
+              style={{ color: theme.color }}
+              className={`h-9 w-9 hidden sm:block p-2 rounded-full cursor-pointer ${theme.bgName}`}
             />
             <AdjustmentsHorizontalIcon
-              style={{ color: theme }}
-              className="h-9 w-9 hidden sm:block p-2 hover:bg-[#ff7b001b] rounded-full cursor-pointer"
+              style={{ color: theme.color }}
+              className={`h-9 w-9 hidden sm:block p-2 rounded-full cursor-pointer ${theme.bgName}`}
             />
 
             <button
               style={{
-                backgroundColor: isTweetEmpty ? "#ff7b00ac" : theme,
+                opacity: isTweetEmpty ? "60%" : "100%",
+                backgroundColor: theme.color,
                 color: isTweetEmpty ? "#f5f5f5af" : "whitesmoke",
               }}
               className={`px-4 py-2 rounded-full ml-auto right-[-5px] ${

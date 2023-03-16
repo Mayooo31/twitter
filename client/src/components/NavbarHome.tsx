@@ -1,14 +1,15 @@
-// css and styles
-import photo1 from "../assets/photo1.jpg";
-import styles from "../styles";
-import "../index.css";
 import { useCtx } from "../context";
 import { useEffect, useState } from "react";
 
-const theme: string = "rgb(255, 122, 0)";
+// css and styles
+import "../index.css";
+
+import photo1 from "../assets/photo1.jpg";
+import styles from "../styles";
+import { colorWithOpacity } from "../utils/opacityColor";
 
 const Navbar = () => {
-  const { setOpenMobileNavbar } = useCtx();
+  const { setOpenMobileNavbar, theme } = useCtx();
   const [shrinkNavbar, setShrinkNavbar] = useState<boolean>(false);
   const [selected, setSelected] = useState("for you");
 
@@ -33,11 +34,10 @@ const Navbar = () => {
 
   return (
     <div
+      style={{ background: theme.name === "blue" ? "#15202bda" : "#000000c9" }}
       className={`sticky top-0 left-0 duration-200 ${
         shrinkNavbar ? "translate-y-[-55px]" : "translate-y-[0px]"
-      } xs:left-[70px] w-full ss:w-full bg-[#15202bed] pb-[1px] ${
-        styles.borderBottom
-      } z-50 custom-blur`}
+      } xs:left-[70px] w-full ss:w-full pb-[1px] ${styles.borderBottom} z-50 custom-blur`}
     >
       <div className="flex items-center pb-2 px-3 pt-3">
         <h1 className="hidden xs:block text-xl font-bold ml-2">Hlavní stránka</h1>
@@ -52,7 +52,7 @@ const Navbar = () => {
           onClick={() => window.scrollTo(0, 0)}
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 30 30"
-          fill={theme}
+          fill={theme.color}
           className="w-7 h-7 xs:hidden"
         >
           {" "}
@@ -62,13 +62,15 @@ const Navbar = () => {
       <div className="flex w-full">
         <button
           onClick={() => setSelected("for you")}
-          className="w-[50%] h-[53px] hover:bg-[#2c3640] cursor-pointer"
+          className={`w-[50%] h-[53px] cursor-pointer ${
+            theme.bgName === "blue" ? "hover:bg-[#15202bbb]" : "hover:bg-[#ffffff20]"
+          }`}
         >
           <div className="relative h-full w-fit m-auto grid place-items-center">
             <span className="font-semibold">Pro vás</span>
             {selected === "for you" && (
               <span
-                style={{ backgroundColor: theme }}
+                style={{ backgroundColor: theme.color }}
                 className="absolute bottom-0 w-full h-1 rounded-full"
               ></span>
             )}
@@ -76,13 +78,15 @@ const Navbar = () => {
         </button>
         <button
           onClick={() => setSelected("following")}
-          className="w-[50%] h-[53px] hover:bg-[#2c3640] cursor-pointer"
+          className={`w-[50%] h-[53px] cursor-pointer ${
+            theme.bgName === "blue" ? "hover:bg-[#15202bbb]" : "hover:bg-[#ffffff20]"
+          }`}
         >
           <div className="relative h-full w-fit m-auto grid place-items-center">
             <span className="font-semibold">Sledování</span>
             {selected === "following" && (
               <span
-                style={{ backgroundColor: theme }}
+                style={{ backgroundColor: theme.color }}
                 className="absolute bottom-0 w-full h-1 rounded-full"
               ></span>
             )}

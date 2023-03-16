@@ -1,15 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useCtx } from "../context";
 
 // components
 import TweetButtons from "./TweetButtons";
 
 // css and styles
+import { EllipsisHorizontalIcon } from "@heroicons/react/24/outline";
 import photo from "../assets/photo1.jpg";
 import styles from "../styles";
-import { EllipsisHorizontalIcon } from "@heroicons/react/24/outline";
+import "../index.css";
 
 const Tweet = () => {
+  const { theme } = useCtx();
   const [nickWidth, setNickWidth] = useState<number>();
   const [usernameWidth, setUsernameWidth] = useState<number>();
   const containerRef = useRef<HTMLDivElement>();
@@ -37,9 +40,9 @@ const Tweet = () => {
 
   return (
     <div
-      className={`px-4 pt-3 pb-1 flex gap-3 ${styles.borderBottom} hover:bg-[#20304077] cursor-pointer`}
+      className={`px-4 pt-3 pb-1 flex gap-3 ${styles.borderBottom} ${theme.bgName} cursor-pointer`}
     >
-      <div onClick={() => navigate("/mario")} className="shrink-0">
+      <div onClick={() => navigate("/mario")} className="shrink-0 h-fit">
         <img className="w-12 h-12 rounded-full" src={photo} />
       </div>
       <div className="w-full">

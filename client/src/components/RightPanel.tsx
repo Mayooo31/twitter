@@ -9,16 +9,16 @@ import Footer from "./Footer";
 
 import photo from "../assets/photo1.jpg";
 import MightLike from "./MightLike";
-
-const theme: string = "rgb(255, 122, 0)";
+import { useCtx } from "../context";
 
 const RightPanel = () => {
+  const { theme } = useCtx();
   const [stickyPanel, setStickyPanel] = useState<string>("65px");
   const stickyRef = useRef<HTMLDivElement>(null!);
   const { accId } = useParams();
   const location = useLocation();
 
-  const photos: string[] = [photo, photo, photo, photo];
+  const photos: string[] = [photo, photo, photo];
 
   useEffect(() => {
     const screenHeight = window.innerHeight;
@@ -40,13 +40,16 @@ const RightPanel = () => {
       >
         {photos.length !== 0 && accId && <Photos photos={photos} />}
         {location.pathname !== "/search" && <Trends />}
-        <div className={`rounded-2xl overflow-hidden bg-[#1e2732]`}>
+        <div
+          style={{ background: theme.name === "blue" ? "#131c26" : "#0a0909" }}
+          className={`rounded-2xl overflow-hidden`}
+        >
           <h1 className="text-xl font-extrabold pt-2 pb-3 px-4">Mohlo by se vám líbit</h1>
           <MightLike />
           <MightLike />
           <MightLike />
           <button
-            style={{ color: theme }}
+            style={{ color: theme.color }}
             className="px-4 text-left py-4 hover:bg-[#41576f23] cursor-pointer w-full"
           >
             Zobrazit více

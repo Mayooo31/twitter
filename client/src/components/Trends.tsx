@@ -1,18 +1,23 @@
-import React from "react";
 import { useLocation } from "react-router-dom";
+import { useCtx } from "../context";
 import Trend from "./Trend";
 
-// Temporarily theme
-const theme: string = "rgb(255, 122, 0)";
-
 const Trends = () => {
+  const { theme } = useCtx();
   const location = useLocation();
 
+  // #1e2732
   return (
     <div
-      className={`rounded-2xl overflow-hidden ${
-        location.pathname === "/search" ? "bg-transparent" : "bg-[#1e2732]"
-      }`}
+      style={{
+        background:
+          location.pathname === "/search"
+            ? "bg-transparent"
+            : theme.name === "blue"
+            ? "#131c26"
+            : "#0a0909",
+      }}
+      className={`rounded-2xl overflow-hidden`}
     >
       <h1 className="text-xl font-extrabold pt-2 pb-3 px-4">Trendy pro vás</h1>
       <Trend popularIn="Front End" popular="React JS" numOfTweets="1.2 mil." />
@@ -25,7 +30,7 @@ const Trends = () => {
       <Trend popularIn="IT" popular="Google" numOfTweets="5.4 mil." />
       <Trend popularIn="Česko" popular="Spotify" numOfTweets="900 tis." />
       <button
-        style={{ color: theme }}
+        style={{ color: theme.color }}
         className="px-4 text-left py-4 hover:bg-[#41576f23] cursor-pointer w-full"
       >
         Zobrazit více

@@ -1,8 +1,6 @@
-import { EllipsisHorizontalIcon } from "@heroicons/react/24/solid";
 import React from "react";
 
-// Temporarily theme
-const theme: string = "rgb(255, 122, 0)";
+import { EllipsisHorizontalIcon } from "@heroicons/react/24/solid";
 
 type Props = {
   popularIn: string;
