@@ -41,7 +41,7 @@ const RightPanel = () => {
         {photos.length !== 0 && accId && <Photos photos={photos} />}
         {location.pathname !== "/search" && <Trends />}
         <div
-          style={{ background: theme.name === "blue" ? "#131c26" : "#0a0909" }}
+          style={{ background: theme.bgName === "bg-blue" ? "#131c26" : "#0a0909" }}
           className={`rounded-2xl overflow-hidden`}
         >
           <h1 className="text-xl font-extrabold pt-2 pb-3 px-4">Mohlo by se vám líbit</h1>

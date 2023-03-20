@@ -34,7 +34,7 @@ const Navbar = () => {
 
   return (
     <div
-      style={{ background: theme.name === "blue" ? "#15202bda" : "#000000c9" }}
+      style={{ background: theme.bgName === "bg-blue" ? "#15202bda" : "#000000c9" }}
       className={`sticky top-0 left-0 duration-200 ${
         shrinkNavbar ? "translate-y-[-55px]" : "translate-y-[0px]"
       } xs:left-[70px] w-full ss:w-full pb-[1px] ${styles.borderBottom} z-50 custom-blur`}

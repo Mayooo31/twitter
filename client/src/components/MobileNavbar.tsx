@@ -32,7 +32,13 @@ type Props = {
 };
 
 const MobileNavbar = ({ coords }: Props) => {
-  const { openMobileNavbar, setOpenMobileNavbar, theme } = useCtx();
+  const {
+    openMobileNavbar,
+    setOpenMobileNavbar,
+    theme,
+    setOpenThemeSettings,
+    setOpenMore,
+  } = useCtx();
   const [showStudio, setShowStudio] = useState<boolean>(false);
   const [showTools, setShowTools] = useState<boolean>(false);
   const [showSettings, setShowSettings] = useState<boolean>(false);
@@ -183,7 +189,14 @@ const MobileNavbar = ({ coords }: Props) => {
               <ClockIcon className="w-5 h-5" />
               <p className="font-normal">Spořič dat</p>
             </button>
-            <button className={`flex gap-3 items-center py-2 w-full ${theme.name}`}>
+            <button
+              onClick={() => {
+                setOpenThemeSettings(true);
+                setOpenMobileNavbar(false);
+                setOpenMore(false);
+              }}
+              className={`flex gap-3 items-center py-2 w-full ${theme.name}`}
+            >
               <PencilSquareIcon className="w-5 h-5" />
               <p className="font-normal">Zobrazení</p>
             </button>

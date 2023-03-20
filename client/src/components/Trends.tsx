@@ -13,7 +13,7 @@ const Trends = () => {
         background:
           location.pathname === "/search"
             ? "bg-transparent"
-            : theme.name === "blue"
+            : theme.bgName === "bg-blue"
             ? "#131c26"
             : "#0a0909",
       }}

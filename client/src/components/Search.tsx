@@ -41,7 +41,7 @@ const Search = () => {
           onBlur={() => setIsFocused(false)}
           style={{
             borderColor: isFocused ? theme.color : "#2f3d4d95",
-            background: theme.name === "blue" ? "#2f3d4d95" : "#232222",
+            background: theme.bgName === "bg-blue" ? "#2f3d4d95" : "#232222",
           }}
           className="border-solid border-[1px] text-secondary py-2 px-14 outline-none w-full rounded-full"
           placeholder="Hledat na Twitteru"

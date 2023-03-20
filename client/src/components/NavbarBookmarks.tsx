@@ -9,7 +9,7 @@ const NavbarBookmarks = () => {
   const navigate = useNavigate();
   return (
     <div
-      style={{ background: theme.name === "blue" ? "#15202bda" : "#000000c9" }}
+      style={{ background: theme.bgName === "bg-blue" ? "#15202bda" : "#000000c9" }}
       onClick={() => window.scrollTo(0, 0)}
       className={`sticky flex justify-between items-center top-0 left-0 xs:left-[70px] w-full h-[53px] pr-5 pl-0 xs:pl-5 pb-[3px] z-50 custom-blur cursor-pointer`}
     >

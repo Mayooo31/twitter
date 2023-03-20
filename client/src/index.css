@@ -10,7 +10,6 @@
 }
 
 body {
-  /* background-color: #15202b; */
   font-weight: 500;
   color: whitesmoke;
 }
@@ -70,11 +69,27 @@ body {
 }
 
 .blue:hover {
-  color: #1997c8;
+  color: #1d9bf0;
 }
 
-.black:hover {
-  color: #1997c8;
+.yellow:hover {
+  color: #ffd400;
+}
+
+.pink:hover {
+  color: #f91880;
+}
+
+.purple:hover {
+  color: #7856ff;
+}
+
+.orange:hover {
+  color: #ff7a00;
+}
+
+.green:hover {
+  color: #00ba7c;
 }
 
 .bg-black:hover {
@@ -82,5 +97,5 @@ body {
 }
 
 .bg-blue:hover {
-  background: #213141;
+  background: #212e3c;
 }

@@ -37,11 +37,10 @@ export const ContextProvider = ({ children }: PropsType) => {
   const [openWriteATweet, setOpenWriteATweet] = useState<boolean>(false);
   const [openThemeSettings, setOpenThemeSettings] = useState<boolean>(false);
   const [theme, setTheme] = useState<ThemeType>({
-    color: "#1997c8",
-    background: "#000",
-    // background: "#15202b",
-    name: "black",
-    bgName: "bg-black",
+    color: "#1d9bf0",
+    background: "#15202b",
+    name: "blue",
+    bgName: "bg-blue",
   });
 
   return (

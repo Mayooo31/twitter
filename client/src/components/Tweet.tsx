@@ -40,7 +40,7 @@ const Tweet = () => {
 
   return (
     <div
-      className={`px-4 pt-3 pb-1 flex gap-3 ${styles.borderBottom} ${theme.bgName} cursor-pointer`}
+      className={`px-4 pt-3 pb-1 flex gap-3 ${styles.borderBottom} duration-150 ease-in ${theme.bgName} cursor-pointer`}
     >
       <div onClick={() => navigate("/mario")} className="shrink-0 h-fit">
         <img className="w-12 h-12 rounded-full" src={photo} />
