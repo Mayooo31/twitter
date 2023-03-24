@@ -1,4 +1,3 @@
-import React from "react";
 import { useCtx } from "../context";
 
 import { ArrowLeftIcon, CheckIcon } from "@heroicons/react/24/outline";
@@ -40,6 +39,7 @@ const ThemeSettings = () => {
         >
           {colors.map(color => (
             <button
+              key={color.name}
               onClick={() => setTheme({ ...theme, color: color.color, name: color.name })}
               style={{ background: color.color }}
               className="w-10 h-10 rounded-full flex items-center justify-center"

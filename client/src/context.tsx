@@ -1,4 +1,4 @@
-import React, { useContext, useState, createContext } from "react";
+import React, { useContext, useState, createContext, useEffect } from "react";
 
 type ContextType = {
   openMobileNavbar: boolean;
@@ -31,17 +31,28 @@ export const useCtx = () => useContext(Context);
 // "rgb(255, 122, 0)"
 // "#ff7a00"
 
+const savedThemeSettings = localStorage.getItem("theme");
+const parsedSavedThemeSettings = savedThemeSettings && JSON.parse(savedThemeSettings);
+
 export const ContextProvider = ({ children }: PropsType) => {
   const [openMobileNavbar, setOpenMobileNavbar] = useState<boolean>(false);
   const [openMore, setOpenMore] = useState<boolean>(false);
   const [openWriteATweet, setOpenWriteATweet] = useState<boolean>(false);
   const [openThemeSettings, setOpenThemeSettings] = useState<boolean>(false);
-  const [theme, setTheme] = useState<ThemeType>({
-    color: "#1d9bf0",
-    background: "#15202b",
-    name: "blue",
-    bgName: "bg-blue",
-  });
+  const [theme, setTheme] = useState<ThemeType>(
+    parsedSavedThemeSettings
+      ? parsedSavedThemeSettings
+      : {
+          color: "#1d9bf0",
+          background: "#15202b",
+          name: "blue",
+          bgName: "bg-blue",
+        }
+  );
+
+  useEffect(() => {
+    localStorage.setItem("theme", JSON.stringify(theme));
+  }, [theme]);
 
   return (
     <Context.Provider
