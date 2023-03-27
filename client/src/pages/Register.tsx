@@ -19,7 +19,7 @@ const Register = () => {
 
   return (
     <EmptyLayout>
-      <div className="w-full h-screen bg-black flex flex-col items-center justify-center">
+      <div className="w-full h-screen bg-[#000] flex flex-col items-center justify-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 30 30"
