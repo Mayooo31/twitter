@@ -8,7 +8,7 @@ interface IUser extends Document {
   password: string;
   createdAt: Date;
   birthYear: number;
-  tweets: string[];
+  tweets: Schema.Types.ObjectId[];
   following: string[];
   followers: string[];
   correctPassword(password: string): Promise<boolean>;
@@ -32,7 +32,6 @@ const userSchema: Schema<IUser> = new Schema({
     type: String,
     required: [true, "Your password is missing!"],
     minlength: [6, "Your password is too short, minimum is 6 character long!"],
-    maxlength: [16, "Your password is too long, maximum is 16 character long!"],
   },
   birthYear: {
     type: Number,

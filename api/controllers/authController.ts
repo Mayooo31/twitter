@@ -19,6 +19,8 @@ export const register = catchAsync(
     const user = await User.findOne({ email });
 
     if (user) return next(createError(401, "This email is already registered!"));
+    if (password.length > 16)
+      return next(createError(401, "Password is too long. Maximum is 16 characters!"));
 
     const createdUser = new User({
       username,
