@@ -10,6 +10,7 @@ import Footer from "./Footer";
 import photo from "../assets/photo1.jpg";
 import MightLike from "./MightLike";
 import { useCtx } from "../context";
+import ShowMorebutton from "./ShowMorebutton";
 
 const RightPanel = () => {
   const { theme } = useCtx();
@@ -48,12 +49,7 @@ const RightPanel = () => {
           <MightLike />
           <MightLike />
           <MightLike />
-          <button
-            style={{ color: theme.color }}
-            className="px-4 text-left py-4 hover:bg-[#41576f23] cursor-pointer w-full"
-          >
-            Zobrazit více
-          </button>
+          <ShowMorebutton />
         </div>
         <Footer />
       </div>

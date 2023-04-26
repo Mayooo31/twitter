@@ -63,7 +63,7 @@ const Navbar = () => {
         <button
           onClick={() => setSelected("for you")}
           className={`w-[50%] h-[53px] cursor-pointer ${
-            theme.bgName === "blue" ? "hover:bg-[#15202bbb]" : "hover:bg-[#ffffff20]"
+            theme.bgName === "bg-blue" ? "hover:bg-[#41576f23]" : "hover:bg-[#5e5e5e44]"
           }`}
         >
           <div className="relative h-full w-fit m-auto grid place-items-center">
@@ -79,7 +79,7 @@ const Navbar = () => {
         <button
           onClick={() => setSelected("following")}
           className={`w-[50%] h-[53px] cursor-pointer ${
-            theme.bgName === "blue" ? "hover:bg-[#15202bbb]" : "hover:bg-[#ffffff20]"
+            theme.bgName === "bg-blue" ? "hover:bg-[#41576f23]" : "hover:bg-[#5e5e5e44]"
           }`}
         >
           <div className="relative h-full w-fit m-auto grid place-items-center">

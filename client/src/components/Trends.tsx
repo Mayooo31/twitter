@@ -1,6 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { useCtx } from "../context";
 import Trend from "./Trend";
+import ShowMorebutton from "./ShowMorebutton";
 
 const Trends = () => {
   const { theme } = useCtx();
@@ -29,12 +30,7 @@ const Trends = () => {
       <Trend popularIn="IT" popular="HireMe" numOfTweets="1.1 tis." />
       <Trend popularIn="IT" popular="Google" numOfTweets="5.4 mil." />
       <Trend popularIn="Česko" popular="Spotify" numOfTweets="900 tis." />
-      <button
-        style={{ color: theme.color }}
-        className="px-4 text-left py-4 hover:bg-[#41576f23] cursor-pointer w-full"
-      >
-        Zobrazit více
-      </button>
+      <ShowMorebutton />
     </div>
   );
 };

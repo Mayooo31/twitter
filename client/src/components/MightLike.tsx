@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 
 import photo from "../assets/photo1.jpg";
 import FollowButton from "./FollowButton";
+import { useCtx } from "../context";
 
 const MightLike = () => {
+  const { theme } = useCtx();
+
   const [isFollowing, setIsFollowing] = useState<boolean>(false);
   const [widthOfButton, setWidthOfButton] = useState<number>(97);
 
@@ -14,7 +17,11 @@ const MightLike = () => {
   }, [isFollowing]);
 
   return (
-    <div className="flex items-center py-3 px-4 hover:bg-[#41576f23] cursor-pointer">
+    <div
+      className={`flex items-center py-3 px-4 ${
+        theme.bgName === "bg-blue" ? "hover:bg-[#41576f23]" : "hover:bg-[#0d0d0d]"
+      } cursor-pointer`}
+    >
       <img src={photo} className="w-12 h-12 rounded-full" />
       <div
         style={{ width: `${"calc(100% - " + (28 + 48 + widthOfButton + "px)")}` }}
