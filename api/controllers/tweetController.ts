@@ -1,21 +1,19 @@
 import { NextFunction, Request, Response } from "express";
 import mongoose from "mongoose";
 
+// Models
 import Tweet from "../models/tweetModel";
 import User from "../models/userModel";
 
+// Utils
 import catchAsync from "../utils/catchAsync";
 import createError from "../utils/error";
 
-interface AuthRequest extends Request {
-  userData?: {
-    id: string;
-    email: string;
-  };
-}
+// Types
+import { AuthRequest } from "../types/types";
 
 export const createTweet = catchAsync(
-  async (req: AuthRequest, res: Response, next: NextFunction) => {
+  async (req: Request & AuthRequest, res: Response, next: NextFunction) => {
     const id = req.userData?.id;
     const { tweet, image } = req.body;
 

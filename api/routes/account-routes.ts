@@ -2,7 +2,7 @@ import express from "express";
 // Middleware
 import { checkAuth } from "../middleware/check-auth";
 // controllers
-import { createTweet } from "../controllers/tweetController";
+import { editProfile, deleteAccount } from "../controllers/accountController";
 
 const router = express.Router();
 
@@ -10,6 +10,7 @@ const router = express.Router();
 router.use(checkAuth);
 
 // routes
-router.post("/create", createTweet);
+router.patch("/edit", editProfile);
+router.delete("/delete", deleteAccount);
 
 export default router;

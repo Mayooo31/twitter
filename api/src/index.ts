@@ -5,6 +5,7 @@ import cors from "cors";
 // Import routes
 import authRoutes from "../routes/auth-routes";
 import tweetRoutes from "../routes/tweet-routes";
+import accountRoutes from "../routes/account-routes";
 
 // Export app for ( server.js )
 export const app = express();
@@ -15,6 +16,7 @@ app.use(cors());
 
 // Routes
 app.use("/api/auth", authRoutes);
+app.use("/api/account", accountRoutes);
 app.use("/api/tweet", tweetRoutes);
 
 app.get("/", (req: Request, res: Response) => {

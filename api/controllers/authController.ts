@@ -43,7 +43,7 @@ export const login = catchAsync(
     const { username, email, password } = req.body;
 
     if (username) {
-      if (!username || !password) {
+      if (!password) {
         return next(createError(400, "Please provide username/email and password"));
       }
 
