@@ -14,7 +14,7 @@ const createToken = (id: string, email: string) => {
 
 export const register = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { username, email, password, birthYear } = req.body;
+    const { username, email, password, age } = req.body;
 
     const user = await User.findOne({ email });
 
@@ -26,7 +26,7 @@ export const register = catchAsync(
       username,
       email,
       password,
-      birthYear,
+      age,
     });
 
     await createdUser.save();
