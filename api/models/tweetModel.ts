@@ -19,7 +19,7 @@ const tweetSchema: Schema<ITweet> = new Schema({
     default: Date.now,
   },
   comments: {
-    type: [Schema.Types.ObjectId],
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   },
   likes: {
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
