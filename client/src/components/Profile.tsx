@@ -7,6 +7,7 @@ import {
 } from "@heroicons/react/24/outline";
 
 // Css and styles
+import "../index.css";
 import photo from "../assets/musk.jpg";
 import photo2 from "../assets/photo1.jpg";
 import FollowButton from "./FollowButton";
@@ -21,7 +22,7 @@ const Profile = () => {
   return (
     <div className={`mb-3`}>
       <div className="relative">
-        <img src={photo} className="object-cover cursor-pointer" />
+        <img src={photo} className="custom-ratio object-cover cursor-pointer" />
         <img
           src={photo2}
           className="w-[22%] rounded-full border-[3px] border-solid border-[#15202b] absolute translate-y-[50%] bottom-0 left-5 z-10 cursor-pointer"
@@ -35,7 +36,8 @@ const Profile = () => {
         </div>
         <h1 className="text-xl font-extrabold mt-[5%]">Elon Musk ✨</h1>
         <p className="text-grayish font-normal">@elonmusk</p>
-        <div className="flex gap-1 items-center mt-3">
+        <p className="text-white font-normal mt-2">nothing</p>
+        <div className="flex gap-1 items-center mt-2">
           <CalendarDaysIcon className="h-5 w-5 text-grayish" />
           <p className="text-grayish font-normal">Uživatel se připojil červen 2009</p>
         </div>

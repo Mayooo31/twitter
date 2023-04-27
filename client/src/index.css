@@ -105,3 +105,7 @@ body {
   -webkit-appearance: none;
   margin: 0;
 }
+
+.custom-ratio {
+  aspect-ratio: 3 / 1;
+}

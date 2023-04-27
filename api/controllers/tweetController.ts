@@ -7,13 +7,19 @@ import User from "../models/userModel";
 import catchAsync from "../utils/catchAsync";
 import createError from "../utils/error";
 
+interface AuthRequest extends Request {
+  userData?: {
+    id: string;
+    email: string;
+  };
+}
+
 export const createTweet = catchAsync(
-  async (req: Request, res: Response, next: NextFunction) => {
+  async (req: AuthRequest, res: Response, next: NextFunction) => {
+    const id = req.userData?.id;
     const { tweet, image } = req.body;
 
     if (!tweet) return next(createError(401, "Empty tweet is not allowed!"));
-
-    const id = "642221af65a268c2fdf535b4";
 
     const user = await User.findById(id);
     if (!user) return next(createError(401, "Something went wrong!"));

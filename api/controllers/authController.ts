@@ -27,6 +27,7 @@ export const register = catchAsync(
       email,
       password,
       age,
+      nick: username,
     });
 
     await createdUser.save();

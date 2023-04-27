@@ -2,12 +2,15 @@ import mongoose, { Schema, Model, Document } from "mongoose";
 import bcrypt from "bcryptjs";
 
 interface IUser extends Document {
+  profilePhoto?: string;
+  secondPhoto?: string;
   username: string;
   nick?: string;
+  about: string;
   email: string;
   password: string;
   createdAt: Date;
-  birthYear: number;
+  age: number;
   tweets: Schema.Types.ObjectId[];
   following: string[];
   followers: string[];
@@ -15,13 +18,16 @@ interface IUser extends Document {
 }
 
 const userSchema: Schema<IUser> = new Schema({
+  profilePhoto: { type: String, default: "" },
+  secondPhoto: { type: String, default: "" },
+  about: { type: String, default: "" },
+  nick: { type: String, maxLength: 16, default: "" },
   username: {
     type: String,
     required: [true, "User name is missing!"],
     unique: true,
     maxLength: 16,
   },
-  nick: { type: String, maxLength: 16 },
   email: {
     type: String,
     required: [true, "Your email is missing!"],
@@ -33,7 +39,7 @@ const userSchema: Schema<IUser> = new Schema({
     required: [true, "Your password is missing!"],
     minlength: [6, "Your password is too short, minimum is 6 character long!"],
   },
-  birthYear: {
+  age: {
     type: Number,
     required: [true, "Your birth year is missing!"],
     min: [15, "Minimum age is 15!"],
