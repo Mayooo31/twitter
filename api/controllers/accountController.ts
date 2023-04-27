@@ -33,7 +33,9 @@ export const deleteAccount = catchAsync(
 
     const promises = [User.findByIdAndDelete(id), Tweet.deleteMany({ createdBy: id })];
 
-    await Promise.all(promises);
+    const promissed = await Promise.all(promises);
+
+    console.log(promissed);
 
     res.status(200).json({ message: "Account deleted" });
   }

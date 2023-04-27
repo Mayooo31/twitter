@@ -5,9 +5,9 @@ interface ITweet extends Document {
   image: string;
   createdBy: Schema.Types.ObjectId;
   createdAt: Date;
-  comments: number;
-  likes: number;
-  retweets: number;
+  comments: Schema.Types.ObjectId[];
+  likes: Schema.Types.ObjectId[];
+  retweets: Schema.Types.ObjectId[];
 }
 
 const tweetSchema: Schema<ITweet> = new Schema({
@@ -19,16 +19,13 @@ const tweetSchema: Schema<ITweet> = new Schema({
     default: Date.now,
   },
   comments: {
-    type: Number,
-    default: 0,
+    type: [Schema.Types.ObjectId],
   },
   likes: {
-    type: Number,
-    default: 0,
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   },
   retweets: {
-    type: Number,
-    default: 0,
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   },
 });
 
