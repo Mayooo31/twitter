@@ -47,7 +47,7 @@ export const likeTweet = catchAsync(
     const tweet = await Tweet.findById(tweetId);
     if (!tweet) return next(createError(401, "Tweet was not found!"));
 
-    await Tweet.updateOne({ id: tweetId }, [
+    await Tweet.updateOne({ _id: tweetId }, [
       {
         $set: {
           likes: {
@@ -78,7 +78,7 @@ export const retweetTweet = catchAsync(
     const tweet = await Tweet.findById(tweetId);
     if (!tweet) return next(createError(401, "Tweet was not found!"));
 
-    await Tweet.updateOne({ id: tweetId }, [
+    await Tweet.updateOne({ _id: tweetId }, [
       {
         $set: {
           retweets: {

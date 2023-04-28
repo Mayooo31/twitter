@@ -39,3 +39,51 @@ export const deleteAccount = catchAsync(
     res.status(200).json({ message: "Account deleted" });
   }
 );
+
+export const followAccount = catchAsync(
+  async (req: Request & AuthRequest, res: Response, next: NextFunction) => {
+    const currentUserId = req.userData?.id;
+    const { followedUserId } = req.body;
+
+    await Promise.all([
+      User.updateOne({ _id: currentUserId }, [
+        {
+          $set: {
+            following: {
+              $cond: [
+                { $in: [followedUserId, "$following"] },
+                {
+                  $filter: {
+                    input: "$following",
+                    cond: { $ne: ["$$this", followedUserId] },
+                  },
+                },
+                { $concatArrays: ["$following", [followedUserId]] },
+              ],
+            },
+          },
+        },
+      ]),
+      User.updateOne({ _id: followedUserId }, [
+        {
+          $set: {
+            followers: {
+              $cond: [
+                { $in: [currentUserId, "$followers"] },
+                {
+                  $filter: {
+                    input: "$followers",
+                    cond: { $ne: ["$$this", currentUserId] },
+                  },
+                },
+                { $concatArrays: ["$followers", [currentUserId]] },
+              ],
+            },
+          },
+        },
+      ]),
+    ]);
+
+    res.status(200).json({ message: "Successfully followed." });
+  }
+);
