@@ -69,3 +69,34 @@ export const likeTweet = catchAsync(
     res.status(200).json({ message: "Success" });
   }
 );
+
+export const retweetTweet = catchAsync(
+  async (req: Request & AuthRequest, res: Response, next: NextFunction) => {
+    const userId = req.userData?.id;
+    const { tweetId } = req.body;
+
+    const tweet = await Tweet.findById(tweetId);
+    if (!tweet) return next(createError(401, "Tweet was not found!"));
+
+    await Tweet.updateOne({ id: tweetId }, [
+      {
+        $set: {
+          retweets: {
+            $cond: [
+              { $in: [userId, "$retweets"] },
+              {
+                $filter: {
+                  input: "$retweets",
+                  cond: { $ne: ["$$this", userId] },
+                },
+              },
+              { $concatArrays: ["$retweets", [userId]] },
+            ],
+          },
+        },
+      },
+    ]);
+
+    res.status(200).json({ message: "Success" });
+  }
+);
