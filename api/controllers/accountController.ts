@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import { NextFunction, Request, Response } from "express";
 
 // Models
@@ -87,3 +86,11 @@ export const followAccount = catchAsync(
     res.status(200).json({ message: "Successfully followed." });
   }
 );
+
+export const getAccount = async (req: Request, res: Response, next: NextFunction) => {
+  const { username } = req.params;
+
+  const foundAccount = await User.findOne({ username }).select("-password");
+
+  res.status(200).json({ account: foundAccount });
+};

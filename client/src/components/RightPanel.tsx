@@ -16,7 +16,7 @@ const RightPanel = () => {
   const { theme } = useCtx();
   const [stickyPanel, setStickyPanel] = useState<string>("65px");
   const stickyRef = useRef<HTMLDivElement>(null!);
-  const { accId } = useParams();
+  const { username } = useParams();
   const location = useLocation();
 
   const photos: string[] = [photo, photo, photo];
@@ -39,7 +39,7 @@ const RightPanel = () => {
         ref={stickyRef}
         className="flex flex-col gap-4 sticky left-0"
       >
-        {photos.length !== 0 && accId && <Photos photos={photos} />}
+        {photos.length !== 0 && username && <Photos photos={photos} />}
         {location.pathname !== "/search" && <Trends />}
         <div
           style={{ background: theme.bgName === "bg-blue" ? "#131c26" : "#0a0909" }}

@@ -100,3 +100,11 @@ export const retweetTweet = catchAsync(
     res.status(200).json({ message: "Success" });
   }
 );
+
+export const getTweet = async (req: Request, res: Response, next: NextFunction) => {
+  const { tweetId } = req.params;
+
+  const foundTweet = await Tweet.findOne({ _id: tweetId });
+
+  res.status(200).json({ tweet: foundTweet });
+};

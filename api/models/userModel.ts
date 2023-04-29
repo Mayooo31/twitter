@@ -27,6 +27,7 @@ const userSchema: Schema<IUser> = new Schema({
     required: [true, "User name is missing!"],
     unique: true,
     maxLength: 16,
+    lowercase: true,
   },
   email: {
     type: String,

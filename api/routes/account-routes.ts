@@ -6,16 +6,15 @@ import {
   editProfile,
   deleteAccount,
   followAccount,
+  getAccount,
 } from "../controllers/accountController";
 
 const router = express.Router();
 
-// Middleware
-router.use(checkAuth);
-
 // routes
-router.patch("/edit", editProfile);
-router.delete("/delete", deleteAccount);
-router.put("/follow", followAccount);
+router.patch("/edit", checkAuth, editProfile);
+router.delete("/delete", checkAuth, deleteAccount);
+router.put("/follow", checkAuth, followAccount);
+router.get("/:username", getAccount);
 
 export default router;
