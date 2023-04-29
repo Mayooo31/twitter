@@ -12,9 +12,9 @@ import {
 const router = express.Router();
 
 // routes
+router.get("/:tweetId", getTweet);
 router.post("/create", checkAuth, createTweet);
 router.put("/like", checkAuth, likeTweet);
 router.put("/retweet", checkAuth, retweetTweet);
-router.get("/:tweetId", getTweet);
 
 export default router;

@@ -87,10 +87,12 @@ export const followAccount = catchAsync(
   }
 );
 
-export const getAccount = async (req: Request, res: Response, next: NextFunction) => {
-  const { username } = req.params;
+export const getAccount = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { username } = req.params;
 
-  const foundAccount = await User.findOne({ username }).select("-password");
+    const foundAccount = await User.findOne({ username }).select("-password");
 
-  res.status(200).json({ account: foundAccount });
-};
+    res.status(200).json({ account: foundAccount });
+  }
+);

@@ -6,6 +6,7 @@ import cors from "cors";
 import authRoutes from "../routes/auth-routes";
 import tweetRoutes from "../routes/tweet-routes";
 import accountRoutes from "../routes/account-routes";
+import bookmarksRoutes from "../routes/bookmarks-routes";
 
 // Export app for ( server.js )
 export const app = express();
@@ -18,6 +19,7 @@ app.use(cors());
 app.use("/api/auth", authRoutes);
 app.use("/api/account", accountRoutes);
 app.use("/api/tweet", tweetRoutes);
+app.use("/api/bookmarks", bookmarksRoutes);
 
 app.get("/", (req: Request, res: Response) => {
   res.json({ name: "Mario" });

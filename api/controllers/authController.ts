@@ -1,8 +1,10 @@
 import { NextFunction, Request, Response } from "express";
-
 import jwt from "jsonwebtoken";
 
+// Models
 import User from "../models/userModel";
+
+// Utils
 import createError from "../utils/error";
 import catchAsync from "../utils/catchAsync";
 
@@ -10,7 +12,6 @@ const createToken = (id: string, email: string) => {
   const token = jwt.sign({ id, email }, process.env.JWT_SECRET!, {
     expiresIn: "24h",
   });
-
   return { token };
 };
 

@@ -12,8 +12,9 @@ interface IUser extends Document {
   createdAt: Date;
   age: number;
   tweets: Schema.Types.ObjectId[];
-  following: string[];
-  followers: string[];
+  bookmarks: Schema.Types.ObjectId[];
+  following: Schema.Types.ObjectId[];
+  followers: Schema.Types.ObjectId[];
   correctPassword(password: string): Promise<boolean>;
 }
 
@@ -46,6 +47,7 @@ const userSchema: Schema<IUser> = new Schema({
     min: [15, "Minimum age is 15!"],
   },
   tweets: [{ type: mongoose.Schema.Types.ObjectId, ref: "Tweet" }],
+  bookmarks: [{ type: mongoose.Schema.Types.ObjectId, ref: "Tweet" }],
   following: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   followers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   createdAt: {
