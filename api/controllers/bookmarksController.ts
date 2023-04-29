@@ -11,6 +11,16 @@ import createError from "../utils/error";
 // Types
 import { AuthRequest } from "../types/types";
 
+export const getBookmarks = catchAsync(
+  async (req: Request & AuthRequest, res: Response, next: NextFunction) => {
+    const userId = req.userData?.id;
+
+    const bookmarksData = await User.findById(userId).populate("bookmarks");
+
+    res.status(200).json({ bookmarks: bookmarksData?.bookmarks });
+  }
+);
+
 export const addToBookmarks = catchAsync(
   async (req: Request & AuthRequest, res: Response, next: NextFunction) => {
     const userId = req.userData?.id;
