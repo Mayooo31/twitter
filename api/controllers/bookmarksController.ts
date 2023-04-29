@@ -2,7 +2,6 @@ import { NextFunction, Request, Response } from "express";
 import mongoose from "mongoose";
 
 // Models
-import Tweet from "../models/tweetModel";
 import User from "../models/userModel";
 
 // Utils

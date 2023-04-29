@@ -28,6 +28,10 @@ export const checkAuth = (req: AuthRequest, res: Response, next: NextFunction) =
     process.env.JWT_SECRET!
   ) as DecodedToken;
 
+  const isExpired = decodedToken.exp && decodedToken.exp < Date.now() / 1000;
+
+  if (isExpired) return next(createError(401, "Token is expired! Please re-log in."));
+
   req.userData = { id: decodedToken.id, email: decodedToken.email };
   next();
 };
