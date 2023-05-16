@@ -30,10 +30,14 @@ export const deleteAccount = catchAsync(
   async (req: Request & AuthRequest, res: Response, next: NextFunction) => {
     const id = req.userData?.id;
 
-    const promises = [User.findByIdAndDelete(id), Tweet.deleteMany({ createdBy: id })];
+    const promises = [
+      User.findByIdAndDelete(id),
+      Tweet.deleteMany({ createdBy: id }),
+    ];
     const result = await Promise.all(promises);
 
-    if (result[0] === null) return next(createError(401, "Account was not found!"));
+    if (result[0] === null)
+      return next(createError(401, "Account was not found!"));
 
     res.status(200).json({ message: "Account deleted" });
   }
@@ -94,5 +98,29 @@ export const getAccount = catchAsync(
     const foundAccount = await User.findOne({ username }).select("-password");
 
     res.status(200).json({ account: foundAccount });
+  }
+);
+
+export const getFollowing = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+
+    const following = await User.findById(id)
+      .populate("following")
+      .select("following");
+
+    res.status(200).json({ following: following!.following });
+  }
+);
+
+export const getFollowers = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+
+    const followers = await User.findById(id)
+      .populate("followers")
+      .select("followers");
+
+    res.status(200).json({ followers: followers!.followers });
   }
 );
