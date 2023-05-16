@@ -14,7 +14,7 @@ const Account = () => {
 
   return (
     <MainLayout>
-      <div className={`ss:h-full max-w-[600px]`}>
+      <div className={`ss:h-full w-full max-w-[600px]`}>
         <NavbarAccount />
         <Profile />
         <ProfileButtons />

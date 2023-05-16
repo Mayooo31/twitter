@@ -13,7 +13,7 @@ const Home = () => {
 
   return (
     <MainLayout>
-      <div className={`ss:h-full max-w-[600px]`}>
+      <div className={`ss:h-full w-full max-w-[600px]`}>
         <NavbarHome />
         <WriteATweet isModal={false} />
         <Tweet />

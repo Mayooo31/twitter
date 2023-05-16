@@ -1,24 +1,5 @@
 import React, { useContext, useState, createContext, useEffect } from "react";
-
-type ContextType = {
-  openMobileNavbar: boolean;
-  setOpenMobileNavbar: React.Dispatch<React.SetStateAction<boolean>>;
-  openMore: boolean;
-  setOpenMore: React.Dispatch<React.SetStateAction<boolean>>;
-  openWriteATweet: boolean;
-  setOpenWriteATweet: React.Dispatch<React.SetStateAction<boolean>>;
-  openThemeSettings: boolean;
-  setOpenThemeSettings: React.Dispatch<React.SetStateAction<boolean>>;
-  theme: ThemeType;
-  setTheme: React.Dispatch<React.SetStateAction<ThemeType>>;
-};
-
-type ThemeType = {
-  color: string;
-  background: string;
-  name: string;
-  bgName: string;
-};
+import { ContextType, LoggedAcountType, ThemeType } from "./types/types";
 
 type PropsType = {
   children: React.ReactNode;
@@ -28,17 +9,18 @@ const Context = createContext<ContextType>(null!);
 
 export const useCtx = () => useContext(Context);
 
-// "rgb(255, 122, 0)"
-// "#ff7a00"
-
 const savedThemeSettings = localStorage.getItem("theme");
-const parsedSavedThemeSettings = savedThemeSettings && JSON.parse(savedThemeSettings);
+const parsedSavedThemeSettings =
+  savedThemeSettings && JSON.parse(savedThemeSettings);
 
 export const ContextProvider = ({ children }: PropsType) => {
-  const [openMobileNavbar, setOpenMobileNavbar] = useState<boolean>(false);
-  const [openMore, setOpenMore] = useState<boolean>(false);
-  const [openWriteATweet, setOpenWriteATweet] = useState<boolean>(false);
-  const [openThemeSettings, setOpenThemeSettings] = useState<boolean>(false);
+  const [loggedAccount, setLoggedAccount] = useState<LoggedAcountType>({
+    token: "",
+    id: "",
+    nick: "",
+    photo: "",
+    username: "mario",
+  });
   const [theme, setTheme] = useState<ThemeType>(
     parsedSavedThemeSettings
       ? parsedSavedThemeSettings
@@ -49,6 +31,12 @@ export const ContextProvider = ({ children }: PropsType) => {
           bgName: "bg-blue",
         }
   );
+  // Modals
+  const [openMobileNavbar, setOpenMobileNavbar] = useState<boolean>(false);
+  const [openMore, setOpenMore] = useState<boolean>(false);
+  const [openWriteATweet, setOpenWriteATweet] = useState<boolean>(false);
+  const [openThemeSettings, setOpenThemeSettings] = useState<boolean>(false);
+  const [openEditProfile, setOpenEditProfile] = useState<boolean>(false);
 
   useEffect(() => {
     localStorage.setItem("theme", JSON.stringify(theme));
@@ -67,6 +55,10 @@ export const ContextProvider = ({ children }: PropsType) => {
         setOpenThemeSettings,
         theme,
         setTheme,
+        loggedAccount,
+        setLoggedAccount,
+        openEditProfile,
+        setOpenEditProfile,
       }}
     >
       {children}

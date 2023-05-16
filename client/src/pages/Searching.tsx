@@ -19,7 +19,7 @@ const Searching = () => {
   return (
     <MainLayout>
       <div className={`ss:h-full relative max-w-[600px] w-full`}>
-        <div className=" flex gap-5 px-4 items-center w-full">
+        <div className="flex gap-5 px-4 items-center w-full">
           <img
             onClick={() => setOpenMobileNavbar(true)}
             src={photo}
