@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import { useCtx } from "../context";
 
 import {
@@ -18,10 +18,6 @@ const Profile = () => {
   const { loggedAccount, setOpenEditProfile } = useCtx();
   const { username } = useParams();
   const [isFollowing, setIsFollowing] = useState<boolean>(true);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   return (
     <div className={`mb-3`}>
@@ -62,13 +58,19 @@ const Profile = () => {
           </p>
         </div>
         <div className="flex gap-4 items-center mt-2">
-          <p className="text-grayish font-normal hover:underline cursor-pointer">
+          <Link
+            to={`/${username}/following`}
+            className="text-grayish font-normal hover:underline cursor-pointer"
+          >
             <span className="font-semibold text-white">178</span> Sledování
-          </p>
-          <p className="text-grayish font-normal hover:underline cursor-pointer">
+          </Link>
+          <Link
+            to={`/${username}/followers`}
+            className="text-grayish font-normal hover:underline cursor-pointer"
+          >
             <span className="font-semibold text-white">129 mil.</span>{" "}
             Sledujících
-          </p>
+          </Link>
         </div>
         <p className="text-grayish font-normal mt-2">
           Uživatele nesleduje nikdo, koho sledujete

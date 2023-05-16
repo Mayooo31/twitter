@@ -14,8 +14,8 @@ const EditProfile = () => {
   const { theme, setOpenEditProfile } = useCtx();
 
   const [edited, setEdited] = useState<EditedType>({
-    name: "mario",
-    about: "gang gang bitch",
+    name: "Mario",
+    about: "nothing special...",
     image: photo,
     bigImage: photo2,
   });
@@ -26,7 +26,7 @@ const EditProfile = () => {
   const inputNameRef = useRef<HTMLInputElement>(null!);
   const inputAboutRef = useRef<HTMLTextAreaElement>(null!);
 
-  const edithandler = () => {
+  const editHandler = () => {
     console.log({
       image: edited.image,
       bigImage: edited.bigImage,
@@ -37,7 +37,7 @@ const EditProfile = () => {
   return (
     <div
       style={{ background: theme.background }}
-      className="absolute ss:fixed top-0 left-0 w-full max-w-[600px] ss:rounded-2xl ss:top-[50%] ss:left-[50%] ss:h-fit ss:translate-x-[-50%] ss:translate-y-[-50%] h-screen z-[100] py-3"
+      className="fixed top-0 left-0 w-full max-w-[600px] ss:rounded-2xl ss:top-[50%] ss:left-[50%] ss:h-fit ss:translate-x-[-50%] ss:translate-y-[-50%] h-screen z-[100] py-3"
     >
       <div className="flex justify-between px-4 pb-3">
         <span className="flex gap-6 items-center">
@@ -48,7 +48,7 @@ const EditProfile = () => {
           <p className="font-bold text-lg">Upravit profil</p>
         </span>
         <button
-          onClick={() => edithandler()}
+          onClick={() => editHandler()}
           className="text-black bg-white rounded-full px-4 py-1"
         >
           Uložit

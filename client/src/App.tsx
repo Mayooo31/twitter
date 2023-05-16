@@ -9,6 +9,7 @@ import Bookmarks from "./pages/Bookmarks";
 import Searching from "./pages/Searching";
 import ModalsAndOverlays from "./components/Modals & Overlays/ModalsAndOverlays";
 import { useCtx } from "./context";
+import FollowersAndFollowing from "./pages/FollowersAndFollowing";
 
 const App = () => {
   const { theme } = useCtx();
@@ -25,6 +26,14 @@ const App = () => {
           <Route path="/bookmarks" element={<Bookmarks />} />
           <Route path="/search" element={<Searching />} />
           <Route path="/:username" element={<Account />} />
+          <Route
+            path="/:username/followers"
+            element={<FollowersAndFollowing />}
+          />
+          <Route
+            path="/:username/following"
+            element={<FollowersAndFollowing />}
+          />
         </Routes>
       </div>
     </BrowserRouter>

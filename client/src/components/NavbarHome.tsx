@@ -6,7 +6,6 @@ import "../index.css";
 
 import photo1 from "../assets/photo1.jpg";
 import styles from "../styles";
-import { colorWithOpacity } from "../utils/opacityColor";
 
 const Navbar = () => {
   const { setOpenMobileNavbar, theme } = useCtx();
@@ -34,13 +33,19 @@ const Navbar = () => {
 
   return (
     <div
-      style={{ background: theme.bgName === "bg-blue" ? "#15202bda" : "#000000c9" }}
+      style={{
+        background: theme.bgName === "bg-blue" ? "#15202bda" : "#000000c9",
+      }}
       className={`sticky top-0 left-0 duration-200 ${
         shrinkNavbar ? "translate-y-[-55px]" : "translate-y-[0px]"
-      } xs:left-[70px] w-full ss:w-full pb-[1px] ${styles.borderBottom} z-50 custom-blur`}
+      } xs:left-[70px] w-full ss:w-full pb-[1px] ${
+        styles.borderBottom
+      } z-50 custom-blur`}
     >
       <div className="flex items-center pb-2 px-3 pt-3">
-        <h1 className="hidden xs:block text-xl font-bold ml-2">Hlavní stránka</h1>
+        <h1 className="hidden xs:block text-xl font-bold ml-2">
+          Hlavní stránka
+        </h1>
         <div className="w-[calc(50%-14px)] xs:hidden">
           <img
             onClick={() => setOpenMobileNavbar(true)}
@@ -63,7 +68,9 @@ const Navbar = () => {
         <button
           onClick={() => setSelected("for you")}
           className={`w-[50%] h-[53px] cursor-pointer ${
-            theme.bgName === "bg-blue" ? "hover:bg-[#41576f23]" : "hover:bg-[#5e5e5e44]"
+            theme.bgName === "bg-blue"
+              ? "hover:bg-[#41576f23]"
+              : "hover:bg-[#5e5e5e44]"
           }`}
         >
           <div className="relative h-full w-fit m-auto grid place-items-center">
@@ -79,7 +86,9 @@ const Navbar = () => {
         <button
           onClick={() => setSelected("following")}
           className={`w-[50%] h-[53px] cursor-pointer ${
-            theme.bgName === "bg-blue" ? "hover:bg-[#41576f23]" : "hover:bg-[#5e5e5e44]"
+            theme.bgName === "bg-blue"
+              ? "hover:bg-[#41576f23]"
+              : "hover:bg-[#5e5e5e44]"
           }`}
         >
           <div className="relative h-full w-fit m-auto grid place-items-center">

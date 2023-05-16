@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
 
-// Components
-import NavbarHome from "../components/NavbarHome";
-import WriteATweet from "../components/WriteATweet";
-import Tweet from "../components/Tweet";
 import MainLayout from "../components/Layouts/MainLayout";
+import NavbarFollowersAndFollowing from "../components/NavbarFollowersAndFollowing";
+import Tweet from "../components/Tweet";
 
-const Home = () => {
+const FollowersAndFollowing = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -14,12 +12,7 @@ const Home = () => {
   return (
     <MainLayout>
       <div className={`min-h-screen w-full max-w-[600px]`}>
-        <NavbarHome />
-        <WriteATweet isModal={false} />
-        <Tweet />
-        <Tweet />
-        <Tweet />
-        <Tweet />
+        <NavbarFollowersAndFollowing />
         <Tweet />
         <Tweet />
         <Tweet />
@@ -30,4 +23,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default FollowersAndFollowing;

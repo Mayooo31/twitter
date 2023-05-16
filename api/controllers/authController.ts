@@ -19,11 +19,23 @@ export const register = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const { username, email, password, age } = req.body;
 
+    if (
+      username === "register" ||
+      username === "login" ||
+      username === "search" ||
+      username === "bookmarks"
+    ) {
+      return next(createError(401, "This name is not allowed!"));
+    }
+
     const user = await User.findOne({ email });
 
-    if (user) return next(createError(401, "This email is already registered!"));
+    if (user)
+      return next(createError(401, "This email is already registered!"));
     if (password.length > 16)
-      return next(createError(401, "Password is too long. Maximum is 16 characters!"));
+      return next(
+        createError(401, "Password is too long. Maximum is 16 characters!")
+      );
 
     const createdUser = new User({
       username,
@@ -47,7 +59,9 @@ export const login = catchAsync(
 
     if (username) {
       if (!password) {
-        return next(createError(400, "Please provide username/email and password"));
+        return next(
+          createError(400, "Please provide username/email and password")
+        );
       }
 
       const user = await User.findOne({ username });
@@ -61,7 +75,9 @@ export const login = catchAsync(
       res.status(200).json({ token, user });
     } else {
       if (!email || !password) {
-        return next(createError(400, "Please provide username/email and password"));
+        return next(
+          createError(400, "Please provide username/email and password")
+        );
       }
 
       const user = await User.findOne({ email });
