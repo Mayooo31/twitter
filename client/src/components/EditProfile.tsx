@@ -30,8 +30,8 @@ const EditProfile = () => {
     console.log({
       image: edited.image,
       bigImage: edited.bigImage,
-      name: inputNameRef.current.value,
-      about: inputAboutRef.current.value,
+      name: edited.name,
+      about: edited.about,
     });
   };
   return (
@@ -56,19 +56,16 @@ const EditProfile = () => {
       </div>
       <div className="relative">
         {edited.bigImage ? (
-          <img
-            src={edited.bigImage}
-            className="custom-ratio object-cover cursor-pointer"
-          />
+          <img src={edited.bigImage} className="custom-ratio object-cover" />
         ) : (
-          <div className="custom-ratio bg-gray-700 object-cover cursor-pointer" />
+          <div className="custom-ratio bg-gray-700 object-cover" />
         )}
 
         <label
-          className="cursor-pointer absolute top-[50%] translate-y-[-50%] left-[30%] bg-[#222222c2] p-2 rounded-full"
+          className="cursor-pointer absolute top-[50%] translate-y-[-50%] left-[30%] bg-[#222222c2] hover:bg-[#3a3737c2] ease-linear duration-50 p-2 rounded-full"
           htmlFor="bigImage"
         >
-          <CameraIcon className="w-8 h-8" />
+          <CameraIcon className="w-8 h-8 cursor-pointer" />
         </label>
         <input
           onChange={(event) => {
@@ -89,22 +86,22 @@ const EditProfile = () => {
               return { ...prevState, bigImage: "" };
             })
           }
-          className="cursor-pointer absolute top-[50%] translate-y-[-50%] right-[30%] bg-[#222222c2] p-2 rounded-full"
+          className="cursor-pointer absolute top-[50%] translate-y-[-50%] right-[30%] bg-[#222222c2] hover:bg-[#3a3737c2] ease-linear duration-50 p-2 rounded-full"
         >
-          <XMarkIcon className="w-8 h-8" />
+          <XMarkIcon className="w-8 h-8 cursor-pointer" />
         </span>
 
         <div className="absolute w-[22%] translate-y-[50%] bottom-0 left-5">
           <img
             src={edited.image ? edited.image : user}
-            className="z-10 w-full aspect-square object-cover rounded-full border-[3px] border-solid border-[#15202b] cursor-pointer"
+            className="z-10 w-full aspect-square object-cover rounded-full border-[3px] border-solid border-[#15202b]"
           />
 
           <label
-            className="cursor-pointer absolute top-[50%] translate-y-[-50%] translate-x-[-50%] left-[50%] bg-[#222222c2] p-2 rounded-full"
+            className="cursor-pointer absolute top-[50%] translate-y-[-50%] translate-x-[-50%] left-[50%] bg-[#222222c2] hover:bg-[#3a3737c2] ease-linear duration-50 p-2 rounded-full"
             htmlFor="image"
           >
-            <CameraIcon className="w-8 h-8" />
+            <CameraIcon className="w-8 h-8 cursor-pointer" />
           </label>
           <input
             onChange={(event) => {
@@ -140,6 +137,11 @@ const EditProfile = () => {
             Jméno
           </label>
           <input
+            onChange={(event) => {
+              setEdited((prevState) => {
+                return { ...prevState, name: event.target.value.trim() };
+              });
+            }}
             defaultValue={edited.name}
             style={{ borderColor: focusName ? theme.color : "#ffffffb3" }}
             ref={inputNameRef}
@@ -168,6 +170,11 @@ const EditProfile = () => {
             O mně
           </label>
           <textarea
+            onChange={(event) => {
+              setEdited((prevState) => {
+                return { ...prevState, about: event.target.value.trim() };
+              });
+            }}
             defaultValue={edited.about}
             style={{ borderColor: focusAbout ? theme.color : "#ffffffb3" }}
             ref={inputAboutRef}

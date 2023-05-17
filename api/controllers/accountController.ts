@@ -103,9 +103,9 @@ export const getAccount = catchAsync(
 
 export const getFollowing = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { id } = req.params;
+    const { username } = req.params;
 
-    const following = await User.findById(id)
+    const following = await User.findOne({ username })
       .populate("following")
       .select("following");
 
@@ -115,9 +115,9 @@ export const getFollowing = catchAsync(
 
 export const getFollowers = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { id } = req.params;
+    const { username } = req.params;
 
-    const followers = await User.findById(id)
+    const followers = await User.findOne({ username })
       .populate("followers")
       .select("followers");
 

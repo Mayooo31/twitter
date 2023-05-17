@@ -15,8 +15,8 @@ const router = express.Router();
 
 // routes
 router.get("/:username", getAccount);
-router.get("/following/:id", getFollowing);
-router.get("/followers/:id", getFollowers);
+router.get("/:username/following", getFollowing);
+router.get("/:username/followers", getFollowers);
 router.put("/follow", checkAuth, followAccount);
 router.patch("/edit", checkAuth, editProfile);
 router.delete("/delete", checkAuth, deleteAccount);
