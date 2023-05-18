@@ -22,7 +22,7 @@ const NavbarFollowersAndFollowing = () => {
     >
       <div
         onClick={() => window.scrollTo(0, 0)}
-        className={`flex justify-between items-center top-0 left-0 xs:left-[70px] w-full h-[53px] pr-5 pl-0 xs:pl-5 pb-[3px] z-50 custom-blur cursor-pointer`}
+        className={`flex justify-between items-center top-0 left-0 xs:left-[70px] w-full h-[53px] pr-5 pl-0 pb-[3px] z-50 cursor-pointer`}
       >
         <button
           onClick={() => {

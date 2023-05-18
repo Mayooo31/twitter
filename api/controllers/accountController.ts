@@ -91,13 +91,18 @@ export const followAccount = catchAsync(
   }
 );
 
+function delay(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 export const getAccount = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const { username } = req.params;
 
     const foundAccount = await User.findOne({ username }).select("-password");
 
-    res.status(200).json({ account: foundAccount });
+    await delay(5000);
+    res.status(200).json(foundAccount);
   }
 );
 

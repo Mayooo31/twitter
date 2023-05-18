@@ -4,7 +4,7 @@ import photo from "../assets/photo1.jpg";
 import FollowButton from "./FollowButton";
 import { useCtx } from "../context";
 
-const MightLike = () => {
+const AccountItem = () => {
   const { theme } = useCtx();
 
   const [isFollowing, setIsFollowing] = useState<boolean>(false);
@@ -19,12 +19,16 @@ const MightLike = () => {
   return (
     <div
       className={`flex items-center py-3 px-4 ${
-        theme.bgName === "bg-blue" ? "hover:bg-[#41576f23]" : "hover:bg-[#0d0d0d]"
+        theme.bgName === "bg-blue"
+          ? "hover:bg-[#41576f23]"
+          : "hover:bg-[#0d0d0d]"
       } cursor-pointer`}
     >
       <img src={photo} className="w-12 h-12 rounded-full" />
       <div
-        style={{ width: `${"calc(100% - " + (28 + 48 + widthOfButton + "px)")}` }}
+        style={{
+          width: `${"calc(100% - " + (28 + 48 + widthOfButton + "px)")}`,
+        }}
         className={`flex flex-col ml-3`}
       >
         <h1 className="hover:underline font-bold text-ellipsis whitespace-nowrap overflow-hidden">
@@ -46,4 +50,4 @@ const MightLike = () => {
   );
 };
 
-export default MightLike;
+export default AccountItem;

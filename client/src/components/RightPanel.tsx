@@ -8,7 +8,7 @@ import Trends from "./Trends";
 import Footer from "./Footer";
 
 import photo from "../assets/photo1.jpg";
-import MightLike from "./MightLike";
+import AccountItem from "./AccountItem";
 import { useCtx } from "../context";
 import ShowMorebutton from "./ShowMorebutton";
 
@@ -42,13 +42,17 @@ const RightPanel = () => {
         {photos.length !== 0 && username && <Photos photos={photos} />}
         {location.pathname !== "/search" && <Trends />}
         <div
-          style={{ background: theme.bgName === "bg-blue" ? "#131c26" : "#0a0909" }}
+          style={{
+            background: theme.bgName === "bg-blue" ? "#131c26" : "#0a0909",
+          }}
           className={`rounded-2xl overflow-hidden`}
         >
-          <h1 className="text-xl font-extrabold pt-2 pb-3 px-4">Mohlo by se vám líbit</h1>
-          <MightLike />
-          <MightLike />
-          <MightLike />
+          <h1 className="text-xl font-extrabold pt-2 pb-3 px-4">
+            Mohlo by se vám líbit
+          </h1>
+          <AccountItem />
+          <AccountItem />
+          <AccountItem />
           <ShowMorebutton />
         </div>
         <Footer />

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 
 import MainLayout from "../components/Layouts/MainLayout";
 import NavbarFollowersAndFollowing from "../components/NavbarFollowersAndFollowing";
+import AccountItem from "../components/AccountItem";
 
 const FollowersAndFollowing = () => {
   useEffect(() => {
@@ -12,6 +13,18 @@ const FollowersAndFollowing = () => {
     <MainLayout>
       <div className={`min-h-screen w-full max-w-[600px]`}>
         <NavbarFollowersAndFollowing />
+        <AccountItem />
+        <AccountItem />
+        <AccountItem />
+        <AccountItem />
+        <AccountItem />
+        <AccountItem />
+        <AccountItem />
+        <AccountItem />
+        <AccountItem />
+        <AccountItem />
+        <AccountItem />
+        <AccountItem />
       </div>
     </MainLayout>
   );

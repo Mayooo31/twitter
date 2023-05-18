@@ -12,7 +12,6 @@ import user from "../assets/user.jpg";
 
 const EditProfile = () => {
   const { theme, setOpenEditProfile } = useCtx();
-
   const [edited, setEdited] = useState<EditedType>({
     name: "Mario",
     about: "nothing special...",
@@ -34,6 +33,7 @@ const EditProfile = () => {
       about: edited.about,
     });
   };
+
   return (
     <div
       style={{ background: theme.background }}
