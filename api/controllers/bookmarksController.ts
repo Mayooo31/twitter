@@ -32,7 +32,9 @@ export const addToBookmarks = catchAsync(
       { new: true }
     );
 
-    res.status(200).json({ message: "Tweet was succesfully added to bookmarks." });
+    res
+      .status(200)
+      .json({ message: "Tweet was succesfully added to bookmarks." });
   }
 );
 
@@ -47,6 +49,8 @@ export const removeFromBookmarks = catchAsync(
       { new: true }
     );
 
-    res.status(200).json({ message: "Tweet was succesfully removed from bookmarks." });
+    res
+      .status(200)
+      .json({ message: "Tweet was succesfully removed from bookmarks." });
   }
 );

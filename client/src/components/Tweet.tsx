@@ -6,12 +6,26 @@ import { useCtx } from "../context";
 import TweetButtons from "./TweetButtons";
 
 // css and styles
-import { EllipsisHorizontalIcon } from "@heroicons/react/24/outline";
-import photo from "../assets/photo1.jpg";
 import styles from "../styles";
 import "../index.css";
+import { EllipsisHorizontalIcon } from "@heroicons/react/24/outline";
 
-const Tweet = () => {
+// Types
+import { TweetDataType } from "../types/types";
+
+// Utils
+import formatDate from "../utils/formatDate";
+
+type DataType = {
+  data: {
+    tweet: TweetDataType;
+    profilePhoto: string;
+    username: string;
+    nick: string;
+  };
+};
+
+const Tweet = ({ data }: DataType) => {
   const { theme } = useCtx();
   const [nickWidth, setNickWidth] = useState<number>();
   const [usernameWidth, setUsernameWidth] = useState<number>();
@@ -42,8 +56,11 @@ const Tweet = () => {
     <div
       className={`px-4 pt-3 pb-1 flex gap-3 ${styles.borderBottom} duration-150 ease-in ${theme.bgName} cursor-pointer`}
     >
-      <div onClick={() => navigate("/mario")} className="shrink-0 h-fit">
-        <img className="w-12 h-12 rounded-full" src={photo} />
+      <div
+        onClick={() => navigate(`/${data.username}`)}
+        className="shrink-0 h-fit"
+      >
+        <img className="w-12 h-12 rounded-full" src={data.profilePhoto} />
       </div>
       <div className="w-full">
         <div
@@ -51,31 +68,33 @@ const Tweet = () => {
           className="flex gap-1 items-center w-full relative"
         >
           <span
-            onClick={() => navigate("/mario")}
+            onClick={() => navigate(`/${data.username}`)}
             style={{ width: nickWidth }}
             ref={nickRef as React.RefObject<HTMLSpanElement>}
             className="text-ellipsis whitespace-nowrap overflow-hidden font-bold hover:underline"
           >
-            Mario🐱‍👤👌
+            {data.nick}
           </span>
           <span
-            onClick={() => navigate("/mario")}
+            onClick={() => navigate(`/${data.username}`)}
             style={{ width: usernameWidth }}
             ref={usernameRef as React.RefObject<HTMLSpanElement>}
             className="font-normal text-grayish text-ellipsis whitespace-nowrap overflow-hidden"
           >
-            @supermario
+            @{data.username}
           </span>
           <span
             ref={dateRef as React.RefObject<HTMLSpanElement>}
             className="font-normal text-grayish whitespace-nowrap"
           >
-            · 23.4.2022
+            · {formatDate(data.tweet.createdAt)}
           </span>
           <EllipsisHorizontalIcon className="h-8 w-8 p-[2px] absolute top-[50%] right-[-5px] translate-y-[-50%] ml-auto cursor-pointer text-grayish hover:text-[#3597ff] hover:bg-[#3597ff23] rounded-full" />
         </div>
-        <span className="font-medium text-[#dadada]">Messi is the best. 👌😎🤷‍♂️</span>
-        <img src={photo} className="my-2 rounded-2xl" />
+        <span className="font-medium text-[#dadada]">{data.tweet.tweet}</span>
+        {data.tweet?.image && (
+          <img src={data.tweet.image} className="my-2 rounded-2xl" />
+        )}
         <TweetButtons />
       </div>
     </div>

@@ -36,3 +36,30 @@ export type EditedType = {
   image: string;
   bigImage: string;
 };
+
+export type AccountDataType = {
+  about: string;
+  age: number;
+  bookmarks: string[];
+  createdAt: string;
+  email: string;
+  followers: string[];
+  following: string[];
+  nick: string;
+  profilePhoto: string;
+  secondPhoto: string;
+  tweets: TweetDataType[];
+  username: string;
+  _id: string;
+};
+
+export type TweetDataType = {
+  tweet: string;
+  image: string;
+  createdBy: string;
+  createdAt: string;
+  comments: string[];
+  likes: string[];
+  retweets: string[];
+  _id: string;
+};

@@ -1,14 +1,19 @@
 import React from "react";
 import { useQuery } from "react-query";
 
+// Types
+import { AccountDataType } from "../types/types";
+
 type PropsType = {
   token?: string;
   url: string;
   key: string;
+  isRetry: boolean;
 };
 
-const useGetData = ({ token = "", url, key }: PropsType) => {
+const useGetData = ({ token = "", url, key, isRetry = true }: PropsType) => {
   return useQuery({
+    retry: isRetry,
     refetchOnWindowFocus: false,
     queryKey: key,
     queryFn: async () => {
@@ -18,7 +23,14 @@ const useGetData = ({ token = "", url, key }: PropsType) => {
           "Content-Type": "application/json",
         },
       });
-      return await res.json();
+
+      if (!res.ok) {
+        const error = await res.json();
+        throw new Error(error.message);
+      }
+
+      const data = await res.json();
+      return data as AccountDataType;
     },
   });
 };

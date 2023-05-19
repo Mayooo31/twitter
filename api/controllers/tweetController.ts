@@ -31,7 +31,7 @@ export const createTweet = catchAsync(
     const sess = await mongoose.startSession();
     sess.startTransaction();
     await createdTweet.save({ session: sess });
-    user?.tweets.push(createdTweet._id);
+    user?.tweets.unshift(createdTweet._id);
     await user.save({ session: sess });
     await sess.commitTransaction();
 

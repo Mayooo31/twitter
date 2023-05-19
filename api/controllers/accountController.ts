@@ -99,9 +99,14 @@ export const getAccount = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const { username } = req.params;
 
-    const foundAccount = await User.findOne({ username }).select("-password");
+    const foundAccount = await User.findOne({ username })
+      .select("-password -__v")
+      .populate("tweets");
 
-    await delay(5000);
+    if (!foundAccount) {
+      return next(createError(500, "Tento účet neexistuje."));
+    }
+    // await delay(2000);
     res.status(200).json(foundAccount);
   }
 );

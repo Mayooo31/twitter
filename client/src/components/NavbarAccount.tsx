@@ -1,13 +1,22 @@
 import { ArrowLeftIcon } from "@heroicons/react/24/solid";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useCtx } from "../context";
 
 // css and styles
 import "../index.css";
 import LoadingSpinner from "./LoadingSpinner";
 
-const NavbarAccount = ({ data, isLoading }: any) => {
+// Types
+import { AccountDataType } from "../types/types";
+
+type PropsType = {
+  data: AccountDataType;
+  isLoading: boolean;
+};
+
+const NavbarAccount = ({ data, isLoading }: PropsType) => {
   const { theme } = useCtx();
+  const { username } = useParams();
   const navigate = useNavigate();
 
   return (
@@ -25,12 +34,16 @@ const NavbarAccount = ({ data, isLoading }: any) => {
         <ArrowLeftIcon className="w-9 h-9 p-2 rounded-full group-active:bg-[#e9e9e925] group-hover:bg-[#e9e9e925]" />
       </button>
       {isLoading ? (
-        <LoadingSpinner isLoading={isLoading} size={25} />
+        <LoadingSpinner
+          isLoading={isLoading}
+          size={25}
+          customCss="justify-self-start"
+        />
       ) : (
         <div>
-          <p className="font-bold text-lg">{data.nick}</p>
+          <p className="font-bold text-lg">{username}</p>
           <p className="text-xs font-normal text-grayish">
-            {data.tweets.length} Tweetů
+            {data?.tweets?.length ? data.tweets.length : 0} Tweetů
           </p>
         </div>
       )}
