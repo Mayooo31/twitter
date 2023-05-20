@@ -33,8 +33,8 @@ export type LoggedAcountType = {
 export type EditedType = {
   name: string;
   about: string;
-  image: string;
-  bigImage: string;
+  image: any;
+  bigImage: any;
 };
 
 export type AccountDataType = {

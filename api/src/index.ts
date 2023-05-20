@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import { ErrorRequestHandler } from "express";
+import path from "path";
 import cors from "cors";
 
 // Import routes
@@ -12,6 +13,7 @@ import bookmarksRoutes from "../routes/bookmarks-routes";
 export const app = express();
 
 // Middlewares
+app.use("/uploads/images", express.static(path.join("uploads", "images")));
 app.use(express.json());
 app.use(cors());
 

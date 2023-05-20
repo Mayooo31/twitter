@@ -1,6 +1,7 @@
 import express from "express";
 // Middleware
 import { checkAuth } from "../middleware/check-auth";
+import fileUpload from "../middleware/file-upload";
 // controllers
 import {
   editProfile,
@@ -18,7 +19,7 @@ router.get("/:username", getAccount);
 router.get("/:username/following", getFollowing);
 router.get("/:username/followers", getFollowers);
 router.put("/follow", checkAuth, followAccount);
-router.patch("/edit", checkAuth, editProfile);
+router.patch("/edit", checkAuth, fileUpload, editProfile);
 router.delete("/delete", checkAuth, deleteAccount);
 
 export default router;

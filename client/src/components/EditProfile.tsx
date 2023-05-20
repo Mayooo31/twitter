@@ -11,7 +11,7 @@ import photo2 from "../assets/musk.jpg";
 import user from "../assets/user.jpg";
 
 const EditProfile = () => {
-  const { theme, setOpenEditProfile } = useCtx();
+  const { theme, setOpenEditProfile, loggedAccount } = useCtx();
   const [edited, setEdited] = useState<EditedType>({
     name: "Mario",
     about: "nothing special...",
@@ -25,13 +25,24 @@ const EditProfile = () => {
   const inputNameRef = useRef<HTMLInputElement>(null!);
   const inputAboutRef = useRef<HTMLTextAreaElement>(null!);
 
-  const editHandler = () => {
-    console.log({
-      image: edited.image,
-      bigImage: edited.bigImage,
-      name: edited.name,
-      about: edited.about,
+  const editHandler = async () => {
+    const formData = new FormData();
+    formData.append("nick", edited.name);
+    formData.append("about", edited.about);
+    formData.append("profilePhoto", edited.image);
+    formData.append("secondPhoto", edited.bigImage);
+    formData.append("username", loggedAccount.username);
+
+    const res = await fetch(import.meta.env.VITE_API_URL + "/account/edit", {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${loggedAccount.token}`,
+      },
+      body: formData,
     });
+
+    const data = await res.json();
+    console.log(data);
   };
 
   return (
@@ -70,14 +81,16 @@ const EditProfile = () => {
         <input
           onChange={(event) => {
             const file = event.target.files && event.target.files[0];
+            console.log(URL.createObjectURL(file!));
+            console.log(file);
             file &&
               setEdited((prevState) => {
-                return { ...prevState, bigImage: URL.createObjectURL(file) };
+                return { ...prevState, bigImage: file };
               });
           }}
           className="hidden"
           type="file"
-          name="bigImage"
+          name="secondPhoto"
           id="bigImage"
         />
         <span
@@ -108,12 +121,12 @@ const EditProfile = () => {
               const file = event.target.files && event.target.files[0];
               file &&
                 setEdited((prevState) => {
-                  return { ...prevState, image: URL.createObjectURL(file) };
+                  return { ...prevState, image: file };
                 });
             }}
             className="hidden"
             type="file"
-            name="image"
+            name="profilePhoto"
             id="image"
           />
         </div>
@@ -188,7 +201,7 @@ const EditProfile = () => {
       <h2 className="mt-6 text-grayish w-full text-center mb-3">
         Pro další nastavení si pořiďte{" "}
         <span className="underline hover:no-underline cursor-pointer">
-          premium
+          premium💰
         </span>
         .
       </h2>

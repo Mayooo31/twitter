@@ -35,7 +35,7 @@ const Profile = ({ data, isLoading, isError }: PropsType) => {
 
   return (
     <div className={`mb-3`}>
-      <div className="relative">
+      <div className="relative custom-ratio object-cover">
         {data?.secondPhoto ? (
           <img
             src={data.secondPhoto}
@@ -47,7 +47,7 @@ const Profile = ({ data, isLoading, isError }: PropsType) => {
 
         <img
           src={data?.profilePhoto ? data.profilePhoto : userPhoto}
-          className="w-[22%] rounded-full border-[3px] border-solid border-[#15202b] absolute translate-y-[50%] bottom-0 left-5 z-10 cursor-pointer"
+          className="w-[22%] aspect-square object-cover rounded-full border-[3px] border-solid border-[#15202b] absolute translate-y-[50%] bottom-0 left-5 z-10 cursor-pointer"
         />
       </div>
       <div className="min-h-[100px]">

@@ -15,7 +15,8 @@ const parsedSavedThemeSettings =
 
 export const ContextProvider = ({ children }: PropsType) => {
   const [loggedAccount, setLoggedAccount] = useState<LoggedAcountType>({
-    token: "",
+    token:
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NGFjNzNmYmJlMDMxNjIwYmVkMjU4NCIsImVtYWlsIjoibWFyaW9wb2RvbGluc2t5QGdtYWlsLmNvbSIsImlhdCI6MTY4NDUzMzE2NCwiZXhwIjoxNjg0NjE5NTY0fQ.kj-uMcW03VncCxQNFk8v3tlidm3CTy7Ni7djESYLldc",
     id: "",
     nick: "",
     photo: "",

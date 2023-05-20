@@ -41,9 +41,9 @@ const NavbarAccount = ({ data, isLoading }: PropsType) => {
         />
       ) : (
         <div>
-          <p className="font-bold text-lg">{username}</p>
+          <p className="font-bold text-lg">{data?.nick ?? "@" + username}</p>
           <p className="text-xs font-normal text-grayish">
-            {data?.tweets?.length ? data.tweets.length : 0} Tweetů
+            {data?.tweets?.length ?? 0} Tweetů
           </p>
         </div>
       )}

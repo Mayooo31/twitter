@@ -11,14 +11,60 @@ import createError from "../utils/error";
 // Types
 import { AuthRequest } from "../types/types";
 
+type FilesType = {
+  profilePhoto?: [
+    {
+      fieldname: string;
+      originalname: string;
+      encoding: string;
+      mimetype: string;
+      destination: string;
+      filename: string;
+      path: string;
+      size: number;
+    }
+  ];
+  secondPhoto?: [
+    {
+      fieldname: string;
+      originalname: string;
+      encoding: string;
+      mimetype: string;
+      destination: string;
+      filename: string;
+      path: string;
+      size: number;
+    }
+  ];
+};
+
 export const editProfile = catchAsync(
   async (req: Request & AuthRequest, res: Response, next: NextFunction) => {
     const id = req.userData?.id;
-    const { profilePhoto, secondPhoto, about, nick } = req.body;
+
+    const { about, nick } = req.body;
+
+    const profilePhotofilename = (
+      req.files as { [fieldname: string]: Express.Multer.File[] }
+    )["profilePhoto"]?.[0]?.filename;
+
+    const secondPhotofilename = (
+      req.files as { [fieldname: string]: Express.Multer.File[] }
+    )["secondPhoto"]?.[0]?.filename;
+
+    console.log(profilePhotofilename);
+    console.log(secondPhotofilename);
 
     const user = await User.findByIdAndUpdate(
       id,
-      { profilePhoto, secondPhoto, about, nick },
+      {
+        profilePhoto:
+          "http://localhost:3000/uploads/images/" + profilePhotofilename,
+        secondPhoto:
+          "http://localhost:3000/uploads/images/" + secondPhotofilename,
+        about,
+        nick,
+      },
       { new: true }
     );
 

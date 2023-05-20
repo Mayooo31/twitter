@@ -95,7 +95,13 @@ const Tweet = ({ data }: DataType) => {
         {data.tweet?.image && (
           <img src={data.tweet.image} className="my-2 rounded-2xl" />
         )}
-        <TweetButtons />
+        <TweetButtons
+          data={{
+            likes: data.tweet.likes,
+            retweets: data.tweet.retweets,
+            comments: data.tweet.comments,
+          }}
+        />
       </div>
     </div>
   );

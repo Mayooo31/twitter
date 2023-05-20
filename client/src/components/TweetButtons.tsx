@@ -12,7 +12,11 @@ import {
   ShareIcon,
 } from "@heroicons/react/24/outline";
 
-const TweetButtons = () => {
+type PropsType = {
+  data: { likes: string[]; retweets: string[]; comments: string[] };
+};
+
+const TweetButtons = ({ data }: PropsType) => {
   const [like, setLike] = useState<boolean>(false);
   const [retweet, setRetweet] = useState<boolean>(false);
 
@@ -21,7 +25,7 @@ const TweetButtons = () => {
       <button className="relative left-[-8px] group flex gap-[2px] items-center cursor-pointer text-grayish hover:text-[#3597ff]">
         <ChatBubbleOvalLeftIcon className="h-8 xxs:h-9 w-8 xxs:w-9 ml-auto group-hover:bg-[#2c8df41c] rounded-full p-2" />
         <span className="whitespace-nowrap font-normal text-xs relative left-[-5px] xxs:left-0">
-          637
+          {data.comments.length}
         </span>
       </button>
       <button
@@ -31,7 +35,7 @@ const TweetButtons = () => {
       >
         <ArrowPathRoundedSquareIcon className="h-8 xxs:h-9 w-8 xxs:w-9 ml-auto group-hover:bg-[#3ec0351d] rounded-full p-2 group-hover:text-[#32ab2a]" />
         <span className="whitespace-nowrap font-normal text-xs relative left-[-5px] xxs:left-0 group-hover:text-[#32ab2a]">
-          2 739
+          {data.retweets.length}
         </span>
       </button>
       <button
@@ -45,7 +49,7 @@ const TweetButtons = () => {
           <HeartIcon className="h-8 xxs:h-9 w-8 xxs:w-9 ml-auto group-hover:bg-[#f918812c] rounded-full p-2 group-hover:text-[#F91880]" />
         )}
         <span className="whitespace-nowrap font-normal text-xs relative left-[-5px] xxs:left-0 group-hover:text-[#F91880]">
-          24,4 tis.
+          {data.likes.length}
         </span>
       </button>
       <button className="group hidden xxs:block cursor-pointer text-grayish hover:text-[#3597ff]">
