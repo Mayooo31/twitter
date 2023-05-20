@@ -1,7 +1,9 @@
 import express from "express";
+
 // Middleware
 import { checkAuth } from "../middleware/check-auth";
 import fileUpload from "../middleware/file-upload";
+
 // controllers
 import {
   editProfile,

@@ -24,13 +24,17 @@ const Account = () => {
     isRetry: false,
   });
 
+  const refetchData = () => {
+    refetch();
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
     <MainLayout>
-      {openEditProfile && <EditProfile />}
+      {openEditProfile && <EditProfile refetch={refetch} />}
       <div className={`min-h-screen w-full max-w-[600px]`}>
         <NavbarAccount data={data!} isLoading={isLoading} />
         <Profile data={data!} isLoading={isLoading} isError={isError} />

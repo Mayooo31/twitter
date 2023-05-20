@@ -27,7 +27,9 @@ export type LoggedAcountType = {
   id: string;
   nick: string;
   username: string;
-  photo: string;
+  profilePhoto: string;
+  secondPhoto: string;
+  about: string;
 };
 
 export type EditedType = {

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useCtx } from "../context";
 
 // Types
@@ -6,17 +6,16 @@ import { EditedType } from "../types/types";
 
 // Icons nad photos
 import { CameraIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import photo from "../assets/photo1.jpg";
-import photo2 from "../assets/musk.jpg";
 import user from "../assets/user.jpg";
 
-const EditProfile = () => {
-  const { theme, setOpenEditProfile, loggedAccount } = useCtx();
+const EditProfile = ({ refetch }: { refetch: () => void }) => {
+  const { theme, setOpenEditProfile, loggedAccount, setLoggedAccount } =
+    useCtx();
   const [edited, setEdited] = useState<EditedType>({
-    name: "Mario",
-    about: "nothing special...",
-    image: photo,
-    bigImage: photo2,
+    name: loggedAccount.nick,
+    about: loggedAccount.about,
+    image: loggedAccount.profilePhoto,
+    bigImage: loggedAccount.secondPhoto,
   });
 
   //   Inputs transitions
@@ -31,7 +30,8 @@ const EditProfile = () => {
     formData.append("about", edited.about);
     formData.append("profilePhoto", edited.image);
     formData.append("secondPhoto", edited.bigImage);
-    formData.append("username", loggedAccount.username);
+    formData.append("oldSecondPhoto", loggedAccount.secondPhoto);
+    formData.append("oldProfilePhoto", loggedAccount.profilePhoto);
 
     const res = await fetch(import.meta.env.VITE_API_URL + "/account/edit", {
       method: "PATCH",
@@ -43,6 +43,18 @@ const EditProfile = () => {
 
     const data = await res.json();
     console.log(data);
+
+    setLoggedAccount((prevState) => {
+      return {
+        ...prevState,
+        nick: data._doc.nick,
+        about: data._doc.about,
+        profilePhoto: data._doc.profilePhoto,
+        secondPhoto: data._doc.secondPhoto,
+      };
+    });
+    setOpenEditProfile(false);
+    refetch();
   };
 
   return (
@@ -59,6 +71,10 @@ const EditProfile = () => {
           <p className="font-bold text-lg">Upravit profil</p>
         </span>
         <button
+          style={{
+            opacity: edited.name.length < 1 ? "60%" : "100%",
+          }}
+          disabled={edited.name.length < 1}
           onClick={() => editHandler()}
           className="text-black bg-white rounded-full px-4 py-1"
         >
@@ -136,7 +152,9 @@ const EditProfile = () => {
           <label
             style={{
               color:
-                focusName || inputNameRef.current?.value || edited.name
+                edited.name.length < 1
+                  ? "red"
+                  : focusName || inputNameRef.current?.value || edited.name
                   ? theme.color
                   : "#ffffffb3",
             }}
@@ -156,7 +174,14 @@ const EditProfile = () => {
               });
             }}
             defaultValue={edited.name}
-            style={{ borderColor: focusName ? theme.color : "#ffffffb3" }}
+            style={{
+              borderColor:
+                edited.name.length < 1
+                  ? "red"
+                  : focusName
+                  ? theme.color
+                  : "#ffffffb3",
+            }}
             ref={inputNameRef}
             onFocus={() => setFocusName(true)}
             onBlur={() => setFocusName(false)}
@@ -164,6 +189,11 @@ const EditProfile = () => {
             type="text"
             className={`w-full bg-transparent px-2 pb-[6px] pt-7 outline-none border-solid border-[1px] border-grayish rounded-md`}
           />
+          {edited.name.length < 1 && (
+            <p className="text-sm text-[#ff1b1b] pt-1">
+              Jméno nemůže zůstat prázdné.
+            </p>
+          )}
         </div>
         <div className="relative w-full">
           <label
