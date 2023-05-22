@@ -2,7 +2,7 @@ import React from "react";
 import { useQuery } from "react-query";
 
 // Types
-import { AccountDataType } from "../types/types";
+import { useCtx } from "../context";
 
 type PropsType = {
   token?: string;
@@ -11,7 +11,9 @@ type PropsType = {
   isRetry: boolean;
 };
 
-const useGetData = ({ token = "", url, key, isRetry = true }: PropsType) => {
+const useGetData = ({ url, key, isRetry = true }: PropsType) => {
+  const { loggedAccount } = useCtx();
+
   return useQuery({
     retry: isRetry,
     refetchOnWindowFocus: false,
@@ -19,7 +21,7 @@ const useGetData = ({ token = "", url, key, isRetry = true }: PropsType) => {
     queryFn: async () => {
       const res = await fetch(import.meta.env.VITE_API_URL + url, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${loggedAccount.token}`,
           "Content-Type": "application/json",
         },
       });
@@ -30,7 +32,7 @@ const useGetData = ({ token = "", url, key, isRetry = true }: PropsType) => {
       }
 
       const data = await res.json();
-      return data as AccountDataType;
+      return data;
     },
   });
 };

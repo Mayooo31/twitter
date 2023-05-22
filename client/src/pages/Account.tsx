@@ -14,6 +14,7 @@ import Tweet from "../components/Tweet";
 import MainLayout from "../components/Layouts/MainLayout";
 import EditProfile from "../components/EditProfile";
 import LoadingSpinner from "../components/LoadingSpinner";
+import { TweetDataType } from "../types/types";
 
 const Account = () => {
   const { openEditProfile } = useCtx();
@@ -23,10 +24,6 @@ const Account = () => {
     key: username!,
     isRetry: false,
   });
-
-  const refetchData = () => {
-    refetch();
-  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -50,7 +47,7 @@ const Account = () => {
         ) : data?.tweets.length === 0 ? (
           <CustomError message="Nenašli jsme žádné tweety." />
         ) : (
-          data?.tweets.map((tweet) => (
+          data?.tweets.map((tweet: TweetDataType) => (
             <Tweet
               key={tweet._id}
               data={{

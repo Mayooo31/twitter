@@ -8,7 +8,11 @@ import { EditedType } from "../types/types";
 import { CameraIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import user from "../assets/user.jpg";
 
+// Hooks
+import useSendData from "../hooks/useSendData";
+
 const EditProfile = ({ refetch }: { refetch: () => void }) => {
+  const { isLoading, isError, error, mutateAsync } = useSendData();
   const { theme, setOpenEditProfile, loggedAccount, setLoggedAccount } =
     useCtx();
   const [edited, setEdited] = useState<EditedType>({
@@ -16,6 +20,8 @@ const EditProfile = ({ refetch }: { refetch: () => void }) => {
     about: loggedAccount.about,
     image: loggedAccount.profilePhoto,
     bigImage: loggedAccount.secondPhoto,
+    blobImage: loggedAccount.profilePhoto,
+    blobBigImage: loggedAccount.secondPhoto,
   });
 
   //   Inputs transitions
@@ -33,16 +39,12 @@ const EditProfile = ({ refetch }: { refetch: () => void }) => {
     formData.append("oldSecondPhoto", loggedAccount.secondPhoto);
     formData.append("oldProfilePhoto", loggedAccount.profilePhoto);
 
-    const res = await fetch(import.meta.env.VITE_API_URL + "/account/edit", {
+    const data = await mutateAsync({
+      url: "/account/edit",
       method: "PATCH",
-      headers: {
-        Authorization: `Bearer ${loggedAccount.token}`,
-      },
       body: formData,
+      json: false,
     });
-
-    const data = await res.json();
-    console.log(data);
 
     setLoggedAccount((prevState) => {
       return {
@@ -53,6 +55,7 @@ const EditProfile = ({ refetch }: { refetch: () => void }) => {
         secondPhoto: data._doc.secondPhoto,
       };
     });
+
     setOpenEditProfile(false);
     refetch();
   };
@@ -82,8 +85,11 @@ const EditProfile = ({ refetch }: { refetch: () => void }) => {
         </button>
       </div>
       <div className="relative">
-        {edited.bigImage ? (
-          <img src={edited.bigImage} className="custom-ratio object-cover" />
+        {edited.blobBigImage ? (
+          <img
+            src={edited.blobBigImage}
+            className="custom-ratio object-cover"
+          />
         ) : (
           <div className="custom-ratio bg-gray-700 object-cover" />
         )}
@@ -97,11 +103,13 @@ const EditProfile = ({ refetch }: { refetch: () => void }) => {
         <input
           onChange={(event) => {
             const file = event.target.files && event.target.files[0];
-            console.log(URL.createObjectURL(file!));
-            console.log(file);
             file &&
               setEdited((prevState) => {
-                return { ...prevState, bigImage: file };
+                return {
+                  ...prevState,
+                  bigImage: file,
+                  blobBigImage: URL.createObjectURL(file!),
+                };
               });
           }}
           className="hidden"
@@ -112,7 +120,7 @@ const EditProfile = ({ refetch }: { refetch: () => void }) => {
         <span
           onClick={() =>
             setEdited((prevState) => {
-              return { ...prevState, bigImage: "" };
+              return { ...prevState, bigImage: "", blobBigImage: "" };
             })
           }
           className="cursor-pointer absolute top-[50%] translate-y-[-50%] right-[30%] bg-[#222222c2] hover:bg-[#3a3737c2] ease-linear duration-50 p-2 rounded-full"
@@ -122,7 +130,7 @@ const EditProfile = ({ refetch }: { refetch: () => void }) => {
 
         <div className="absolute w-[22%] translate-y-[50%] bottom-0 left-5">
           <img
-            src={edited.image ? edited.image : user}
+            src={edited.blobImage ? edited.blobImage : user}
             className="z-10 w-full aspect-square object-cover rounded-full border-[3px] border-solid border-[#15202b]"
           />
 
@@ -137,7 +145,11 @@ const EditProfile = ({ refetch }: { refetch: () => void }) => {
               const file = event.target.files && event.target.files[0];
               file &&
                 setEdited((prevState) => {
-                  return { ...prevState, image: file };
+                  return {
+                    ...prevState,
+                    image: file,
+                    blobImage: URL.createObjectURL(file!),
+                  };
                 });
             }}
             className="hidden"

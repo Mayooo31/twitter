@@ -22,7 +22,7 @@ const fileUpload: RequestHandler = multer({
     },
     filename: (req: any, file, cb) => {
       const ext = MIME_TYPE_MAP[file.mimetype];
-      cb(null, req.userData.id + "-" + file.fieldname + "." + ext);
+      cb(null, req.userData.id + "-" + file.originalname + "." + ext);
     },
   }),
   fileFilter(req, file, cb) {

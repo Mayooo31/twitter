@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import fs from "fs";
 
 // Models
 import Tweet from "../models/tweetModel";
@@ -24,6 +25,23 @@ export const editProfile = catchAsync(
     const secondPhotofilename = (
       req.files as { [fieldname: string]: Express.Multer.File[] }
     )["secondPhoto"]?.[0]?.filename;
+
+    if (profilePhotofilename) {
+      fs.unlink(
+        "/uploads/images/" + oldProfilePhoto.split("/uploads/images/")[1],
+        (err) => {
+          console.log(err);
+        }
+      );
+    }
+    if (secondPhotofilename) {
+      fs.unlink(
+        "/uploads/images/" + oldSecondPhoto.split("/uploads/images/")[1],
+        (err) => {
+          console.log(err);
+        }
+      );
+    }
 
     const user = await User.findByIdAndUpdate(
       id,

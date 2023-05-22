@@ -37,6 +37,8 @@ export type EditedType = {
   about: string;
   image: any;
   bigImage: any;
+  blobImage: string;
+  blobBigImage: string;
 };
 
 export type AccountDataType = {
