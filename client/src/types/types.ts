@@ -30,6 +30,8 @@ export type LoggedAcountType = {
   profilePhoto: string;
   secondPhoto: string;
   about: string;
+  following: number;
+  followers: number;
 };
 
 export type EditedType = {

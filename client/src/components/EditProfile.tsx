@@ -54,6 +54,8 @@ const EditProfile = ({ refetch }: { refetch: () => void }) => {
         about: data._doc.about,
         profilePhoto: data._doc.profilePhoto,
         secondPhoto: data._doc.secondPhoto,
+        followers: data._doc.followers.length,
+        following: data._doc.following.length,
       };
     });
 

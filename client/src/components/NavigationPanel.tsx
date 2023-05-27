@@ -7,8 +7,6 @@ import { useCtx } from "../context";
 // Components
 import MobileNavbar from "./MobileNavbar";
 
-// Icons
-import photo from "../assets/photo1.jpg";
 import {
   HomeIcon as HomeIconSelected,
   MagnifyingGlassIcon as MagnifyingGlassIconSelected,
@@ -173,13 +171,16 @@ const NavigationPanel = () => {
           <p className="hidden lg:flex text-xl ">Tweetovat</p>
         </button>
         <div className="hidden xs:flex mt-auto mb-4 lg:w-[240px] mr-[10px] lg:gap-2 lg:items-center lg:rounded-full hover:bg-[#ffffff1e] lg:py-2 pl-3 cursor-pointer">
-          <img className="w-10 h-10 rounded-full" src={photo} />
+          <img
+            className="w-10 h-10 rounded-full"
+            src={loggedAccount.profilePhoto}
+          />
           <div className="hidden lg:flex flex-col">
             <span className=" text-ellipsis whitespace-nowrap overflow-hidden w-[130px]">
-              Mario🐱‍👤👌
+              {loggedAccount.nick}
             </span>
             <span className="text-grayish font-normal text-ellipsis whitespace-nowrap overflow-hidden w-[130px]">
-              @supermario
+              @{loggedAccount.username}
             </span>
           </div>
           <EllipsisHorizontalIcon className="hidden shrink-0 lg:flex h-6 w-6 ml-auto text-grayish mr-4" />

@@ -48,6 +48,8 @@ const Register = () => {
       secondPhoto: data.createdUser.secondPhoto,
       username: data.createdUser.username,
       about: data.createdUser.about,
+      followers: data.createdUser.followers.length,
+      following: data.createdUser.following.length,
     });
 
     navigate(`/${data.createdUser.username}`);

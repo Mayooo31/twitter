@@ -6,11 +6,8 @@ import MainLayout from "../components/Layouts/MainLayout";
 import Search from "../components/Search";
 import Trends from "../components/Trends";
 
-// Css and styles
-import photo from "../assets/photo1.jpg";
-
 const Searching = () => {
-  const { setOpenMobileNavbar } = useCtx();
+  const { setOpenMobileNavbar, loggedAccount } = useCtx();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -22,8 +19,8 @@ const Searching = () => {
         <div className="flex gap-5 px-4 items-center w-full">
           <img
             onClick={() => setOpenMobileNavbar(true)}
-            src={photo}
-            className="rounded-full w-9 h-9 xs:hidden"
+            src={loggedAccount.profilePhoto}
+            className="rounded-full w-9 h-9 aspect-square xs:hidden"
           />
           <Search />
         </div>

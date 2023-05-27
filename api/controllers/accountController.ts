@@ -56,7 +56,7 @@ export const editProfile = catchAsync(
         nick,
       },
       { new: true }
-    );
+    ).select("-password -__v");
 
     res.status(200).json({ message: "Succesfully edited", ...user });
   }
@@ -127,10 +127,6 @@ export const followAccount = catchAsync(
   }
 );
 
-function delay(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
 export const getAccount = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const { username } = req.params;
@@ -142,7 +138,6 @@ export const getAccount = catchAsync(
     if (!foundAccount) {
       return next(createError(500, "Tento účet neexistuje."));
     }
-    // await delay(2000);
     res.status(200).json(foundAccount);
   }
 );

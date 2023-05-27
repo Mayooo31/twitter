@@ -13,6 +13,7 @@ const Login = () => {
   const { setLoggedAccount } = useCtx();
   const navigate = useNavigate();
   const { isLoading, isError, error, mutateAsync } = useSendData();
+
   const [focusEmail, setFocusEmail] = useState(false);
   const [focusPassword, setFocusPassword] = useState(false);
 
@@ -40,6 +41,8 @@ const Login = () => {
       secondPhoto: data.user.secondPhoto,
       username: data.user.username,
       about: data.user.about,
+      followers: data.user.followers.length,
+      following: data.user.following.length,
     });
 
     navigate(`/${data.user.username}`);

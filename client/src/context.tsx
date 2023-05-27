@@ -25,6 +25,8 @@ export const ContextProvider = ({ children }: PropsType) => {
       "http://localhost:3000/uploads/images/644ac73fbbe031620bed2584-kirby-4k-wallpaper-uhdpaper.com-799@0@i.jpg.jpeg",
     username: "mario",
     about: "nothing special...",
+    following: 0,
+    followers: 0,
   });
   const [theme, setTheme] = useState<ThemeType>(
     parsedSavedThemeSettings

@@ -24,7 +24,6 @@ import {
   UserIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import photo from "../assets/photo1.jpg";
 import "../index.css";
 
 type Props = {
@@ -38,11 +37,14 @@ const MobileNavbar = ({ coords }: Props) => {
     theme,
     setOpenThemeSettings,
     setOpenMore,
+    loggedAccount,
+    setLoggedAccount,
   } = useCtx();
+  const navigate = useNavigate();
+
   const [showStudio, setShowStudio] = useState<boolean>(false);
   const [showTools, setShowTools] = useState<boolean>(false);
   const [showSettings, setShowSettings] = useState<boolean>(false);
-  const navigate = useNavigate();
 
   return (
     <div
@@ -55,29 +57,41 @@ const MobileNavbar = ({ coords }: Props) => {
     >
       <div className="flex justify-between items-center mb-5 xs:hidden">
         <h1 className="text-lg font-bold">Informace o účtu</h1>
-        <XMarkIcon onClick={() => setOpenMobileNavbar(false)} className="w-8 h-8 p-1" />
+        <XMarkIcon
+          onClick={() => setOpenMobileNavbar(false)}
+          className="w-8 h-8 p-1"
+        />
       </div>
       <div className="flex flex-col mb-2 xs:hidden">
         <div className="flex justify-between items-center mb-1">
-          <img src={photo} className="w-10 h-10 rounded-full" />
+          <img
+            src={loggedAccount.profilePhoto}
+            className="w-10 h-10 rounded-full"
+          />
           <PlusIcon className="w-8 h-8 p-1 rounded-full border-[#d2d2d244] border-[2px] border-solid" />
         </div>
-        <p className="text-lg font-bold">Mario🤢🐱‍👤😒</p>
-        <p className="text-grayish">@supermario</p>
+        <p className="text-lg font-bold">{loggedAccount.nick}</p>
+        <p className="text-grayish">@{loggedAccount.username}</p>
       </div>
       <div className="flex gap-4 mb-4 xs:hidden">
         <p className="font-normal text-grayish">
-          <span className="font-bold text-secondary">445</span> sledovani
+          <span className="font-bold text-secondary">
+            {loggedAccount.following}
+          </span>{" "}
+          sledovani
         </p>
         <p className="font-normal text-grayish">
-          <span className="font-bold text-secondary">21</span> sledujicich
+          <span className="font-bold text-secondary">
+            {loggedAccount.followers}
+          </span>{" "}
+          sledujicich
         </p>
       </div>
       <div className="flex flex-col">
         <button
           onClick={() => {
             setOpenMobileNavbar(false);
-            navigate("/mario");
+            navigate(`/${loggedAccount.username}`);
             window.scrollTo(0, 0);
           }}
           className="flex gap-5 py-3 items-center xs:hidden"
@@ -125,7 +139,9 @@ const MobileNavbar = ({ coords }: Props) => {
         </button>
         {showStudio && (
           <div>
-            <button className={`flex gap-3 items-center py-2 w-full ${theme.name}`}>
+            <button
+              className={`flex gap-3 items-center py-2 w-full ${theme.name}`}
+            >
               <ChartBarIcon className="w-5 h-5" />
               <p className="font-normal">Analýzy</p>
             </button>
@@ -147,15 +163,21 @@ const MobileNavbar = ({ coords }: Props) => {
         </button>
         {showTools && (
           <div>
-            <button className={`flex gap-3 items-center py-2 w-full ${theme.name}`}>
+            <button
+              className={`flex gap-3 items-center py-2 w-full ${theme.name}`}
+            >
               <RocketLaunchIcon className="w-5 h-5" />
               <p className="font-normal">Twitter pro profesionály</p>
             </button>
-            <button className={`flex gap-3 items-center py-2 w-full ${theme.name}`}>
+            <button
+              className={`flex gap-3 items-center py-2 w-full ${theme.name}`}
+            >
               <ArrowTrendingUpIcon className="w-5 h-5" />
               <p className="font-normal">Reklamy na Twitteru</p>
             </button>
-            <button className={`flex gap-3 items-center py-2 w-full ${theme.name}`}>
+            <button
+              className={`flex gap-3 items-center py-2 w-full ${theme.name}`}
+            >
               <BanknotesIcon className="w-5 h-5" />
               <p className="font-normal">Monetizace</p>
             </button>
@@ -177,15 +199,21 @@ const MobileNavbar = ({ coords }: Props) => {
         </button>
         {showSettings && (
           <div className="mb-5">
-            <button className={`flex gap-3 items-center py-2 w-full ${theme.name}`}>
+            <button
+              className={`flex gap-3 items-center py-2 w-full ${theme.name}`}
+            >
               <Cog8ToothIcon className="w-5 h-5" />
               <p className="font-normal">Nastavení a soukromí</p>
             </button>
-            <button className={`flex gap-3 items-center py-2 w-full ${theme.name}`}>
+            <button
+              className={`flex gap-3 items-center py-2 w-full ${theme.name}`}
+            >
               <QuestionMarkCircleIcon className="w-5 h-5" />
               <p className="font-normal">Centrum nápovědy</p>
             </button>
-            <button className={`flex gap-3 items-center py-2 w-full ${theme.name}`}>
+            <button
+              className={`flex gap-3 items-center py-2 w-full ${theme.name}`}
+            >
               <ClockIcon className="w-5 h-5" />
               <p className="font-normal">Spořič dat</p>
             </button>
@@ -200,7 +228,24 @@ const MobileNavbar = ({ coords }: Props) => {
               <PencilSquareIcon className="w-5 h-5" />
               <p className="font-normal">Zobrazení</p>
             </button>
-            <button className={`flex gap-3 items-center py-2 w-full ${theme.name}`}>
+            <button
+              onClick={() => {
+                setLoggedAccount({
+                  about: "",
+                  id: "",
+                  nick: "",
+                  profilePhoto: "",
+                  secondPhoto: "",
+                  token: "",
+                  username: "",
+                  following: 0,
+                  followers: 0,
+                });
+                setOpenMobileNavbar(false);
+                navigate("/login");
+              }}
+              className={`flex gap-3 items-center py-2 w-full ${theme.name}`}
+            >
               <ArrowRightOnRectangleIcon className="w-5 h-5" />
               <p className="font-normal">Odhlásit se</p>
             </button>
