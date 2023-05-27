@@ -55,7 +55,7 @@ const Profile = ({ data, isLoading, isError }: PropsType) => {
           <LoadingSpinner
             isLoading={isLoading}
             size={35}
-            customCss="justify-center"
+            customCss="w-full flex py-5 justify-center"
           />
         ) : (
           !isError && (

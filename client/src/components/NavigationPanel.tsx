@@ -34,8 +34,12 @@ import {
 } from "@heroicons/react/24/outline";
 
 const NavigationPanel = () => {
-  const { setOpenMore, openMore, setOpenWriteATweet, theme } = useCtx();
-  const [coords, setCoords] = useState<{ x: string; y: string }>({ x: "0px", y: "0px" });
+  const { setOpenMore, openMore, setOpenWriteATweet, theme, loggedAccount } =
+    useCtx();
+  const [coords, setCoords] = useState<{ x: string; y: string }>({
+    x: "0px",
+    y: "0px",
+  });
   const moreButtonRef = useRef<HTMLButtonElement>(null!);
   const navigate = useNavigate();
   const location = useLocation();
@@ -138,11 +142,11 @@ const NavigationPanel = () => {
         </button>
         <button
           onClick={() => {
-            navigate("/mario");
+            navigate(`/${loggedAccount.username}`);
           }}
           className="hidden  xs:h-[55px] xs:w-full xs:py-0 center xs:flex xs:justify-center xs:items-center lg:justify-start lg:gap-5 lg:w-fit hover:bg-[#ffffff1e] lg:pl-3 lg:pr-6 lg:rounded-full"
         >
-          {location.pathname === "/mario" ? (
+          {location.pathname === `/${loggedAccount.username}` ? (
             <UserIconSelected className="w-7 h-7" />
           ) : (
             <UserIcon className="w-7 h-7" />
@@ -181,7 +185,9 @@ const NavigationPanel = () => {
           <EllipsisHorizontalIcon className="hidden shrink-0 lg:flex h-6 w-6 ml-auto text-grayish mr-4" />
         </div>
       </div>
-      {(openMore || window.innerWidth < 500) && <MobileNavbar coords={coords} />}
+      {(openMore || window.innerWidth < 500) && (
+        <MobileNavbar coords={coords} />
+      )}
     </>
   );
 };

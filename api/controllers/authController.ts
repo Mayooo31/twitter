@@ -55,16 +55,16 @@ export const register = catchAsync(
 
 export const login = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { username, email, password } = req.body;
+    const { email, password } = req.body;
 
-    if (username) {
+    if (!email.includes("@")) {
       if (!password) {
         return next(
           createError(400, "Please provide username/email and password")
         );
       }
 
-      const user = await User.findOne({ username });
+      const user = await User.findOne({ username: email });
 
       if (!user || !(await user.correctPassword(password))) {
         return next(createError(401, "Incorrect credentials!"));

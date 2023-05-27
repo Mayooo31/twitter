@@ -37,7 +37,7 @@ const NavbarAccount = ({ data, isLoading }: PropsType) => {
         <LoadingSpinner
           isLoading={isLoading}
           size={25}
-          customCss="justify-self-start"
+          customCss="w-full flex py-5 justify-self-start"
         />
       ) : (
         <div>

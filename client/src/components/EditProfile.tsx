@@ -10,6 +10,7 @@ import user from "../assets/user.jpg";
 
 // Hooks
 import useSendData from "../hooks/useSendData";
+import LoadingSpinner from "./LoadingSpinner";
 
 const EditProfile = ({ refetch }: { refetch: () => void }) => {
   const { isLoading, isError, error, mutateAsync } = useSendData();
@@ -62,9 +63,18 @@ const EditProfile = ({ refetch }: { refetch: () => void }) => {
 
   return (
     <div
-      style={{ background: theme.background }}
-      className="fixed top-0 left-0 w-full max-w-[600px] ss:rounded-2xl ss:top-[50%] ss:left-[50%] ss:h-fit ss:translate-x-[-50%] ss:translate-y-[-50%] h-screen z-[100] py-3"
+      style={{
+        background: theme.background,
+      }}
+      className="fixed overflow-hidden top-0 left-0 w-full max-w-[600px] ss:rounded-2xl ss:top-[50%] ss:left-[50%] ss:h-fit ss:translate-x-[-50%] ss:translate-y-[-50%] h-screen z-[100] py-3"
     >
+      {isLoading && (
+        <LoadingSpinner
+          isLoading={isLoading}
+          size={100}
+          customCss="w-full flex py-0 absolute z-[100] h-full bg-[#00000076] justify-center items-center"
+        />
+      )}
       <div className="flex justify-between px-4 pb-3">
         <span className="flex gap-6 items-center">
           <XMarkIcon
@@ -79,7 +89,7 @@ const EditProfile = ({ refetch }: { refetch: () => void }) => {
           }}
           disabled={edited.name.length < 1}
           onClick={() => editHandler()}
-          className="text-black bg-white rounded-full px-4 py-1"
+          className="text-black rounded-full px-4 bg-white"
         >
           Uložit
         </button>

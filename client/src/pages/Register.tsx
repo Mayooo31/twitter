@@ -1,11 +1,20 @@
 import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../index.css";
+
+// Hooks
+import { useCtx } from "../context";
+import useSendData from "../hooks/useSendData";
 
 // Components
 import EmptyLayout from "../components/Layouts/EmptyLayout";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const Register = () => {
+  const { setLoggedAccount } = useCtx();
+  const navigate = useNavigate();
+  const { isLoading, isError, error, mutateAsync } = useSendData();
+
   const [focusName, setFocusName] = useState(false);
   const [focusEmail, setFocusEmail] = useState(false);
   const [focusPassword, setFocusPassword] = useState(false);
@@ -16,8 +25,32 @@ const Register = () => {
   const inputPasswordRef = useRef<HTMLInputElement>(null!);
   const inputAgeRef = useRef<HTMLInputElement>(null!);
 
-  const submitHandler = (e: React.FormEvent) => {
+  const submitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const data = await mutateAsync({
+      url: "/auth/register",
+      body: {
+        email: inputEmailRef.current.value.trim(),
+        password: inputPasswordRef.current.value.trim(),
+        username: inputNameRef.current.value.trim(),
+        age: inputAgeRef.current.value.trim(),
+      },
+    });
+
+    if (error) return;
+
+    setLoggedAccount({
+      token: data.token,
+      id: data.createdUser._id,
+      nick: data.createdUser.nick,
+      profilePhoto: data.createdUser.profilePhoto,
+      secondPhoto: data.createdUser.secondPhoto,
+      username: data.createdUser.username,
+      about: data.createdUser.about,
+    });
+
+    navigate(`/${data.createdUser.username}`);
   };
 
   return (
@@ -128,8 +161,17 @@ const Register = () => {
                 } rounded-md`}
               />
             </div>
-            <button className="bg-white hover:bg-opacity-80 ease-in-out duration-150 text-black w-full py-3 rounded-full">
-              Registrovat se
+            <button className="bg-white hover:bg-opacity-80 ease-in-out duration-150 text-black w-full h-[50px] rounded-full">
+              {isLoading ? (
+                <LoadingSpinner
+                  isLoading={isLoading}
+                  size={15}
+                  customCss="flex justify-center"
+                  type={2}
+                />
+              ) : (
+                "Registrovat se"
+              )}
             </button>
           </form>
           <div className="flex gap-2 mt-5">

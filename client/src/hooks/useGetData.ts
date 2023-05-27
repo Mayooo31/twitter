@@ -5,7 +5,6 @@ import { useQuery } from "react-query";
 import { useCtx } from "../context";
 
 type PropsType = {
-  token?: string;
   url: string;
   key: string;
   isRetry: boolean;

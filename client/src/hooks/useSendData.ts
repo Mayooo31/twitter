@@ -3,7 +3,7 @@ import { useCtx } from "../context";
 
 type PropsType = {
   url: string;
-  method: string;
+  method?: string;
   body: any;
   json?: boolean;
 };
@@ -24,7 +24,7 @@ const useSendData = () => {
       const res = await fetch(import.meta.env.VITE_API_URL + url, {
         method,
         headers: json ? typeJSON : typeFORMDATA,
-        body,
+        body: json ? JSON.stringify(body) : body,
       });
 
       if (!res.ok) {
