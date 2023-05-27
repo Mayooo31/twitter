@@ -60,7 +60,10 @@ const Tweet = ({ data }: DataType) => {
         onClick={() => navigate(`/${data.username}`)}
         className="shrink-0 h-fit"
       >
-        <img className="w-12 h-12 rounded-full" src={data.profilePhoto} />
+        <img
+          className="w-12 h-12 aspect-square object-cover rounded-full"
+          src={data.profilePhoto}
+        />
       </div>
       <div className="w-full">
         <div

@@ -123,6 +123,7 @@ const Login = () => {
             <button className="bg-white hover:bg-opacity-80 ease-in-out duration-150 text-black w-full h-[50px] rounded-full">
               {isLoading ? (
                 <LoadingSpinner
+                  color="#3B82F6"
                   isLoading={isLoading}
                   size={15}
                   customCss="flex justify-center"

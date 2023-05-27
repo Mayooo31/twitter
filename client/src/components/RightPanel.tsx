@@ -14,10 +14,11 @@ import ShowMorebutton from "./ShowMorebutton";
 
 const RightPanel = () => {
   const { theme } = useCtx();
+  const location = useLocation();
+  const { username } = useParams();
+
   const [stickyPanel, setStickyPanel] = useState<string>("65px");
   const stickyRef = useRef<HTMLDivElement>(null!);
-  const { username } = useParams();
-  const location = useLocation();
 
   const photos: string[] = [photo, photo, photo];
 

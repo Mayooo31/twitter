@@ -6,7 +6,7 @@ import { useCtx } from "../context";
 
 type PropsType = {
   url: string;
-  key: string;
+  key?: string;
   isRetry: boolean;
 };
 

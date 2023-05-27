@@ -7,6 +7,7 @@ type PropsType = {
   size: number;
   customCss: string;
   type?: number;
+  color?: string;
 };
 
 const LoadingSpinner = ({
@@ -14,6 +15,7 @@ const LoadingSpinner = ({
   size,
   customCss,
   type = 1,
+  color,
 }: PropsType) => {
   const { theme } = useCtx();
 
@@ -21,7 +23,7 @@ const LoadingSpinner = ({
     <div className={`${customCss}`}>
       {type === 1 && (
         <MoonLoader
-          color={theme.color}
+          color={color ?? theme.color}
           loading={isLoading}
           size={size}
           aria-label="Loading Spinner"
@@ -30,7 +32,7 @@ const LoadingSpinner = ({
       )}
       {type === 2 && (
         <BeatLoader
-          color={theme.color}
+          color={color ?? theme.color}
           loading={isLoading}
           size={size}
           aria-label="Loading Spinner"
