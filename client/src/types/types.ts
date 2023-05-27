@@ -69,3 +69,5 @@ export type TweetDataType = {
   retweets: string[];
   _id: string;
 };
+
+export type selectedType = "tweets" | "tweets and answers" | "media" | "likes";

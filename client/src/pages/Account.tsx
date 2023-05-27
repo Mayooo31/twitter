@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+
+// Hooks
 import { useCtx } from "../context";
 import { useParams } from "react-router-dom";
-
-// Custom
 import useGetData from "../hooks/useGetData";
-import CustomError from "../components/CustomError";
 
 // Components
 import NavbarAccount from "../components/NavbarAccount";
@@ -14,16 +13,34 @@ import Tweet from "../components/Tweet";
 import MainLayout from "../components/Layouts/MainLayout";
 import EditProfile from "../components/EditProfile";
 import LoadingSpinner from "../components/LoadingSpinner";
-import { TweetDataType } from "../types/types";
+import CustomError from "../components/CustomError";
+
+// Types
+import { TweetDataType, selectedType } from "../types/types";
 
 const Account = () => {
   const { openEditProfile } = useCtx();
   const { username } = useParams();
+  const [selected, setSelected] = useState<selectedType>("tweets");
+
   const { data, isLoading, isError, refetch, error } = useGetData({
     url: `/account/${username}`,
     key: username!,
     isRetry: false,
   });
+  const [filteredData, setFilteredData] = useState(data);
+
+  useEffect(() => {
+    selected === "media" &&
+      setFilteredData({
+        ...data,
+        tweets: data.tweets.filter((tweet: TweetDataType) => {
+          if (tweet.image) return tweet;
+        }),
+      });
+
+    selected !== "media" && setFilteredData(data);
+  }, [selected, data]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -35,7 +52,7 @@ const Account = () => {
       <div className={`min-h-screen w-full max-w-[600px]`}>
         <NavbarAccount data={data!} isLoading={isLoading} />
         <Profile data={data!} isLoading={isLoading} isError={isError} />
-        <ProfileButtons />
+        <ProfileButtons selected={selected} setSelected={setSelected} />
         {isLoading ? (
           <LoadingSpinner
             isLoading={isLoading}
@@ -44,20 +61,22 @@ const Account = () => {
           />
         ) : isError ? (
           <CustomError message={(error as Error).message} />
-        ) : data?.tweets.length === 0 ? (
+        ) : filteredData?.tweets.length === 0 ? (
           <CustomError message="Nenašli jsme žádné tweety." />
         ) : (
-          data?.tweets.map((tweet: TweetDataType) => (
-            <Tweet
-              key={tweet._id}
-              data={{
-                tweet,
-                nick: data.nick,
-                username: data.username,
-                profilePhoto: data.profilePhoto,
-              }}
-            />
-          ))
+          filteredData?.tweets.map((tweet: TweetDataType) => {
+            return (
+              <Tweet
+                key={tweet._id}
+                data={{
+                  tweet,
+                  nick: data.nick,
+                  username: data.username,
+                  profilePhoto: data.profilePhoto,
+                }}
+              />
+            );
+          })
         )}
       </div>
     </MainLayout>

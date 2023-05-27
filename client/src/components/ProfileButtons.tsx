@@ -1,10 +1,18 @@
-import React, { useState } from "react";
 import { useCtx } from "../context";
+
+// Styles
 import styles from "../styles";
 
-const ProfileButtons = () => {
+// Types
+import { selectedType } from "../types/types";
+
+type Props = {
+  selected: selectedType;
+  setSelected: React.Dispatch<React.SetStateAction<selectedType>>;
+};
+
+const ProfileButtons = ({ selected, setSelected }: Props) => {
   const { theme } = useCtx();
-  const [selected, setSelected] = useState("tweets");
 
   return (
     <div className={`flex ${styles.borderBottom}`}>

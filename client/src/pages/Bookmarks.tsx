@@ -15,6 +15,7 @@ const Bookmarks = () => {
   const { data, isLoading, isError, refetch, error } = useGetData({
     url: `/bookmarks`,
     isRetry: false,
+    key: "bookmarks",
   });
 
   console.log(data);
@@ -27,7 +28,6 @@ const Bookmarks = () => {
     <MainLayout>
       <div className={`min-h-screen w-full max-w-[600px]`}>
         <NavbarBookmarks />
-
         {isLoading ? (
           <LoadingSpinner
             isLoading={isLoading}
