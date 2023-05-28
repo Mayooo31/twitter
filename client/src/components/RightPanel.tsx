@@ -6,11 +6,14 @@ import Search from "./Search";
 import Photos from "./Photos";
 import Trends from "./Trends";
 import Footer from "./Footer";
-
-import photo from "../assets/photo1.jpg";
 import AccountItem from "./AccountItem";
-import { useCtx } from "../context";
 import ShowMorebutton from "./ShowMorebutton";
+
+// Styles and css
+import photo from "../assets/photo1.jpg";
+
+// Hooks
+import { useCtx } from "../context";
 
 const RightPanel = () => {
   const { theme } = useCtx();

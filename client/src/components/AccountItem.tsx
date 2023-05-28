@@ -12,9 +12,11 @@ type Props = {
 
 const AccountItem = ({ data }: Props) => {
   const navigate = useNavigate();
-  const { theme } = useCtx();
+  const { theme, loggedAccount } = useCtx();
 
-  const [isFollowing, setIsFollowing] = useState<boolean>(false);
+  const [isFollowing, setIsFollowing] = useState<boolean>(
+    loggedAccount.following.includes(data._id)
+  );
   const [widthOfButton, setWidthOfButton] = useState<number>(97);
 
   useEffect(() => {
@@ -52,6 +54,7 @@ const AccountItem = ({ data }: Props) => {
       </div>
       <div className="h-[32px] ml-auto">
         <FollowButton
+          followedUserId={data._id}
           setWidthOfButton={setWidthOfButton}
           customCss="h-full"
           isFollowing={isFollowing}

@@ -41,8 +41,8 @@ const Login = () => {
       secondPhoto: data.user.secondPhoto,
       username: data.user.username,
       about: data.user.about,
-      followers: data.user.followers.length,
-      following: data.user.following.length,
+      followers: data.user.followers,
+      following: data.user.following,
     });
 
     navigate(`/${data.user.username}`);

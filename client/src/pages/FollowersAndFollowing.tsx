@@ -17,8 +17,6 @@ const FollowersAndFollowing = () => {
     isRetry: false,
   });
 
-  console.log(data);
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

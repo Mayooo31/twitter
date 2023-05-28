@@ -76,13 +76,13 @@ const MobileNavbar = ({ coords }: Props) => {
       <div className="flex gap-4 mb-4 xs:hidden">
         <p className="font-normal text-grayish">
           <span className="font-bold text-secondary">
-            {loggedAccount.following}
+            {loggedAccount.following.length}
           </span>{" "}
           sledovani
         </p>
         <p className="font-normal text-grayish">
           <span className="font-bold text-secondary">
-            {loggedAccount.followers}
+            {loggedAccount.followers.length}
           </span>{" "}
           sledujicich
         </p>
@@ -238,8 +238,8 @@ const MobileNavbar = ({ coords }: Props) => {
                   secondPhoto: "",
                   token: "",
                   username: "",
-                  following: 0,
-                  followers: 0,
+                  following: [],
+                  followers: [],
                 });
                 setOpenMobileNavbar(false);
                 setOpenMore(false);

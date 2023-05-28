@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import useSendData from "../hooks/useSendData";
 
 type Props = {
   isFollowing: boolean;
   setIsFollowing: React.Dispatch<React.SetStateAction<boolean>>;
   customCss?: string;
   setWidthOfButton?: React.Dispatch<React.SetStateAction<number>>;
+  followedUserId: string;
 };
 
 const FollowButton = ({
@@ -12,14 +14,28 @@ const FollowButton = ({
   setIsFollowing,
   customCss,
   setWidthOfButton,
+  followedUserId,
 }: Props) => {
   const [hovering, setHovering] = useState("Sleduji");
+
+  const { isLoading, isError, error, mutateAsync } = useSendData();
+
+  const followhandler = async () => {
+    await mutateAsync({
+      url: "/account/follow",
+      method: "PUT",
+      body: { followedUserId },
+    });
+  };
 
   return (
     <>
       {isFollowing && (
         <button
-          onClick={() => setIsFollowing(false)}
+          onClick={() => {
+            setIsFollowing(false);
+            followhandler();
+          }}
           onMouseEnter={() => {
             setHovering("Přestat sledovat");
             if (setWidthOfButton) setWidthOfButton(150);
@@ -35,7 +51,10 @@ const FollowButton = ({
       )}
       {!isFollowing && (
         <button
-          onClick={() => setIsFollowing(true)}
+          onClick={() => {
+            setIsFollowing(true);
+            followhandler();
+          }}
           className={`px-4 cursor-pointer rounded-full border-[1px] border-solid border-white bg-white text-black ${customCss}`}
         >
           Sledovat
