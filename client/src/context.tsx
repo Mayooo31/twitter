@@ -16,7 +16,7 @@ const parsedSavedThemeSettings =
 export const ContextProvider = ({ children }: PropsType) => {
   const [loggedAccount, setLoggedAccount] = useState<LoggedAcountType>({
     token:
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NGFjNzNmYmJlMDMxNjIwYmVkMjU4NCIsImVtYWlsIjoibWFyaW9wb2RvbGluc2t5QGdtYWlsLmNvbSIsImlhdCI6MTY4NTEzOTIzMSwiZXhwIjoxNjg1MjI1NjMxfQ.-OJ1EyfSbLadblhKS1MlZRdxKRBMGNAa2zQanqF1y_A",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NGFjNzNmYmJlMDMxNjIwYmVkMjU4NCIsImVtYWlsIjoibWFyaW9wb2RvbGluc2t5QGdtYWlsLmNvbSIsImlhdCI6MTY4NTI1NTQyOCwiZXhwIjoxNjg1MzQxODI4fQ.dRYjSP1VESGoqlOqMTDT11rtVpVBgbD_u0DcDnAmYl8",
     id: "644ac73fbbe031620bed2584",
     nick: "Mariush",
     profilePhoto:

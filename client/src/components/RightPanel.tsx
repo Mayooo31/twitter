@@ -42,7 +42,7 @@ const RightPanel = () => {
       >
         {photos.length !== 0 && username && <Photos photos={photos} />}
         {location.pathname !== "/search" && <Trends />}
-        <div
+        {/* <div
           style={{
             background: theme.bgName === "bg-blue" ? "#131c26" : "#0a0909",
           }}
@@ -55,7 +55,7 @@ const RightPanel = () => {
           <AccountItem />
           <AccountItem />
           <ShowMorebutton />
-        </div>
+        </div> */}
         <Footer />
       </div>
     </div>

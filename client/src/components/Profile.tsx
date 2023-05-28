@@ -97,7 +97,7 @@ const Profile = ({ data, isLoading, isError }: PropsType) => {
                   className="text-grayish font-normal hover:underline cursor-pointer"
                 >
                   <span className="font-semibold text-white">
-                    {data.followers.length}
+                    {data.following.length}
                   </span>{" "}
                   Sledování
                 </Link>
@@ -106,7 +106,7 @@ const Profile = ({ data, isLoading, isError }: PropsType) => {
                   className="text-grayish font-normal hover:underline cursor-pointer"
                 >
                   <span className="font-semibold text-white">
-                    {data.following.length}{" "}
+                    {data.followers.length}{" "}
                   </span>{" "}
                   Sledujících
                 </Link>

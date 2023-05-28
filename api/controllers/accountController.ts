@@ -148,9 +148,9 @@ export const getFollowing = catchAsync(
 
     const following = await User.findOne({ username })
       .populate("following")
-      .select("following");
+      .select("following nick");
 
-    res.status(200).json({ following: following!.following });
+    res.status(200).json(following);
   }
 );
 
@@ -160,8 +160,8 @@ export const getFollowers = catchAsync(
 
     const followers = await User.findOne({ username })
       .populate("followers")
-      .select("followers");
+      .select("followers nick");
 
-    res.status(200).json({ followers: followers!.followers });
+    res.status(200).json(followers);
   }
 );

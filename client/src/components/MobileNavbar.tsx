@@ -242,6 +242,7 @@ const MobileNavbar = ({ coords }: Props) => {
                   followers: 0,
                 });
                 setOpenMobileNavbar(false);
+                setOpenMore(false);
                 navigate("/login");
               }}
               className={`flex gap-3 items-center py-2 w-full ${theme.name}`}

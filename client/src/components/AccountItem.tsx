@@ -3,8 +3,15 @@ import React, { useEffect, useState } from "react";
 import photo from "../assets/photo1.jpg";
 import FollowButton from "./FollowButton";
 import { useCtx } from "../context";
+import { AccountDataType } from "../types/types";
+import { useNavigate } from "react-router-dom";
 
-const AccountItem = () => {
+type Props = {
+  data: AccountDataType;
+};
+
+const AccountItem = ({ data }: Props) => {
+  const navigate = useNavigate();
   const { theme } = useCtx();
 
   const [isFollowing, setIsFollowing] = useState<boolean>(false);
@@ -24,18 +31,23 @@ const AccountItem = () => {
           : "hover:bg-[#0d0d0d]"
       } cursor-pointer`}
     >
-      <img src={photo} className="w-12 h-12 rounded-full" />
+      <img
+        onClick={() => navigate(`/${data.username}`)}
+        src={data.profilePhoto}
+        className="w-12 h-12 aspect-square object-cover rounded-full"
+      />
       <div
+        onClick={() => navigate(`/${data.username}`)}
         style={{
           width: `${"calc(100% - " + (28 + 48 + widthOfButton + "px)")}`,
         }}
         className={`flex flex-col ml-3`}
       >
         <h1 className="hover:underline font-bold text-ellipsis whitespace-nowrap overflow-hidden">
-          Elon Musk
+          {data.nick}
         </h1>
         <p className="text-sm text-[#b3b3b3b8] font-medium text-ellipsis whitespace-nowrap overflow-hidden">
-          @elonmusk
+          @{data.username}
         </p>
       </div>
       <div className="h-[32px] ml-auto">

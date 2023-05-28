@@ -5,8 +5,14 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import "../index.css";
 import styles from "../styles";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
+import LoadingSpinner from "./LoadingSpinner";
 
-const NavbarFollowersAndFollowing = () => {
+type Props = {
+  nick: string;
+  isLoading: boolean;
+};
+
+const NavbarFollowersAndFollowing = ({ nick, isLoading }: Props) => {
   const { theme } = useCtx();
   const navigate = useNavigate();
   const { username } = useParams();
@@ -32,11 +38,20 @@ const NavbarFollowersAndFollowing = () => {
         >
           <ArrowLeftIcon className="w-9 h-9 p-2 rounded-full group-active:bg-[#e9e9e925] group-hover:bg-[#e9e9e925]" />
         </button>
-        <div className="mr-auto">
-          <p className="font-bold text-xl">Elon Musk ✨</p>
-          <p className="text-xs font-normal text-grayish">@_____majo_____</p>
-        </div>
+        {isLoading ? (
+          <LoadingSpinner
+            isLoading={isLoading}
+            size={25}
+            customCss="w-full flex py-5 justify-self-start"
+          />
+        ) : (
+          <div className="mr-auto">
+            <p className="font-bold text-xl">{nick}</p>
+            <p className="text-xs font-normal text-grayish">@{username}</p>
+          </div>
+        )}
       </div>
+
       <div className="flex w-full">
         <Link
           to={`/${username}/followers`}
