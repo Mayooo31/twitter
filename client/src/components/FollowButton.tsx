@@ -18,7 +18,7 @@ const FollowButton = ({
 }: Props) => {
   const [hovering, setHovering] = useState("Sleduji");
 
-  const { isLoading, isError, error, mutateAsync } = useSendData();
+  const { mutateAsync } = useSendData();
 
   const followhandler = async () => {
     await mutateAsync({

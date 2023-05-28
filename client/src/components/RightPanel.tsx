@@ -14,6 +14,7 @@ import photo from "../assets/photo1.jpg";
 
 // Hooks
 import { useCtx } from "../context";
+import useGetData from "../hooks/useGetData";
 
 const RightPanel = () => {
   const { theme } = useCtx();
@@ -22,6 +23,14 @@ const RightPanel = () => {
 
   const [stickyPanel, setStickyPanel] = useState<string>("65px");
   const stickyRef = useRef<HTMLDivElement>(null!);
+
+  const { data, isLoading, isError, error } = useGetData({
+    url: "/account/who-to-follow",
+    key: "who-to-follow",
+    isRetry: false,
+  });
+
+  console.log(data);
 
   const photos: string[] = [photo, photo, photo];
 

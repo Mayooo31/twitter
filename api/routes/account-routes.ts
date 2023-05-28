@@ -12,11 +12,13 @@ import {
   getAccount,
   getFollowing,
   getFollowers,
+  getWhoToFollow,
 } from "../controllers/accountController";
 
 const router = express.Router();
 
 // routes
+router.get("/who-to-follow", checkAuth, getWhoToFollow);
 router.get("/:username", getAccount);
 router.get("/:username/following", getFollowing);
 router.get("/:username/followers", getFollowers);

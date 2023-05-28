@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import mongoose from "mongoose";
 import fs from "fs";
 
 // Models
@@ -163,5 +164,28 @@ export const getFollowers = catchAsync(
       .select("followers nick");
 
     res.status(200).json(followers);
+  }
+);
+
+// export const getWhoToFollow = catchAsync(
+//   async (req: Request & AuthRequest, res: Response, next: NextFunction) => {
+//     const id = req.userData?.id;
+
+//     const users = await User.find({ followers: { $ne: id } }).limit(3);
+
+//     res.status(200).json(users);
+//   }
+// );
+
+export const getWhoToFollow = catchAsync(
+  async (req: Request & AuthRequest, res: Response, next: NextFunction) => {
+    const id = new mongoose.Types.ObjectId(req.userData?.id);
+
+    const users = await User.find({
+      _id: { $ne: id },
+      followers: { $nin: [id] },
+    }).limit(3);
+
+    res.status(200).json(users);
   }
 );

@@ -15,7 +15,7 @@ const AccountItem = ({ data }: Props) => {
   const { theme, loggedAccount } = useCtx();
 
   const [isFollowing, setIsFollowing] = useState<boolean>(
-    loggedAccount.following.includes(data._id)
+    loggedAccount.following.includes(data?._id)
   );
   const [widthOfButton, setWidthOfButton] = useState<number>(97);
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useCtx } from "../context";
 
@@ -32,6 +32,10 @@ const Profile = ({ data, isLoading, isError }: PropsType) => {
   const { loggedAccount, setOpenEditProfile } = useCtx();
   const { username } = useParams();
   const [isFollowing, setIsFollowing] = useState<boolean>(true);
+
+  useEffect(() => {
+    data && setIsFollowing(loggedAccount.following.includes(data._id));
+  }, [data]);
 
   return (
     <div className={`mb-3`}>
@@ -73,6 +77,7 @@ const Profile = ({ data, isLoading, isError }: PropsType) => {
                     <EllipsisHorizontalIcon className="h-9 w-9 p-1 cursor-pointer rounded-full border-[1px] border-solid border-[#dbdbdb72] hover:bg-[#2c3640]" />
                     <BellAlertIcon className="h-9 w-9 p-1 cursor-pointer rounded-full border-[1px] border-solid border-[#dbdbdb72] hover:bg-[#2c3640]" />
                     <FollowButton
+                      followedUserId={data._id}
                       isFollowing={isFollowing}
                       setIsFollowing={setIsFollowing}
                     />
