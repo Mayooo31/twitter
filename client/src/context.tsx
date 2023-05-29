@@ -16,14 +16,14 @@ const parsedSavedThemeSettings =
 export const ContextProvider = ({ children }: PropsType) => {
   const [loggedAccount, setLoggedAccount] = useState<LoggedAcountType>({
     token:
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NGFjNzNmYmJlMDMxNjIwYmVkMjU4NCIsImVtYWlsIjoibWFyaW9wb2RvbGluc2t5QGdtYWlsLmNvbSIsImlhdCI6MTY4NTI1NTQyOCwiZXhwIjoxNjg1MzQxODI4fQ.dRYjSP1VESGoqlOqMTDT11rtVpVBgbD_u0DcDnAmYl8",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NzQ5Njk3MDg1M2VmZjA3OWUwNWY3ZiIsImVtYWlsIjoibWFyaW9wb2RvbGluc2t5QGdtYWlsLmNvbSIsImlhdCI6MTY4NTM2Mzg0NCwiZXhwIjoxNjg1NDUwMjQ0fQ.f-FVVk5f-SBSchrBSvmQ1wkjpk9UhSs1sMjnX9t3FSk",
     id: "644ac73fbbe031620bed2584",
     nick: "Mariush",
     profilePhoto:
       "http://localhost:3000/uploads/images/644ac73fbbe031620bed2584-bart-simpson-4k-wallpaper-uhdpaper.com-829@0@i.jpg.jpeg",
     secondPhoto:
       "http://localhost:3000/uploads/images/644ac73fbbe031620bed2584-kirby-4k-wallpaper-uhdpaper.com-799@0@i.jpg.jpeg",
-    username: "mario",
+    username: "mariom",
     about: "nothing special...",
     following: [],
     followers: [],

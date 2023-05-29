@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import mongoose from "mongoose";
+var mongoose = require("mongoose");
 import fs from "fs";
 
 // Models
@@ -82,8 +82,9 @@ export const deleteAccount = catchAsync(
 
 export const followAccount = catchAsync(
   async (req: Request & AuthRequest, res: Response, next: NextFunction) => {
-    const currentUserId = req.userData?.id;
-    const { followedUserId } = req.body;
+    // const currentUserId = req.userData?.id;
+    const currentUserId = new mongoose.Types.ObjectId(req.userData!.id);
+    const followedUserId = new mongoose.Types.ObjectId(req.body.followedUserId);
 
     await Promise.all([
       User.updateOne({ _id: currentUserId }, [
@@ -167,19 +168,9 @@ export const getFollowers = catchAsync(
   }
 );
 
-// export const getWhoToFollow = catchAsync(
-//   async (req: Request & AuthRequest, res: Response, next: NextFunction) => {
-//     const id = req.userData?.id;
-
-//     const users = await User.find({ followers: { $ne: id } }).limit(3);
-
-//     res.status(200).json(users);
-//   }
-// );
-
 export const getWhoToFollow = catchAsync(
   async (req: Request & AuthRequest, res: Response, next: NextFunction) => {
-    const id = new mongoose.Types.ObjectId(req.userData?.id);
+    const id = new mongoose.Types.ObjectId(req.userData!.id);
 
     const users = await User.find({
       _id: { $ne: id },

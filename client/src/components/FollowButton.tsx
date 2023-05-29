@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import useSendData from "../hooks/useSendData";
+import { useCtx } from "../context";
 
 type Props = {
   isFollowing: boolean;
@@ -16,9 +17,9 @@ const FollowButton = ({
   setWidthOfButton,
   followedUserId,
 }: Props) => {
+  const { setLoggedAccount } = useCtx();
+  const { mutateAsync, isError } = useSendData();
   const [hovering, setHovering] = useState("Sleduji");
-
-  const { mutateAsync } = useSendData();
 
   const followhandler = async () => {
     await mutateAsync({
@@ -35,6 +36,16 @@ const FollowButton = ({
           onClick={() => {
             setIsFollowing(false);
             followhandler();
+            if (!isError) {
+              setLoggedAccount((prevState) => {
+                return {
+                  ...prevState,
+                  following: prevState.following.filter(
+                    (followId) => followId !== followedUserId
+                  ),
+                };
+              });
+            }
           }}
           onMouseEnter={() => {
             setHovering("Přestat sledovat");
@@ -54,6 +65,14 @@ const FollowButton = ({
           onClick={() => {
             setIsFollowing(true);
             followhandler();
+            if (!isError) {
+              setLoggedAccount((prevState) => {
+                return {
+                  ...prevState,
+                  following: [...prevState.following, followedUserId],
+                };
+              });
+            }
           }}
           className={`px-4 cursor-pointer rounded-full border-[1px] border-solid border-white bg-white text-black ${customCss}`}
         >

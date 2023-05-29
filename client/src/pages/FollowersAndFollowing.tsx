@@ -47,7 +47,7 @@ const FollowersAndFollowing = () => {
           />
         ) : (
           data[endPath[2]].map((account: AccountDataType) => {
-            return <AccountItem data={account} />;
+            return <AccountItem key={account._id} data={account} />;
           })
         )}
       </div>

@@ -15,6 +15,9 @@ import photo from "../assets/photo1.jpg";
 // Hooks
 import { useCtx } from "../context";
 import useGetData from "../hooks/useGetData";
+import CustomError from "./CustomError";
+import LoadingSpinner from "./LoadingSpinner";
+import { AccountDataType } from "../types/types";
 
 const RightPanel = () => {
   const { theme } = useCtx();
@@ -54,20 +57,34 @@ const RightPanel = () => {
       >
         {photos.length !== 0 && username && <Photos photos={photos} />}
         {location.pathname !== "/search" && <Trends />}
-        {/* <div
-          style={{
-            background: theme.bgName === "bg-blue" ? "#131c26" : "#0a0909",
-          }}
-          className={`rounded-2xl overflow-hidden`}
-        >
-          <h1 className="text-xl font-extrabold pt-2 pb-3 px-4">
-            Mohlo by se vám líbit
-          </h1>
-          <AccountItem />
-          <AccountItem />
-          <AccountItem />
-          <ShowMorebutton />
-        </div> */}
+
+        {isLoading ? (
+          <LoadingSpinner
+            isLoading={isLoading}
+            size={35}
+            customCss="w-full flex py-5 justify-center"
+          />
+        ) : isError ? (
+          <CustomError message={(error as Error).message} />
+        ) : (
+          data.length !== 0 && (
+            <div
+              style={{
+                background: theme.bgName === "bg-blue" ? "#131c26" : "#0a0909",
+              }}
+              className={`rounded-2xl overflow-hidden`}
+            >
+              <h1 className="text-xl font-extrabold pt-2 pb-3 px-4">
+                Mohlo by se vám líbit
+              </h1>
+              {data.map((account: AccountDataType) => {
+                return <AccountItem key={account._id} data={account} />;
+              })}
+              <ShowMorebutton />
+            </div>
+          )
+        )}
+
         <Footer />
       </div>
     </div>

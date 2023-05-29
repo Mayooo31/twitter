@@ -22,7 +22,7 @@ const userSchema: Schema<IUser> = new Schema({
   profilePhoto: { type: String, default: "" },
   secondPhoto: { type: String, default: "" },
   about: { type: String, default: "" },
-  nick: { type: String, maxLength: 16, default: "" },
+  nick: { type: String, maxLength: 24, default: "" },
   username: {
     type: String,
     required: [true, "User name is missing!"],
