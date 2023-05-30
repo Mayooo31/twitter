@@ -17,14 +17,6 @@ const Home = () => {
         <NavbarHome />
         <WriteATweet isModal={false} />
         <Tweet />
-        <Tweet />
-        <Tweet />
-        <Tweet />
-        <Tweet />
-        <Tweet />
-        <Tweet />
-        <Tweet />
-        <Tweet />
       </div>
     </MainLayout>
   );

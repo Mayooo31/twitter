@@ -44,12 +44,13 @@ const Register = () => {
       token: data.token,
       id: data.createdUser._id,
       nick: data.createdUser.nick,
-      profilePhoto: data.createdUser.profilePhoto,
-      secondPhoto: data.createdUser.secondPhoto,
+      profilePhoto: "",
+      secondPhoto: "",
       username: data.createdUser.username,
-      about: data.createdUser.about,
-      followers: data.createdUser.followers,
-      following: data.createdUser.following,
+      about: "",
+      followers: [],
+      following: [],
+      bookmarks: [],
     });
 
     navigate(`/${data.createdUser.username}`);

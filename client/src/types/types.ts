@@ -32,6 +32,7 @@ export type LoggedAcountType = {
   about: string;
   following: string[];
   followers: string[];
+  bookmarks: string[];
 };
 
 export type EditedType = {

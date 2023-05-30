@@ -28,6 +28,7 @@ const Account = () => {
     key: username!,
     isRetry: false,
   });
+
   const [filteredData, setFilteredData] = useState(data);
 
   useEffect(() => {
@@ -44,7 +45,7 @@ const Account = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  });
+  }, []);
 
   return (
     <MainLayout>

@@ -41,8 +41,8 @@ export const createTweet = catchAsync(
 
 export const likeTweet = catchAsync(
   async (req: Request & AuthRequest, res: Response, next: NextFunction) => {
-    const userId = req.userData?.id;
-    const { tweetId } = req.body;
+    const userId = new mongoose.Types.ObjectId(req.userData!.id);
+    const tweetId = new mongoose.Types.ObjectId(req.body.tweetId);
 
     const tweet = await Tweet.findById(tweetId);
     if (!tweet) return next(createError(401, "Tweet was not found!"));
@@ -72,8 +72,8 @@ export const likeTweet = catchAsync(
 
 export const retweetTweet = catchAsync(
   async (req: Request & AuthRequest, res: Response, next: NextFunction) => {
-    const userId = req.userData?.id;
-    const { tweetId } = req.body;
+    const userId = new mongoose.Types.ObjectId(req.userData!.id);
+    const tweetId = new mongoose.Types.ObjectId(req.body.tweetId);
 
     const tweet = await Tweet.findById(tweetId);
     if (!tweet) return next(createError(401, "Tweet was not found!"));

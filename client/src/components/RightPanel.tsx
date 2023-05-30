@@ -33,7 +33,7 @@ const RightPanel = () => {
     isRetry: false,
   });
 
-  console.log(data);
+  // console.log(data);
 
   const photos: string[] = [photo, photo, photo];
 

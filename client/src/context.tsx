@@ -27,6 +27,7 @@ export const ContextProvider = ({ children }: PropsType) => {
     about: "nothing special...",
     following: [],
     followers: [],
+    bookmarks: [],
   });
   const [theme, setTheme] = useState<ThemeType>(
     parsedSavedThemeSettings

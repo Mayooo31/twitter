@@ -31,6 +31,8 @@ const Login = () => {
       },
     });
 
+    console.log(data);
+
     if (error) return;
 
     setLoggedAccount({
@@ -43,6 +45,7 @@ const Login = () => {
       about: data.user.about,
       followers: data.user.followers,
       following: data.user.following,
+      bookmarks: data.user.bookmarks,
     });
 
     navigate(`/${data.user.username}`);

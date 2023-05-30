@@ -29,8 +29,8 @@ export const getBookmarks = catchAsync(
 
 export const addToBookmarks = catchAsync(
   async (req: Request & AuthRequest, res: Response, next: NextFunction) => {
-    const userId = req.userData?.id;
-    const { tweetId } = req.params;
+    const userId = new mongoose.Types.ObjectId(req.userData!.id);
+    const tweetId = new mongoose.Types.ObjectId(req.params.tweetId);
 
     await User.findByIdAndUpdate(
       userId,
@@ -46,8 +46,8 @@ export const addToBookmarks = catchAsync(
 
 export const removeFromBookmarks = catchAsync(
   async (req: Request & AuthRequest, res: Response, next: NextFunction) => {
-    const userId = req.userData?.id;
-    const { tweetId } = req.params;
+    const userId = new mongoose.Types.ObjectId(req.userData!.id);
+    const tweetId = new mongoose.Types.ObjectId(req.params.tweetId);
 
     await User.findByIdAndUpdate(
       userId,

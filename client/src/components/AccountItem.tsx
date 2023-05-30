@@ -27,6 +27,10 @@ const AccountItem = ({ data }: Props) => {
 
   return (
     <div
+      onClick={() => {
+        navigate(`/${data.username}`);
+        window.scrollTo(0, 0);
+      }}
       className={`flex items-center py-3 px-4 ${
         theme.bgName === "bg-blue"
           ? "hover:bg-[#41576f23]"
@@ -34,12 +38,10 @@ const AccountItem = ({ data }: Props) => {
       } cursor-pointer`}
     >
       <img
-        onClick={() => navigate(`/${data.username}`)}
         src={data.profilePhoto}
         className="w-12 h-12 aspect-square object-cover rounded-full"
       />
       <div
-        onClick={() => navigate(`/${data.username}`)}
         style={{
           width: `${"calc(100% - " + (28 + 48 + widthOfButton + "px)")}`,
         }}

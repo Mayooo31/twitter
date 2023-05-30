@@ -141,6 +141,7 @@ const NavigationPanel = () => {
         <button
           onClick={() => {
             navigate(`/${loggedAccount.username}`);
+            window.scrollTo(0, 0);
           }}
           className="hidden  xs:h-[55px] xs:w-full xs:py-0 center xs:flex xs:justify-center xs:items-center lg:justify-start lg:gap-5 lg:w-fit hover:bg-[#ffffff1e] lg:pl-3 lg:pr-6 lg:rounded-full"
         >
@@ -172,7 +173,7 @@ const NavigationPanel = () => {
         </button>
         <div className="hidden xs:flex mt-auto mb-4 lg:w-[240px] mr-[10px] lg:gap-2 lg:items-center lg:rounded-full hover:bg-[#ffffff1e] lg:py-2 pl-3 cursor-pointer">
           <img
-            className="w-10 h-10 rounded-full"
+            className="w-10 h-10 object-cover aspect-square rounded-full"
             src={loggedAccount.profilePhoto}
           />
           <div className="hidden lg:flex flex-col">

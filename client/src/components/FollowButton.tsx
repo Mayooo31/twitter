@@ -33,7 +33,8 @@ const FollowButton = ({
     <>
       {isFollowing && (
         <button
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation();
             setIsFollowing(false);
             followhandler();
             if (!isError) {
@@ -62,7 +63,8 @@ const FollowButton = ({
       )}
       {!isFollowing && (
         <button
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation();
             setIsFollowing(true);
             followhandler();
             if (!isError) {

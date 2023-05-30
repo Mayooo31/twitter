@@ -18,15 +18,24 @@ const tweetSchema: Schema<ITweet> = new Schema({
     type: Date,
     default: Date.now,
   },
-  comments: {
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-  },
-  likes: {
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-  },
-  retweets: {
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-  },
+  comments: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
+  likes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
+  retweets: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
 });
 
 const Tweet: Model<ITweet> = mongoose.model("Tweet", tweetSchema);

@@ -100,6 +100,7 @@ const Tweet = ({ data }: DataType) => {
         )}
         <TweetButtons
           data={{
+            tweetId: data.tweet._id,
             likes: data.tweet.likes,
             retweets: data.tweet.retweets,
             comments: data.tweet.comments,
