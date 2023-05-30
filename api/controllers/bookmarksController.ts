@@ -9,10 +9,10 @@ import catchAsync from "../utils/catchAsync";
 import createError from "../utils/error";
 
 // Types
-import { AuthRequest } from "../types/types";
+import { ExtendedReq } from "../types/types";
 
 export const getBookmarks = catchAsync(
-  async (req: Request & AuthRequest, res: Response, next: NextFunction) => {
+  async (req: ExtendedReq, res: Response, next: NextFunction) => {
     const userId = req.userData?.id;
 
     const bookmarksData = await User.findById(userId).populate({
@@ -28,7 +28,7 @@ export const getBookmarks = catchAsync(
 );
 
 export const addToBookmarks = catchAsync(
-  async (req: Request & AuthRequest, res: Response, next: NextFunction) => {
+  async (req: ExtendedReq, res: Response, next: NextFunction) => {
     const userId = new mongoose.Types.ObjectId(req.userData!.id);
     const tweetId = new mongoose.Types.ObjectId(req.params.tweetId);
 
@@ -45,7 +45,7 @@ export const addToBookmarks = catchAsync(
 );
 
 export const removeFromBookmarks = catchAsync(
-  async (req: Request & AuthRequest, res: Response, next: NextFunction) => {
+  async (req: ExtendedReq, res: Response, next: NextFunction) => {
     const userId = new mongoose.Types.ObjectId(req.userData!.id);
     const tweetId = new mongoose.Types.ObjectId(req.params.tweetId);
 

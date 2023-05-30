@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCtx } from "../context";
 import TextareaAutosize from "react-textarea-autosize";
@@ -17,15 +17,25 @@ import {
 // Css
 import photo from "../assets/photo1.jpg";
 import styles from "../styles";
+import useSendData from "../hooks/useSendData";
 
 type Props = {
   isModal: boolean;
 };
 
+type imageType = { image: File | null; blobImage: string };
+
 const WriteATweet = ({ isModal }: Props) => {
-  const [isTweetEmpty, setIsTweetEmpty] = useState<boolean>(true);
+  const { isLoading, isError, error, mutate } = useSendData();
   const { setOpenWriteATweet, theme } = useCtx();
   const navigate = useNavigate();
+
+  const tweetRef = useRef<HTMLTextAreaElement>(null);
+  const [isTweetEmpty, setIsTweetEmpty] = useState<boolean>(true);
+  const [image, setImage] = useState<imageType>({
+    image: null,
+    blobImage: "",
+  });
 
   const textAreaHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (e.target.value) {
@@ -35,13 +45,26 @@ const WriteATweet = ({ isModal }: Props) => {
     }
   };
 
+  const createHandler = async () => {
+    const formData = new FormData();
+    formData.append("tweet", tweetRef.current?.value.trim()!);
+    formData.append("image", image.image ?? "");
+
+    mutate({
+      url: "/tweet/create",
+      method: "POST",
+      body: formData,
+      json: false,
+    });
+  };
+
   return (
     <div
       style={{ background: theme.background }}
-      className={`xs:block ${styles.borderBottom} px-4 py-2 ${
+      className={`xs:block px-4 py-2 ${
         isModal
-          ? "fixed top-0 left-0 sm:top-[10%] w-full rounded-[0] sm:left-[50%] z-[100] h-screen sm:h-fit sm:w-[600px] max-w-full bg-inherit sm:translate-x-[-50%] sm:rounded-2xl"
-          : "hidden relative"
+          ? "fixed overflow-y-auto top-0 left-0 sm:top-[10%] sm:max-h-[80%] w-full rounded-[0] sm:left-[50%] z-[100] h-screen sm:h-fit sm:w-[600px] max-w-full bg-inherit sm:translate-x-[-50%] sm:rounded-2xl"
+          : "hidden relative ${styles.borderBottom}"
       }`}
     >
       {isModal && (
@@ -57,22 +80,49 @@ const WriteATweet = ({ isModal }: Props) => {
         />
         <div className="w-full flex flex-col pt-2">
           <TextareaAutosize
+            ref={tweetRef}
             placeholder="Co se právě děje?"
             className="bg-transparent outline-none w-full text-xl resize-none"
-            minRows={isModal ? 5 : 2}
+            minRows={image.blobImage ? 2 : isModal ? 5 : 2}
             maxRows={6}
             onChange={textAreaHandler}
           />
-          {isModal && <span className="w-full h-[1px] mb-2 bg-[#d5d5d53c]" />}
+          {image.blobImage && (
+            <div className="relative">
+              <img className="rounded-xl" src={image.blobImage} />
+              <XMarkIcon
+                onClick={() => setImage({ image: null, blobImage: "" })}
+                className="absolute top-2 left-2 h-10 w-10 p-2 text-white rounded-full cursor-pointer bg-[#06050599]"
+              />
+            </div>
+          )}
+          {isModal && (
+            <span className="w-full h-[1px] mb-2 mt-4 bg-[#d5d5d53c]" />
+          )}
           <div
             className={`flex gap-4 items-center pt-2 pb-1 left-[-5px] ${
               isModal ? "static" : "relative"
             }`}
           >
-            <PhotoIcon
-              style={{ color: theme.color }}
-              className={`h-9 w-9 p-2 rounded-full cursor-pointer ${theme.bgName}`}
+            <input
+              onChange={(event) => {
+                const file = event.target.files && event.target.files[0];
+                file &&
+                  setImage({
+                    image: file,
+                    blobImage: URL.createObjectURL(file!),
+                  });
+              }}
+              type="file"
+              id="image"
+              className="hidden"
             />
+            <label htmlFor="image">
+              <PhotoIcon
+                style={{ color: theme.color }}
+                className={`h-9 w-9 p-2 rounded-full cursor-pointer ${theme.bgName}`}
+              />
+            </label>
             <GifIcon
               style={{ color: theme.color }}
               className={`h-9 w-9 p-2 rounded-full cursor-pointer ${theme.bgName}`}
@@ -95,6 +145,9 @@ const WriteATweet = ({ isModal }: Props) => {
             />
 
             <button
+              onClick={() => {
+                createHandler();
+              }}
               style={{
                 opacity: isTweetEmpty ? "60%" : "100%",
                 backgroundColor: theme.color,

@@ -10,12 +10,12 @@ import catchAsync from "../utils/catchAsync";
 import createError from "../utils/error";
 
 // Types
-import { AuthRequest } from "../types/types";
+import { ExtendedReq } from "../types/types";
 
 export const createTweet = catchAsync(
-  async (req: Request & AuthRequest, res: Response, next: NextFunction) => {
+  async (req: ExtendedReq, res: Response, next: NextFunction) => {
     const id = req.userData?.id;
-    const { tweet, image } = req.body;
+    const { tweet } = req.body;
 
     if (!tweet) return next(createError(401, "Empty tweet is not allowed!"));
 
@@ -24,7 +24,7 @@ export const createTweet = catchAsync(
 
     const createdTweet = new Tweet({
       tweet,
-      image,
+      image: req?.file?.filename ? process.env.API_URL + req.file.filename : "",
       createdBy: id,
     });
 
@@ -35,12 +35,12 @@ export const createTweet = catchAsync(
     await user.save({ session: sess });
     await sess.commitTransaction();
 
-    res.status(200).json({ createdTweet });
+    res.status(200).json(createdTweet);
   }
 );
 
 export const likeTweet = catchAsync(
-  async (req: Request & AuthRequest, res: Response, next: NextFunction) => {
+  async (req: ExtendedReq, res: Response, next: NextFunction) => {
     const userId = new mongoose.Types.ObjectId(req.userData!.id);
     const tweetId = new mongoose.Types.ObjectId(req.body.tweetId);
 
@@ -71,7 +71,7 @@ export const likeTweet = catchAsync(
 );
 
 export const retweetTweet = catchAsync(
-  async (req: Request & AuthRequest, res: Response, next: NextFunction) => {
+  async (req: ExtendedReq, res: Response, next: NextFunction) => {
     const userId = new mongoose.Types.ObjectId(req.userData!.id);
     const tweetId = new mongoose.Types.ObjectId(req.body.tweetId);
 

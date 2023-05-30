@@ -18,8 +18,6 @@ const Bookmarks = () => {
     key: "bookmarks",
   });
 
-  console.log(data);
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

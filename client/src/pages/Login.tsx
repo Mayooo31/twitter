@@ -31,8 +31,6 @@ const Login = () => {
       },
     });
 
-    console.log(data);
-
     if (error) return;
 
     setLoggedAccount({

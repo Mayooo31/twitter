@@ -11,10 +11,10 @@ import catchAsync from "../utils/catchAsync";
 import createError from "../utils/error";
 
 // Types
-import { AuthRequest } from "../types/types";
+import { ExtendedReq } from "../types/types";
 
 export const editProfile = catchAsync(
-  async (req: Request & AuthRequest, res: Response, next: NextFunction) => {
+  async (req: ExtendedReq, res: Response, next: NextFunction) => {
     const id = req.userData?.id;
 
     const { about, nick, oldProfilePhoto, oldSecondPhoto } = req.body;
@@ -48,10 +48,10 @@ export const editProfile = catchAsync(
       id,
       {
         profilePhoto: profilePhotofilename
-          ? "http://localhost:3000/uploads/images/" + profilePhotofilename
+          ? process.env.API_URL + profilePhotofilename
           : oldProfilePhoto,
         secondPhoto: secondPhotofilename
-          ? "http://localhost:3000/uploads/images/" + secondPhotofilename
+          ? process.env.API_URL + secondPhotofilename
           : oldSecondPhoto,
         about,
         nick,
@@ -64,7 +64,7 @@ export const editProfile = catchAsync(
 );
 
 export const deleteAccount = catchAsync(
-  async (req: Request & AuthRequest, res: Response, next: NextFunction) => {
+  async (req: ExtendedReq, res: Response, next: NextFunction) => {
     const id = req.userData?.id;
 
     const promises = [
@@ -81,7 +81,7 @@ export const deleteAccount = catchAsync(
 );
 
 export const followAccount = catchAsync(
-  async (req: Request & AuthRequest, res: Response, next: NextFunction) => {
+  async (req: ExtendedReq, res: Response, next: NextFunction) => {
     // const currentUserId = req.userData?.id;
     const currentUserId = new mongoose.Types.ObjectId(req.userData!.id);
     const followedUserId = new mongoose.Types.ObjectId(req.body.followedUserId);
@@ -169,7 +169,7 @@ export const getFollowers = catchAsync(
 );
 
 export const getWhoToFollow = catchAsync(
-  async (req: Request & AuthRequest, res: Response, next: NextFunction) => {
+  async (req: ExtendedReq, res: Response, next: NextFunction) => {
     const id = new mongoose.Types.ObjectId(req.userData!.id);
 
     const users = await User.find({

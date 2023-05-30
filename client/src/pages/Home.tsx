@@ -15,7 +15,7 @@ const Home = () => {
     <MainLayout>
       <div className={`min-h-screen w-full max-w-[600px]`}>
         <NavbarHome />
-        <WriteATweet isModal={false} />
+        {/* <WriteATweet isModal={false} /> */}
         <Tweet />
       </div>
     </MainLayout>
