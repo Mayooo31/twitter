@@ -1,5 +1,7 @@
 import { useRef, useState } from "react";
-import { useCtx } from "../context";
+
+// Components
+import LoadingSpinner from "./LoadingSpinner";
 
 // Types
 import { EditedType } from "../types/types";
@@ -9,8 +11,8 @@ import { CameraIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import user from "../assets/user.jpg";
 
 // Hooks
+import { useCtx } from "../context";
 import useSendData from "../hooks/useSendData";
-import LoadingSpinner from "./LoadingSpinner";
 
 const EditProfile = ({ refetch }: { refetch: () => void }) => {
   const { isLoading, isError, error, mutateAsync } = useSendData();

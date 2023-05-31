@@ -33,10 +33,6 @@ const RightPanel = () => {
     isRetry: false,
   });
 
-  // console.log(data);
-
-  const photos: string[] = [photo, photo, photo];
-
   useEffect(() => {
     const screenHeight = window.innerHeight;
     const panelHeight = stickyRef.current.offsetHeight;
@@ -55,7 +51,7 @@ const RightPanel = () => {
         ref={stickyRef}
         className="flex flex-col gap-4 sticky left-0"
       >
-        {photos.length !== 0 && username && <Photos photos={photos} />}
+        {username && <Photos />}
         {location.pathname !== "/search" && <Trends />}
 
         {isLoading ? (

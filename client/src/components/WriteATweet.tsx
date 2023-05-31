@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useCtx } from "../context";
 import TextareaAutosize from "react-textarea-autosize";
 
-// Icons
+// Css and icons
+import photo from "../assets/photo1.jpg";
 import {
   PhotoIcon,
   GifIcon,
@@ -14,10 +14,10 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 
-// Css
-import photo from "../assets/photo1.jpg";
-import styles from "../styles";
+// Custom hooks
+import { useCtx } from "../context";
 import useSendData from "../hooks/useSendData";
+import styles from "../styles";
 
 type Props = {
   isModal: boolean;
@@ -61,10 +61,10 @@ const WriteATweet = ({ isModal }: Props) => {
   return (
     <div
       style={{ background: theme.background }}
-      className={`xs:block px-4 py-2 ${
+      className={`xs:block px-4 py-2 ${isModal ? "" : styles.borderBottom} ${
         isModal
           ? "fixed overflow-y-auto top-0 left-0 sm:top-[10%] sm:max-h-[80%] w-full rounded-[0] sm:left-[50%] z-[100] h-screen sm:h-fit sm:w-[600px] max-w-full bg-inherit sm:translate-x-[-50%] sm:rounded-2xl"
-          : "hidden relative ${styles.borderBottom}"
+          : "hidden relative"
       }`}
     >
       {isModal && (

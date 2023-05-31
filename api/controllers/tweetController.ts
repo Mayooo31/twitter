@@ -110,3 +110,39 @@ export const getTweet = catchAsync(
     res.status(200).json({ tweet: foundTweet });
   }
 );
+
+export const getFollowingTweets = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { following } = req.body;
+
+    const tweets = await Tweet.find({ createdBy: { $in: following } })
+      .sort({ createdAt: -1 })
+      .populate("createdBy")
+      .exec();
+
+    console.log(tweets);
+
+    res.status(200).json(tweets);
+  }
+);
+
+export const getLastImages = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { username } = req.params;
+
+    const user = await User.findOne({ username });
+    if (!user) return next(createError(401, "User was not found!"));
+
+    const images = await Tweet.find({
+      image: { $ne: "" },
+      createdBy: user._id,
+    })
+      .sort({ createdAt: -1 })
+      .limit(6)
+      .select("image");
+
+    console.log(images);
+
+    res.status(200).json(images);
+  }
+);
