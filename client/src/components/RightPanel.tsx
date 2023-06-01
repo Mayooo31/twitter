@@ -8,15 +8,14 @@ import Trends from "./Trends";
 import Footer from "./Footer";
 import AccountItem from "./AccountItem";
 import ShowMorebutton from "./ShowMorebutton";
-
-// Styles and css
-import photo from "../assets/photo1.jpg";
-
-// Hooks
-import { useCtx } from "../context";
-import useGetData from "../hooks/useGetData";
 import CustomError from "./CustomError";
 import LoadingSpinner from "./LoadingSpinner";
+
+// Custom hooks
+import { useCtx } from "../context";
+import useGetData from "../hooks/useGetData";
+
+// Types
 import { AccountDataType } from "../types/types";
 
 const RightPanel = () => {

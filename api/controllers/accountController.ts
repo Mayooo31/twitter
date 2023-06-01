@@ -152,6 +152,10 @@ export const getFollowing = catchAsync(
       .populate("following")
       .select("following nick");
 
+    if (!following) {
+      return next(createError(500, "Tento účet neexistuje."));
+    }
+
     res.status(200).json(following);
   }
 );
@@ -163,6 +167,10 @@ export const getFollowers = catchAsync(
     const followers = await User.findOne({ username })
       .populate("followers")
       .select("followers nick");
+
+    if (!followers) {
+      return next(createError(500, "Tento účet neexistuje."));
+    }
 
     res.status(200).json(followers);
   }

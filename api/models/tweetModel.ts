@@ -11,7 +11,7 @@ interface ITweet extends Document {
 }
 
 const tweetSchema: Schema<ITweet> = new Schema({
-  tweet: { type: String, required: true },
+  tweet: { type: String },
   image: { type: String },
   createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   createdAt: {

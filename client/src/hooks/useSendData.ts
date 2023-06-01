@@ -1,5 +1,6 @@
 import { useMutation } from "react-query";
 import { useCtx } from "../context";
+import { toast } from "react-toastify";
 
 type PropsType = {
   url: string;
@@ -29,6 +30,8 @@ const useSendData = () => {
 
       if (!res.ok) {
         const error = await res.json();
+
+        // toast.error((error as Error).message);
         throw new Error(error.message);
       }
 

@@ -1,9 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TextareaAutosize from "react-textarea-autosize";
 
 // Css and icons
-import photo from "../assets/photo1.jpg";
 import {
   PhotoIcon,
   GifIcon,
@@ -18,6 +17,7 @@ import {
 import { useCtx } from "../context";
 import useSendData from "../hooks/useSendData";
 import styles from "../styles";
+import { toast } from "react-toastify";
 
 type Props = {
   isModal: boolean;
@@ -26,8 +26,8 @@ type Props = {
 type imageType = { image: File | null; blobImage: string };
 
 const WriteATweet = ({ isModal }: Props) => {
-  const { isLoading, isError, error, mutate } = useSendData();
-  const { setOpenWriteATweet, theme } = useCtx();
+  const { isLoading, isError, error, mutate, data } = useSendData();
+  const { setOpenWriteATweet, theme, loggedAccount } = useCtx();
   const navigate = useNavigate();
 
   const tweetRef = useRef<HTMLTextAreaElement>(null);
@@ -58,6 +58,14 @@ const WriteATweet = ({ isModal }: Props) => {
     });
   };
 
+  useEffect(() => {
+    if (isError) {
+      toast.error((error as Error).message);
+    } else if (data) {
+      setOpenWriteATweet(false);
+    }
+  }, [isError, data]);
+
   return (
     <div
       style={{ background: theme.background }}
@@ -74,9 +82,9 @@ const WriteATweet = ({ isModal }: Props) => {
       )}
       <div className="flex gap-3">
         <img
-          onClick={() => navigate("/mario")}
-          src={photo}
-          className="w-12 h-12 rounded-full cursor-pointer"
+          onClick={() => navigate(`/${loggedAccount.username}`)}
+          src={loggedAccount.profilePhoto}
+          className="w-12 h-12 rounded-full aspect-square object-cover cursor-pointer"
         />
         <div className="w-full flex flex-col pt-2">
           <TextareaAutosize
@@ -145,9 +153,8 @@ const WriteATweet = ({ isModal }: Props) => {
             />
 
             <button
-              onClick={() => {
-                createHandler();
-              }}
+              disabled={isLoading}
+              onClick={createHandler}
               style={{
                 opacity: isTweetEmpty ? "60%" : "100%",
                 backgroundColor: theme.color,

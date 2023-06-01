@@ -17,13 +17,14 @@ export const createTweet = catchAsync(
     const id = req.userData?.id;
     const { tweet } = req.body;
 
-    if (!tweet) return next(createError(401, "Empty tweet is not allowed!"));
+    if (!tweet && !req?.file?.filename)
+      return next(createError(401, "Empty tweet is not allowed!"));
 
     const user = await User.findById(id);
     if (!user) return next(createError(401, "Something went wrong!"));
 
     const createdTweet = new Tweet({
-      tweet,
+      tweet: tweet ?? "",
       image: req?.file?.filename ? process.env.API_URL + req.file.filename : "",
       createdBy: id,
     });
@@ -120,8 +121,6 @@ export const getFollowingTweets = catchAsync(
       .populate("createdBy")
       .exec();
 
-    console.log(tweets);
-
     res.status(200).json(tweets);
   }
 );
@@ -140,8 +139,6 @@ export const getLastImages = catchAsync(
       .sort({ createdAt: -1 })
       .limit(6)
       .select("image");
-
-    console.log(images);
 
     res.status(200).json(images);
   }

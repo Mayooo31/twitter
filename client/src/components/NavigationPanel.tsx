@@ -166,7 +166,7 @@ const NavigationPanel = () => {
         <button
           onClick={() => setOpenWriteATweet(true)}
           style={{ background: theme.color }}
-          className="absolute xs:static bottom-16 right-3 xs:mt-3 p-3 rounded-full lg:w-[220px] lg:grid lg:place-items-center"
+          className="absolute xs:static bottom-16 right-3 xs:mt-3 p-3 rounded-full lg:w-[220px] lg:grid lg:place-items-center duration-150 ease-in hover:opacity-90"
         >
           <ChatBubbleBottomCenterTextIcon className="w-8 h-8 lg:hidden" />
           <p className="hidden lg:flex text-xl ">Tweetovat</p>

@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // Components
 import LoadingSpinner from "./LoadingSpinner";
@@ -13,9 +13,10 @@ import user from "../assets/user.jpg";
 // Hooks
 import { useCtx } from "../context";
 import useSendData from "../hooks/useSendData";
+import { toast } from "react-toastify";
 
 const EditProfile = ({ refetch }: { refetch: () => void }) => {
-  const { isLoading, isError, error, mutateAsync } = useSendData();
+  const { isLoading, isError, error, mutate, data } = useSendData();
   const { theme, setOpenEditProfile, loggedAccount, setLoggedAccount } =
     useCtx();
   const [edited, setEdited] = useState<EditedType>({
@@ -42,28 +43,35 @@ const EditProfile = ({ refetch }: { refetch: () => void }) => {
     formData.append("oldSecondPhoto", loggedAccount.secondPhoto);
     formData.append("oldProfilePhoto", loggedAccount.profilePhoto);
 
-    const data = await mutateAsync({
+    mutate({
       url: "/account/edit",
       method: "PATCH",
       body: formData,
       json: false,
     });
-
-    setLoggedAccount((prevState) => {
-      return {
-        ...prevState,
-        nick: data._doc.nick,
-        about: data._doc.about,
-        profilePhoto: data._doc.profilePhoto,
-        secondPhoto: data._doc.secondPhoto,
-        followers: data._doc.followers,
-        following: data._doc.following,
-      };
-    });
-
-    setOpenEditProfile(false);
-    refetch();
   };
+
+  useEffect(() => {
+    if (isError) {
+      toast.error((error as Error).message);
+    } else if (data) {
+      setLoggedAccount((prevState) => {
+        return {
+          ...prevState,
+          nick: data._doc.nick,
+          about: data._doc.about,
+          profilePhoto: data._doc.profilePhoto,
+          secondPhoto: data._doc.secondPhoto,
+          followers: data._doc.followers,
+          following: data._doc.following,
+        };
+      });
+
+      setOpenEditProfile(false);
+      toast.success(`Succesfully edited 🎉`, { autoClose: 2000 });
+      refetch();
+    }
+  }, [isError, data]);
 
   return (
     <div

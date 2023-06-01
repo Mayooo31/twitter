@@ -1,5 +1,6 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 // Hooks
 import useSendData from "../hooks/useSendData";
@@ -12,7 +13,7 @@ import LoadingSpinner from "../components/LoadingSpinner";
 const Login = () => {
   const { setLoggedAccount } = useCtx();
   const navigate = useNavigate();
-  const { isLoading, isError, error, mutateAsync } = useSendData();
+  const { isLoading, isError, error, mutate, data } = useSendData();
 
   const [focusEmail, setFocusEmail] = useState(false);
   const [focusPassword, setFocusPassword] = useState(false);
@@ -23,31 +24,37 @@ const Login = () => {
   const submitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const data = await mutateAsync({
+    mutate({
       url: "/auth/login",
       body: {
         email: inputEmailRef.current.value.trim(),
         password: inputPasswordRef.current.value.trim(),
       },
     });
-
-    if (error) return;
-
-    setLoggedAccount({
-      token: data.token,
-      id: data.user._id,
-      nick: data.user.nick,
-      profilePhoto: data.user.profilePhoto,
-      secondPhoto: data.user.secondPhoto,
-      username: data.user.username,
-      about: data.user.about,
-      followers: data.user.followers,
-      following: data.user.following,
-      bookmarks: data.user.bookmarks,
-    });
-
-    navigate(`/${data.user.username}`);
   };
+
+  useEffect(() => {
+    if (isError) {
+      toast.error((error as Error).message);
+    }
+    if (data) {
+      setLoggedAccount({
+        token: data.token,
+        id: data.user._id,
+        nick: data.user.nick,
+        profilePhoto: data.user.profilePhoto,
+        secondPhoto: data.user.secondPhoto,
+        username: data.user.username,
+        about: data.user.about,
+        followers: data.user.followers,
+        following: data.user.following,
+        bookmarks: data.user.bookmarks,
+      });
+
+      navigate("/");
+      toast.success(`You are logged as ${data.user.nick}`, { autoClose: 2000 });
+    }
+  }, [isError, data]);
 
   return (
     <EmptyLayout>

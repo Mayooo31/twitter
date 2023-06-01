@@ -19,7 +19,11 @@ interface DecodedToken extends JwtPayload {
   email: string;
 }
 
-export const checkAuth = (req: AuthRequest, res: Response, next: NextFunction) => {
+export const checkAuth = (
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction
+) => {
   const token = req.headers.authorization?.split(" ")[1];
   if (!token) return next(createError(401, "Authentication failed!"));
 
@@ -30,7 +34,8 @@ export const checkAuth = (req: AuthRequest, res: Response, next: NextFunction) =
 
   const isExpired = decodedToken.exp && decodedToken.exp < Date.now() / 1000;
 
-  if (isExpired) return next(createError(401, "Token is expired! Please re-log in."));
+  if (isExpired)
+    return next(createError(401, "Token is expired! Please re-log in."));
 
   req.userData = { id: decodedToken.id, email: decodedToken.email };
   next();

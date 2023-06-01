@@ -1,7 +1,8 @@
 import React from "react";
 import { useQuery } from "react-query";
+import { toast } from "react-toastify";
 
-// Types
+// Custom hooks
 import { useCtx } from "../context";
 
 type PropsType = {
@@ -27,6 +28,8 @@ const useGetData = ({ url, key, isRetry = true }: PropsType) => {
 
       if (!res.ok) {
         const error = await res.json();
+
+        // toast.error((error as Error).message);
         throw new Error(error.message);
       }
 

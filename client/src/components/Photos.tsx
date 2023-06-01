@@ -1,10 +1,14 @@
 import React from "react";
-import photo from "../assets/photo1.jpg";
-import photo1 from "../assets/cat.jpg";
-import "../index.css";
-import useGetData from "../hooks/useGetData";
 import { useParams } from "react-router-dom";
+
+// Css and styles
+import "../index.css";
+
+// Components
 import LoadingSpinner from "./LoadingSpinner";
+
+// Custom hooks
+import useGetData from "../hooks/useGetData";
 
 const Photos = () => {
   const { username } = useParams();
@@ -14,8 +18,6 @@ const Photos = () => {
     key: `/${username}/images`,
     isRetry: false,
   });
-
-  console.log(data);
 
   const customGrid =
     !data || data.length === 1 || data.length === 0

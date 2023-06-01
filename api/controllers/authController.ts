@@ -10,7 +10,7 @@ import catchAsync from "../utils/catchAsync";
 
 const createToken = (id: string, email: string) => {
   const token = jwt.sign({ id, email }, process.env.JWT_SECRET!, {
-    expiresIn: "24h",
+    expiresIn: "365d",
   });
   return { token };
 };
@@ -28,9 +28,14 @@ export const register = catchAsync(
       return next(createError(401, "This name is not allowed!"));
     }
 
-    const user = await User.findOne({ email });
+    const [userWithEmail, userWithUsername] = await Promise.all([
+      User.findOne({ email }),
+      User.findOne({ username }),
+    ]);
 
-    if (user)
+    if (userWithUsername)
+      return next(createError(401, "This username is already registered!"));
+    if (userWithEmail)
       return next(createError(401, "This email is already registered!"));
     if (password.length > 16)
       return next(

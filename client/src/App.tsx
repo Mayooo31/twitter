@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useCtx } from "./context";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // Components / Pages
 import ModalsAndOverlays from "./components/Modals & Overlays/ModalsAndOverlays";
@@ -17,6 +19,18 @@ const App = () => {
   return (
     <BrowserRouter>
       <ModalsAndOverlays />
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <div
         style={{
           background: theme.background,

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../index.css";
 
@@ -9,11 +9,12 @@ import useSendData from "../hooks/useSendData";
 // Components
 import EmptyLayout from "../components/Layouts/EmptyLayout";
 import LoadingSpinner from "../components/LoadingSpinner";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const { setLoggedAccount } = useCtx();
   const navigate = useNavigate();
-  const { isLoading, isError, error, mutateAsync } = useSendData();
+  const { isLoading, isError, error, mutate, data } = useSendData();
 
   const [focusName, setFocusName] = useState(false);
   const [focusEmail, setFocusEmail] = useState(false);
@@ -28,7 +29,7 @@ const Register = () => {
   const submitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const data = await mutateAsync({
+    mutate({
       url: "/auth/register",
       body: {
         email: inputEmailRef.current.value.trim(),
@@ -37,24 +38,30 @@ const Register = () => {
         age: inputAgeRef.current.value.trim(),
       },
     });
-
-    if (error) return;
-
-    setLoggedAccount({
-      token: data.token,
-      id: data.createdUser._id,
-      nick: data.createdUser.nick,
-      profilePhoto: "",
-      secondPhoto: "",
-      username: data.createdUser.username,
-      about: "",
-      followers: [],
-      following: [],
-      bookmarks: [],
-    });
-
-    navigate(`/${data.createdUser.username}`);
   };
+
+  useEffect(() => {
+    if (isError) {
+      toast.error((error as Error).message);
+    }
+    if (data) {
+      setLoggedAccount({
+        token: data.token,
+        id: data.createdUser._id,
+        nick: data.createdUser.nick,
+        profilePhoto: "",
+        secondPhoto: "",
+        username: data.createdUser.username,
+        about: "",
+        followers: [],
+        following: [],
+        bookmarks: [],
+      });
+
+      navigate(`/${data.createdUser.username}`);
+      toast.success(`Succesfully registered as ${data.user.nick}`);
+    }
+  }, [isError, data]);
 
   return (
     <EmptyLayout>
