@@ -27,7 +27,7 @@ type DataType = {
 };
 
 const Tweet = ({ data }: DataType) => {
-  const { theme } = useCtx();
+  const { theme, setPreviewImage } = useCtx();
   const [nickWidth, setNickWidth] = useState<number>();
   const [usernameWidth, setUsernameWidth] = useState<number>();
   const containerRef = useRef<HTMLDivElement>();
@@ -98,6 +98,7 @@ const Tweet = ({ data }: DataType) => {
         <span className="font-medium text-[#dadada]">{data.tweet.tweet}</span>
         {data.tweet?.image && (
           <img
+            onClick={() => setPreviewImage(data.tweet.image)}
             src={data.tweet.image}
             className="my-2 rounded-2xl max-h-[60vh] min-w-full sm:min-w-[80%] object-cover"
           />

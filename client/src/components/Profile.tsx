@@ -29,7 +29,7 @@ type PropsType = {
 };
 
 const Profile = ({ data, isLoading, isError }: PropsType) => {
-  const { loggedAccount, setOpenEditProfile } = useCtx();
+  const { loggedAccount, setOpenEditProfile, setPreviewImage } = useCtx();
   const { username } = useParams();
   const [isFollowing, setIsFollowing] = useState<boolean>(true);
 
@@ -42,6 +42,7 @@ const Profile = ({ data, isLoading, isError }: PropsType) => {
       <div className="relative custom-ratio object-cover">
         {data?.secondPhoto ? (
           <img
+            onClick={() => setPreviewImage(data.secondPhoto)}
             src={data.secondPhoto}
             className="custom-ratio object-cover cursor-pointer"
           />
@@ -50,6 +51,11 @@ const Profile = ({ data, isLoading, isError }: PropsType) => {
         )}
 
         <img
+          onClick={() => {
+            if (data?.profilePhoto) {
+              setPreviewImage(data.profilePhoto);
+            }
+          }}
           src={data?.profilePhoto ? data.profilePhoto : userPhoto}
           className="w-[22%] aspect-square object-cover rounded-full border-[3px] border-solid border-[#15202b] absolute translate-y-[50%] bottom-0 left-5 z-10 cursor-pointer"
         />

@@ -7,6 +7,7 @@ import { useCtx } from "../../context";
 import Overlay from "../Overlay";
 import ThemeSettings from "../ThemeSettings";
 import WriteATweet from "../WriteATweet";
+import PreviewImage from "../PreviewImage";
 
 const ModalsAndOverlays = () => {
   const {
@@ -20,6 +21,7 @@ const ModalsAndOverlays = () => {
     setOpenThemeSettings,
     openEditProfile,
     setOpenEditProfile,
+    previewImage,
   } = useCtx();
 
   return (
@@ -31,6 +33,7 @@ const ModalsAndOverlays = () => {
       <Overlay isOpen={openEditProfile} closeOverlay={setOpenEditProfile} />
       {openWriteATweet && <WriteATweet isModal={true} />}
       {openThemeSettings && <ThemeSettings />}
+      {previewImage && <PreviewImage />}
     </>
   );
 };

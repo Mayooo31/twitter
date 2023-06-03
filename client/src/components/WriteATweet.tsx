@@ -97,7 +97,10 @@ const WriteATweet = ({ isModal }: Props) => {
           />
           {image.blobImage && (
             <div className="relative">
-              <img className="rounded-xl" src={image.blobImage} />
+              <img
+                className="rounded-xl max-h-[60vh] min-w-full sm:min-w-[80%] object-cover"
+                src={image.blobImage}
+              />
               <XMarkIcon
                 onClick={() => setImage({ image: null, blobImage: "" })}
                 className="absolute top-2 left-2 h-10 w-10 p-2 text-white rounded-full cursor-pointer bg-[#06050599]"
