@@ -17,7 +17,7 @@ const FollowButton = ({
   setWidthOfButton,
   followedUserId,
 }: Props) => {
-  const { setLoggedAccount } = useCtx();
+  const { setLoggedAccount, loggedAccount } = useCtx();
   const { mutateAsync, isError } = useSendData();
   const [hovering, setHovering] = useState("Sleduji");
 
@@ -61,7 +61,7 @@ const FollowButton = ({
           {hovering}
         </button>
       )}
-      {!isFollowing && (
+      {!isFollowing && followedUserId !== loggedAccount.id && (
         <button
           onClick={(e) => {
             e.stopPropagation();

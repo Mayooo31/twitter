@@ -1,14 +1,14 @@
-import { useCtx } from "../context";
 import { useEffect, useState } from "react";
 
 // css and styles
 import "../index.css";
-
-import photo1 from "../assets/photo1.jpg";
 import styles from "../styles";
 
+// Custom hooks
+import { useCtx } from "../context";
+
 const Navbar = () => {
-  const { setOpenMobileNavbar, theme } = useCtx();
+  const { setOpenMobileNavbar, theme, loggedAccount } = useCtx();
   const [shrinkNavbar, setShrinkNavbar] = useState<boolean>(false);
   const [selected, setSelected] = useState("for you");
 
@@ -49,8 +49,8 @@ const Navbar = () => {
         <div className="w-[calc(50%-14px)] xs:hidden">
           <img
             onClick={() => setOpenMobileNavbar(true)}
-            className="w-9 h-9 rounded-full"
-            src={photo1}
+            className="w-9 h-9 rounded-full object-cover aspect-square"
+            src={loggedAccount.profilePhoto}
           />
         </div>
         <svg

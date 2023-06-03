@@ -1,11 +1,16 @@
 import React, { useEffect } from "react";
 
+// Components
 import MainLayout from "../components/Layouts/MainLayout";
 import NavbarFollowersAndFollowing from "../components/NavbarFollowersAndFollowing";
 import AccountItem from "../components/AccountItem";
-import useGetData from "../hooks/useGetData";
 import LoadingSpinner from "../components/LoadingSpinner";
 import CustomError from "../components/CustomError";
+
+// Custom hooks
+import useGetData from "../hooks/useGetData";
+
+// Types
 import { AccountDataType } from "../types/types";
 
 const FollowersAndFollowing = () => {

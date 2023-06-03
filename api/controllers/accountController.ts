@@ -19,13 +19,9 @@ export const editProfile = catchAsync(
 
     const { about, nick, oldProfilePhoto, oldSecondPhoto } = req.body;
 
-    const profilePhotofilename = (
-      req.files as { [fieldname: string]: Express.Multer.File[] }
-    )["profilePhoto"]?.[0]?.filename;
+    const profilePhotofilename = req.files["profilePhoto"]?.[0]?.filename;
 
-    const secondPhotofilename = (
-      req.files as { [fieldname: string]: Express.Multer.File[] }
-    )["secondPhoto"]?.[0]?.filename;
+    const secondPhotofilename = req.files["secondPhoto"]?.[0]?.filename;
 
     if (profilePhotofilename) {
       fs.unlink(

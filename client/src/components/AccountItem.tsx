@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
-
-import photo from "../assets/photo1.jpg";
-import FollowButton from "./FollowButton";
-import { useCtx } from "../context";
-import { AccountDataType } from "../types/types";
 import { useNavigate } from "react-router-dom";
+
+// Components
+import FollowButton from "./FollowButton";
+
+// Custom hooks
+import { useCtx } from "../context";
+
+// Types
+import { AccountDataType } from "../types/types";
 
 type Props = {
   data: AccountDataType;

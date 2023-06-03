@@ -10,34 +10,34 @@ const Context = createContext<ContextType>(null!);
 export const useCtx = () => useContext(Context);
 
 const savedThemeSettings = localStorage.getItem("theme");
+const savedAccount = localStorage.getItem("account");
+
 const parsedSavedThemeSettings =
   savedThemeSettings && JSON.parse(savedThemeSettings);
+const parsedAccount = savedAccount && JSON.parse(savedAccount);
 
 export const ContextProvider = ({ children }: PropsType) => {
-  const [loggedAccount, setLoggedAccount] = useState<LoggedAcountType>({
-    token:
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NzQ5Njk3MDg1M2VmZjA3OWUwNWY3ZiIsImVtYWlsIjoibWFyaW9wb2RvbGluc2t5QGdtYWlsLmNvbSIsImlhdCI6MTY4NTQ2MDU5NSwiZXhwIjoxNjg1NTQ2OTk1fQ.-O0p-kCHxpUzL52Z0HMiFFNo_OXOYoobvqd5yg8kv9g",
-    id: "644ac73fbbe031620bed2584",
-    nick: "Mariush",
-    profilePhoto:
-      "http://localhost:3000/uploads/images/644ac73fbbe031620bed2584-bart-simpson-4k-wallpaper-uhdpaper.com-829@0@i.jpg.jpeg",
-    secondPhoto:
-      "http://localhost:3000/uploads/images/644ac73fbbe031620bed2584-kirby-4k-wallpaper-uhdpaper.com-799@0@i.jpg.jpeg",
-    username: "mariom",
-    about: "nothing special...",
-    following: [],
-    followers: [],
-    bookmarks: [],
-  });
+  const [loggedAccount, setLoggedAccount] = useState<LoggedAcountType>(
+    parsedAccount ?? {
+      token: "",
+      id: "",
+      nick: "",
+      profilePhoto: "",
+      secondPhoto: "",
+      username: "",
+      about: "",
+      following: [],
+      followers: [],
+      bookmarks: [],
+    }
+  );
   const [theme, setTheme] = useState<ThemeType>(
-    parsedSavedThemeSettings
-      ? parsedSavedThemeSettings
-      : {
-          color: "#1d9bf0",
-          background: "#15202b",
-          name: "blue",
-          bgName: "bg-blue",
-        }
+    parsedSavedThemeSettings ?? {
+      color: "#1d9bf0",
+      background: "#15202b",
+      name: "blue",
+      bgName: "bg-blue",
+    }
   );
   // Modals
   const [openMobileNavbar, setOpenMobileNavbar] = useState<boolean>(false);
@@ -49,6 +49,10 @@ export const ContextProvider = ({ children }: PropsType) => {
   useEffect(() => {
     localStorage.setItem("theme", JSON.stringify(theme));
   }, [theme]);
+
+  useEffect(() => {
+    localStorage.setItem("account", JSON.stringify(loggedAccount));
+  }, [loggedAccount]);
 
   return (
     <Context.Provider

@@ -22,6 +22,7 @@ type PropsType = {
     likes: string[];
     retweets: string[];
     comments: string[];
+    unBookmarkhandler?: (bookmarkId: string) => void;
   };
 };
 
@@ -79,18 +80,17 @@ const TweetButtons = ({ data }: PropsType) => {
       body: {},
     });
 
-    !isError &&
-      setLoggedAccount((prevState) => {
-        return {
-          ...prevState,
-          bookmarks:
-            action === "remove"
-              ? prevState.bookmarks.filter(
-                  (bookmark) => bookmark !== data.tweetId
-                )
-              : [...prevState.bookmarks, data.tweetId],
-        };
-      });
+    setLoggedAccount((prevState) => {
+      return {
+        ...prevState,
+        bookmarks:
+          action === "remove"
+            ? prevState.bookmarks.filter(
+                (bookmark) => bookmark !== data.tweetId
+              )
+            : [...prevState.bookmarks, data.tweetId],
+      };
+    });
   };
 
   return (
@@ -133,6 +133,7 @@ const TweetButtons = ({ data }: PropsType) => {
         onClick={() => {
           setBookmarked(!bookmarked);
           bookmarkhandler();
+          data.unBookmarkhandler && data.unBookmarkhandler(data.tweetId);
         }}
         className="group hidden xxs:block cursor-pointer text-grayish hover:text-[#3597ff]"
       >

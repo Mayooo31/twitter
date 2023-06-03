@@ -22,6 +22,7 @@ type DataType = {
     profilePhoto: string;
     username: string;
     nick: string;
+    unBookmarkhandler?: (bookmarkId: string) => void;
   };
 };
 
@@ -96,7 +97,10 @@ const Tweet = ({ data }: DataType) => {
         </div>
         <span className="font-medium text-[#dadada]">{data.tweet.tweet}</span>
         {data.tweet?.image && (
-          <img src={data.tweet.image} className="my-2 rounded-2xl" />
+          <img
+            src={data.tweet.image}
+            className="my-2 rounded-2xl max-h-[60vh] min-w-full sm:min-w-[80%] object-cover"
+          />
         )}
         <TweetButtons
           data={{
@@ -104,6 +108,7 @@ const Tweet = ({ data }: DataType) => {
             likes: data.tweet.likes,
             retweets: data.tweet.retweets,
             comments: data.tweet.comments,
+            unBookmarkhandler: data.unBookmarkhandler,
           }}
         />
       </div>

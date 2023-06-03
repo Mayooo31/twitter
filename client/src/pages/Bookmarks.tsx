@@ -1,26 +1,36 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 // Components
 import NavbarBookmarks from "../components/NavbarBookmarks";
 import Tweet from "../components/Tweet";
-
-// Css and styles
-import MainLayout from "../components/Layouts/MainLayout";
-import useGetData from "../hooks/useGetData";
-import { TweetDataType } from "../types/types";
-import CustomError from "../components/CustomError";
 import LoadingSpinner from "../components/LoadingSpinner";
+import CustomError from "../components/CustomError";
+import MainLayout from "../components/Layouts/MainLayout";
+
+// Custom hooks
+import useGetData from "../hooks/useGetData";
 
 const Bookmarks = () => {
-  const { data, isLoading, isError, refetch, error } = useGetData({
+  const { data, isLoading, isError, error } = useGetData({
     url: `/bookmarks`,
     isRetry: false,
     key: "bookmarks",
   });
+  const [bookmarks, setBookmarks] = useState<any[]>(data);
+
+  const unBookmarkhandler = (bookmarkId: string): void => {
+    setBookmarks((prevState) =>
+      prevState.filter((bookmark) => bookmark._id !== bookmarkId)
+    );
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  useEffect(() => {
+    setBookmarks(data);
+  }, [data]);
 
   return (
     <MainLayout>
@@ -37,7 +47,7 @@ const Bookmarks = () => {
         ) : data.length === 0 ? (
           <CustomError message="Nenašli jsme žádné záložky." />
         ) : (
-          data.map((tweet: any) => (
+          bookmarks?.map((tweet: any) => (
             <Tweet
               key={tweet._id}
               data={{
@@ -54,6 +64,7 @@ const Bookmarks = () => {
                 nick: tweet.createdBy.nick,
                 username: tweet.createdBy.username,
                 profilePhoto: tweet.createdBy.profilePhoto,
+                unBookmarkhandler,
               }}
             />
           ))
