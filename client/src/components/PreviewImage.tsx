@@ -14,6 +14,34 @@ import {
 const PreviewImage = () => {
   const { previewImage, setPreviewImage } = useCtx();
 
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "ArrowLeft") {
+        setPreviewImage((prevState) => ({
+          ...prevState,
+          selectedImage:
+            prevState.selectedImage === 0
+              ? prevState.images.length - 1
+              : prevState.selectedImage! - 1,
+        }));
+      } else if (event.key === "ArrowRight") {
+        setPreviewImage((prevState) => ({
+          ...prevState,
+          selectedImage:
+            prevState.selectedImage === prevState.images.length - 1
+              ? 0
+              : prevState.selectedImage! + 1,
+        }));
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
   return (
     <div className="fixed top-0 left-0 right-0 bottom-0 h-screen w-screen z-[100]">
       <span
@@ -76,7 +104,7 @@ const PreviewImage = () => {
         (image: { image: string; _id: string }, index: number) => {
           return (
             <img
-              key={image._id}
+              key={image._id ?? image}
               style={{
                 transform: `translateX(calc(-50% - ${
                   index - previewImage.selectedImage!
