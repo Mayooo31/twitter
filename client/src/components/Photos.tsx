@@ -9,9 +9,11 @@ import LoadingSpinner from "./LoadingSpinner";
 
 // Custom hooks
 import useGetData from "../hooks/useGetData";
+import { useCtx } from "../context";
 
 const Photos = () => {
   const { username } = useParams();
+  const { previewImage, setPreviewImage } = useCtx();
 
   const { data, isLoading } = useGetData({
     url: `/tweet/${username}/last-images`,
@@ -47,8 +49,11 @@ const Photos = () => {
         />
       ) : (
         data &&
-        data.map((photo: { image: string; _id: string }) => (
+        data.map((photo: { image: string; _id: string }, index: number) => (
           <img
+            onClick={() =>
+              setPreviewImage({ images: data, selectedImage: index })
+            }
             key={photo._id}
             src={photo.image}
             className="object-cover w-full h-full cursor-pointer"

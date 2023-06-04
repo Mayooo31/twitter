@@ -1,7 +1,12 @@
 import React, { useContext, useState, createContext, useEffect } from "react";
 
 // Types
-import { ContextType, LoggedAcountType, ThemeType } from "./types/types";
+import {
+  ContextType,
+  LoggedAcountType,
+  ThemeType,
+  previewImageType,
+} from "./types/types";
 
 type PropsType = {
   children: React.ReactNode;
@@ -47,7 +52,10 @@ export const ContextProvider = ({ children }: PropsType) => {
   const [openWriteATweet, setOpenWriteATweet] = useState<boolean>(false);
   const [openThemeSettings, setOpenThemeSettings] = useState<boolean>(false);
   const [openEditProfile, setOpenEditProfile] = useState<boolean>(false);
-  const [previewImage, setPreviewImage] = useState<string>("");
+  const [previewImage, setPreviewImage] = useState<previewImageType>({
+    images: [],
+    selectedImage: undefined,
+  });
 
   useEffect(() => {
     localStorage.setItem("theme", JSON.stringify(theme));

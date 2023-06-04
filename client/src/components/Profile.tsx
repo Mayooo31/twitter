@@ -42,7 +42,9 @@ const Profile = ({ data, isLoading, isError }: PropsType) => {
       <div className="relative custom-ratio object-cover">
         {data?.secondPhoto ? (
           <img
-            onClick={() => setPreviewImage(data.secondPhoto)}
+            onClick={() =>
+              setPreviewImage({ images: [data.secondPhoto], selectedImage: 0 })
+            }
             src={data.secondPhoto}
             className="custom-ratio object-cover cursor-pointer"
           />
@@ -53,7 +55,10 @@ const Profile = ({ data, isLoading, isError }: PropsType) => {
         <img
           onClick={() => {
             if (data?.profilePhoto) {
-              setPreviewImage(data.profilePhoto);
+              setPreviewImage({
+                images: [data.profilePhoto],
+                selectedImage: 0,
+              });
             }
           }}
           src={data?.profilePhoto ? data.profilePhoto : userPhoto}

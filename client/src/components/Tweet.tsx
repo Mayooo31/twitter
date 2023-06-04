@@ -98,7 +98,9 @@ const Tweet = ({ data }: DataType) => {
         <span className="font-medium text-[#dadada]">{data.tweet.tweet}</span>
         {data.tweet?.image && (
           <img
-            onClick={() => setPreviewImage(data.tweet.image)}
+            onClick={() =>
+              setPreviewImage({ images: [data.tweet.image], selectedImage: 0 })
+            }
             src={data.tweet.image}
             className="my-2 rounded-2xl max-h-[60vh] min-w-full sm:min-w-[80%] object-cover"
           />

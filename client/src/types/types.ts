@@ -13,8 +13,13 @@ export type ContextType = {
   setLoggedAccount: React.Dispatch<React.SetStateAction<LoggedAcountType>>;
   openEditProfile: boolean;
   setOpenEditProfile: React.Dispatch<React.SetStateAction<boolean>>;
-  previewImage: string;
-  setPreviewImage: React.Dispatch<React.SetStateAction<string>>;
+  previewImage: previewImageType;
+  setPreviewImage: React.Dispatch<React.SetStateAction<previewImageType>>;
+};
+
+export type previewImageType = {
+  selectedImage: number | undefined;
+  images: any[];
 };
 
 export type ThemeType = {

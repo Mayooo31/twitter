@@ -33,7 +33,7 @@ const ModalsAndOverlays = () => {
       <Overlay isOpen={openEditProfile} closeOverlay={setOpenEditProfile} />
       {openWriteATweet && <WriteATweet isModal={true} />}
       {openThemeSettings && <ThemeSettings />}
-      {previewImage && <PreviewImage />}
+      {previewImage.images.length !== 0 && <PreviewImage />}
     </>
   );
 };
