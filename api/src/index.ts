@@ -10,7 +10,7 @@ import accountRoutes from "../routes/account-routes";
 import bookmarksRoutes from "../routes/bookmarks-routes";
 
 // Export app for ( server.js )
-export const app = express();
+const app = express();
 
 // Middlewares
 app.use("/uploads/images", express.static(path.join("uploads", "images")));
@@ -39,3 +39,5 @@ const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
 };
 
 app.use(errorHandler);
+
+export default app;
