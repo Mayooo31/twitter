@@ -20,7 +20,7 @@ const Searching = () => {
           <img
             onClick={() => setOpenMobileNavbar(true)}
             src={loggedAccount.profilePhoto}
-            className="rounded-full w-9 h-9 aspect-square xs:hidden"
+            className="rounded-full w-9 h-9 aspect-square object-cover xs:hidden"
           />
           <Search />
         </div>

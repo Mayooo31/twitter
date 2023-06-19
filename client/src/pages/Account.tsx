@@ -19,7 +19,7 @@ import CustomError from "../components/CustomError";
 import { TweetDataType, selectedType } from "../types/types";
 
 const Account = () => {
-  const { openEditProfile } = useCtx();
+  const { openEditProfile, setLoggedAccount } = useCtx();
   const { username } = useParams();
   const [selected, setSelected] = useState<selectedType>("tweets");
 
@@ -45,6 +45,10 @@ const Account = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    setLoggedAccount((prevState) => {
+      return { ...prevState, refetchAccountData: refetch };
+    });
   }, []);
 
   return (

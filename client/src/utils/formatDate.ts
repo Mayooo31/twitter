@@ -17,7 +17,9 @@ function formatDate(dateString: string) {
   const hoursDiff = Math.floor(timeDiff / (1000 * 60 * 60));
   const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
 
-  if (minutesDiff < 60) {
+  if (minutesDiff < 1) {
+    return "now";
+  } else if (minutesDiff < 60) {
     return minutesDiff + " m";
   } else if (hoursDiff < 24) {
     return hoursDiff + " h";

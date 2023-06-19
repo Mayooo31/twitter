@@ -240,6 +240,7 @@ const MobileNavbar = ({ coords }: Props) => {
                   username: "",
                   following: [],
                   followers: [],
+                  bookmarks: [],
                 });
                 setOpenMobileNavbar(false);
                 setOpenMore(false);

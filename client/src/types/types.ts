@@ -40,6 +40,7 @@ export type LoggedAcountType = {
   following: string[];
   followers: string[];
   bookmarks: string[];
+  refetchAccountData: () => void;
 };
 
 export type EditedType = {

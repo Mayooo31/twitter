@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import TextareaAutosize from "react-textarea-autosize";
+import { toast } from "react-toastify";
 
 // Css and icons
+import styles from "../styles";
 import {
   PhotoIcon,
   GifIcon,
@@ -16,8 +18,6 @@ import {
 // Custom hooks
 import { useCtx } from "../context";
 import useSendData from "../hooks/useSendData";
-import styles from "../styles";
-import { toast } from "react-toastify";
 
 type Props = {
   isModal: boolean;
@@ -30,6 +30,7 @@ const WriteATweet = ({ isModal }: Props) => {
   const { setOpenWriteATweet, theme, loggedAccount } = useCtx();
   const navigate = useNavigate();
 
+  const location = useLocation();
   const tweetRef = useRef<HTMLTextAreaElement>(null);
   const [isTweetEmpty, setIsTweetEmpty] = useState<boolean>(true);
   const [image, setImage] = useState<imageType>({
@@ -63,6 +64,12 @@ const WriteATweet = ({ isModal }: Props) => {
       toast.error((error as Error).message);
     } else if (data) {
       setOpenWriteATweet(false);
+
+      if (location.pathname === `/${loggedAccount.username}`) {
+        loggedAccount.refetchAccountData();
+      } else {
+        navigate(`/${loggedAccount.username}`);
+      }
     }
   }, [isError, data]);
 

@@ -9,7 +9,6 @@ import tweetRoutes from "../routes/tweet-routes";
 import accountRoutes from "../routes/account-routes";
 import bookmarksRoutes from "../routes/bookmarks-routes";
 
-// Export app for ( server.js )
 const app = express();
 
 // Middlewares
@@ -40,4 +39,5 @@ const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
 
 app.use(errorHandler);
 
+// Export app for ( server.js )
 export default app;

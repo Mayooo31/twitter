@@ -137,7 +137,7 @@ export const getLastImages = catchAsync(
       createdBy: user._id,
     })
       .sort({ createdAt: -1 })
-      .limit(6)
+      .limit(20)
       .select("image");
 
     res.status(200).json(images);

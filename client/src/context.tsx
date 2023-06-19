@@ -36,6 +36,7 @@ export const ContextProvider = ({ children }: PropsType) => {
       following: [],
       followers: [],
       bookmarks: [],
+      refetchAccountData: () => {},
     }
   );
   const [theme, setTheme] = useState<ThemeType>(
